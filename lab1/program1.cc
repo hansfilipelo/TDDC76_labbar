@@ -1,5 +1,6 @@
 /*
 * Program som skriver ett meddelande på standard utmatningsfil.
+Kommentera lite bara å så fint.
 */
 
 #include <iostream>
