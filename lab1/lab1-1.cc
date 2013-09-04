@@ -9,7 +9,7 @@
 using namespace std;
 
 //---------------------------------
-int get-roof (int roof){
+int getRoof (int roof){
 	
 	cout << "Please enter a integer larger than 0" << "\n";
 	cin >> roof;
@@ -24,16 +24,16 @@ int get-roof (int roof){
 
 //---------------------------------
 
-void print-value(string current-string){
+void printValue(string currentString){
 	
-	int diff = 10 - current-string.length();
+	int diff = 10 - currentString.length();
 	
-	cout << setw(diff) << current-string;
+	cout << setw(diff) << currentString;
 }
 
 //---------------------------------
 
-string hex-make(int decimal){
+string hexMake(int decimal){
 	
 	string hex;
 	itoa(decimal,hex,16);
@@ -43,7 +43,7 @@ string hex-make(int decimal){
 
 //---------------------------------
 
-string okt-make(int decimal){
+string oktMake(int decimal){
 	
 	string oktal;
 	itoa(decimal,oktal,8);
@@ -54,15 +54,15 @@ string okt-make(int decimal){
 
 //---------------------------------
 
-void print-list(int roof){
+void printList(int roof){
 	
 	int x = 1:
 	
 	cout << "       DEC       OKT       HEX" << "\n";
 	for [ x <= roof ]{
-		print-value(x);
-		print-value(okt-make(x));
-		print-value(hex-make(x));
+		printValue(x);
+		printValue(oktMake(x));
+		printValue(hexMake(x));
 		
 		cout << "\n";
 		
@@ -75,9 +75,9 @@ int main{
 	
 	int roof;
 	
-	roof = get-roof(roof);
+	roof = getRoof(roof);
 	
-	print-list(roof);
+	printList(roof);
 	
 	return 0;
 }
