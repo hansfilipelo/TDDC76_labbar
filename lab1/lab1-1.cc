@@ -14,7 +14,7 @@ int getRoof (int roof){
 	cout << "Please enter a integer larger than 0" << "\n";
 	cin >> roof;
 	
-	while [ roof < 1 ]{
+	while (roof < 1 ){
 		cout << "Felaktigt värde, försök igen!" << "\n";
 		cin >> roof;
 	}
@@ -59,7 +59,7 @@ void printList(int roof){
 	int x = 1:
 	
 	cout << "       DEC       OKT       HEX" << "\n";
-	for [ x <= roof ]{
+	for ( x <= roof ){
 		printValue(x);
 		printValue(oktMake(x));
 		printValue(hexMake(x));
