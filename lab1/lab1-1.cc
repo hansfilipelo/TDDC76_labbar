@@ -24,54 +24,43 @@ int getRoof (int roof){
 
 //---------------------------------
 
-void printValue(string currentString){
+void printDec(int decimal){
 	
-	int diff = 10 - currentString.length();
-	
-	cout << setw(diff) << currentString;
+	cout << setw(10) << dec << decimal;
 }
 
 //---------------------------------
 
-string hexMake(int decimal){
+void printOct(int decimal){
 	
-	string hex;
-	itoa(decimal,hex,16);
-	
-	return hex;
+	cout << setw(10) << oct << decimal;
 }
 
 //---------------------------------
 
-string oktMake(int decimal){
+void printHex(int decimal){
 	
-	string oktal;
-	itoa(decimal,oktal,8);
-	
-	return oktal;
+	cout << setw(10) << hex << decimal;
 }
-
 
 //---------------------------------
 
-void printList(int roof){
-	
-	int x = 1:
+void printList(int roof) {
 	
 	cout << "       DEC       OKT       HEX" << "\n";
-	for ( x <= roof ){
-		printValue(x);
-		printValue(oktMake(x));
-		printValue(hexMake(x));
+	for ( int x = 1; x <= roof; x++){
+		printDec(x);
+		printOct(x);
+		printHex(x);
 		
 		cout << "\n";
 		
-		x++;
 	}
+}
 
 //---------------------------------
 
-int main{
+int main() {
 	
 	int roof;
 	
