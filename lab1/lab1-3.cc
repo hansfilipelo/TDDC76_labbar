@@ -17,15 +17,15 @@ char tecken;
 
 while (cin>>tecken)
 {
-tot = tot + 1;
+tot += 1;
 if (isdigit(tecken))
-siffror = siffror + 1;
+siffror += 1;
 if (isalpha(tecken))
-alfa = alfa + 1;
+alfa += 1;
 if (ispunct(tecken))
-interp = interp + 1;
+interp += 1;
 if (isspace(tecken))
-vita =vita + 1;
+vita += 1;
 }
 cout<<"\n"<<"Indata innehöll:"<<"\n" << siffror << " siffror"<<"\n";
 cout<<  alfa << " alfabetiska tecken"<<"\n";
