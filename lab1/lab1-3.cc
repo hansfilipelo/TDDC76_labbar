@@ -15,7 +15,7 @@ int vita;
 int tot;
 char tecken;
 
-while (cin>>tecken)
+while (cin>> noskipws>>tecken && tecken != '\n')
 {
 tot += 1;
 if (isdigit(tecken))
