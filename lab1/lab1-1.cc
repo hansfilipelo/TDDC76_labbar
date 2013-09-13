@@ -8,8 +8,11 @@
 
 using namespace std;
 
-//---------------------------------
-int getRoof (int roof){
+/*---------------------------------
+getRoof
+Purpose: Gets a value from user to be used as top value (roof) for output.
+*/
+static int getRoof (int roof){
 	
 	cout << "Please enter a integer larger than 0" << "\n";
 	cin >> roof;
@@ -22,30 +25,45 @@ int getRoof (int roof){
 	return roof;
 }
 
-//---------------------------------
+/*---------------------------------
+printDec
+Purpose: Print value in base 10.
+*/
 
-void printDec(int decimal){
+static void printDec(int decimal){
 	
 	cout << setw(10) << dec << decimal;
 }
 
-//---------------------------------
 
-void printOct(int decimal){
+/*---------------------------------
+printOct
+Purpose: Print value in base 8.
+*/
+
+static void printOct(int decimal){
 	
 	cout << setw(10) << oct << decimal;
 }
 
-//---------------------------------
 
-void printHex(int decimal){
+/*---------------------------------
+printHex
+Purpose: Print value in base 16.
+*/
+
+static void printHex(int decimal){
 	
 	cout << setw(10) << hex << decimal;
 }
 
-//---------------------------------
 
-void printList(int roof) {
+/*---------------------------------
+printList
+Purpose: Correctly aligns output from functions above. 
+*/
+
+static void printList(int roof) {
 	
 	cout << "       DEC       OKT       HEX" << "\n";
 	for ( int x = 1; x <= roof; x++){

@@ -11,6 +11,7 @@ int main () {
 	
 	double kelvin = 1; 
 	
+	//If Kelvin is'nt 0, continue
 	while ( kelvin != 0) {
 		cout << "Ge en temperatur i Kelvin:" << "\n";
 		cin >> kelvin;
