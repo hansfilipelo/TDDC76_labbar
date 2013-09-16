@@ -5,6 +5,7 @@
 #include <cctype>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 using namespace std;
 
 struct word_entry {
@@ -15,10 +16,7 @@ struct word_entry {
 //------------------------------
 
 static string makelowercase(string message){
-	for (unsigned int i = 0; i < message.size(); i++ ){
-		
-		message[i] = tolower(message[i]);	
-	}
+	transform(message.begin(), message.end(),message.begin(),::tolower);
 	return message;
 }
 
@@ -35,9 +33,6 @@ static bool finnsilista(string message,vector<word_entry>& ordlista){
 			if ( ordlista[i].name == message ){
 				ordlista[i].antal += 1;
 				return true;
-			}
-			else {
-				return false;
 			}
 		}
 	}
