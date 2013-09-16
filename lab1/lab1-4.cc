@@ -46,14 +46,15 @@ static void addlistsort(string& message, vector<word_entry>& ordlista){
 	word_entry temp;
 	temp.name = message;
 	temp.antal = 1;
+	unsigned long length = ordlista.size();
 	
-	if ( ordlista.size() > 0 ){
-		for(unsigned int i=0; i < ordlista.size(); i++){
+	if ( length > 0 ){
+		for(unsigned int i=0; i < length; i++){
 			if(ordlista[i].name > temp.name){
-				ordlista.insert(ordlista.begin() + i, temp);	
+				ordlista.insert(ordlista.begin() + i, temp);
 				break;
 			}
-			else if (ordlista.size() == (i + 1)) {
+			else if (length == (i + 1)) {
 				ordlista.push_back(temp);
 			}
 		}
