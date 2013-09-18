@@ -7,24 +7,27 @@ using namespace std;
 
 struct list_node {
 	string content;
-	struct<list_node> * next;
+	list_node* next;
+	
+	list_node(string initial_content, list_node* initial_next){
+		content = initial_content;
+		next = initial_next;
+		}
 };
 //Does struct<list-node> point to null at init?
-	
+
 
 class list
 {
 	public:
-		list(int argc, string* argv[]);
+		list();
 		~list();
 		void reverse();
 		void print();
 		void print_reversed();
-		string select(int pos);
-		void insert(string content,int pos);
-		void push_back(string content);
-		void delete(pos);		
-	private:   
+		void insert(string content);
+		void clear();
+	private:
 		int length;
-		struct<list_node> * first;
+		list_node* first;
 };

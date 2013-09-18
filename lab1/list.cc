@@ -2,42 +2,45 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-#include "list.h"
+#include "./list.h"
 
 using namespace std;
 
-list::list(int argc, string* argv[]){
-	if (argc =! 1){
-		cout << "setw(10) << "Please enter a valid filename" << endl;
-	}
-	else{
-		ifstream inputfile (argv[0]);
-		if(inputfile.is_open){
-			while ( getline (inputfile,line) )
-				{
-      				pushback(line);
-      			}
-      		}
-      	else{
-      		cout << "Please enter path to a valid file" << endl;
-      	} 
-	}
+list::list(){
+	first = nullptr;
 }
 
-list::getStruct(int pos){
-	if (pos == 0){
-		return first;
+void list::insert(string content){
+	first = new list_node(content,first);
+}
+
+void list::print(){
+	if (first == nullptr){
+		cout << "List is empty" << endl;
 	}
 	else {
-		temp& = first.next;
-		for ( i=0 ; i < pos && i < length ; i++ ){
-			temp& = temp.next;
-			if ( i == (pos -1)){
-				return temp&;
-			}
+		cout << first->content << endl;
+		list_node* temp = first->next;
+		
+		while (temp != nullptr){
+			cout << temp->content << endl;
+			temp = temp->next;
 		}
 	}
 }
-			
-list::pushback(string content){
+
+void list::reverse(){
 	
+	list_node* reverseLooper(list_node* current){
+		if (current->next == nullptr){
+			first = current;
+			return current;
+		}
+		else {
+			reverseLooper(current)->next = current;
+		}	
+	};
+	
+	list_node* temp = first;
+	reverseLooper(temp)->next = nullptr;
+}
