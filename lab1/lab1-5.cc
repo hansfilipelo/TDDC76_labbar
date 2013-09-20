@@ -12,9 +12,16 @@ int main(){
 	
 	testis.print();
 	
+	cout << endl << "Reverse" << endl;
 	testis.reverse();
 	
 	testis.print();
 	
+	cout << endl << "Reversse igen" << endl;
+	testis.printReverse();
+
+	testis.clear;
+	cout << endl << "Rensat skit" << endl;
+	testis.print
 	return 0;
 }
