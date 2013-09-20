@@ -45,16 +45,19 @@ void list::reverse(){
 	reverseLooper(temp)->next = nullptr;
 }
 
-void list::printreversed(){
+//------------------------------------
 
-	void printreversedloop(list_node* current){
-		if(current->next == nullptr){
-			cout<<current->content<<endl;
-			}
-		else{
-			printreversedloop(current->next);
-			cout<<current->content<<endl;
-			}
-		}
+void printreversedloop(list_node* current){
+	if(current->next == nullptr){
+		cout<<current->content<<endl;
+	}
+	else{
+		printreversedloop(current->next);
+		cout<<current->content<<endl;
+	}
+}
+
+void list::printreversed(){
+	
 	prinreversedloop(first);
 }
