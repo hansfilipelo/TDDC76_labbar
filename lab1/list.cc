@@ -29,17 +29,17 @@ void list::print(){
 	}
 }
 
-void list::reverse(){
-	
-	list_node* reverseLooper(list_node* current){
-		if (current->next == nullptr){
-			first = current;
-			return current;
-		}
-		else {
-			reverseLooper(current)->next = current;
-		}	
+list_node* reverseLooper(list_node* current){
+	if (current->next == nullptr){
+		first = current;
+		return current;
 	}
+	else {
+		reverseLooper(current)->next = current;
+	}	
+}
+
+void list::reverse(){
 	
 	list_node* temp = first;
 	reverseLooper(temp)->next = nullptr;
