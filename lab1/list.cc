@@ -45,6 +45,11 @@ list::~list(){
 //------------------------------------
 
 void list::clear(){
+
+	if (first == nullptr)){
+		return;
+	}
+
 	list_node* current = first->next;
 	list_node* next;
 	first = nullptr; 
