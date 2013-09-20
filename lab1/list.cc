@@ -19,7 +19,18 @@ list::~list(){
 //------------------------------------
 
 void list::clear(){
+	list_node* current = first->next;
+	list_node* next;
 
+	while ( current->next != nullptr ){
+		next = current->next;
+		delete current;
+		current = next;
+	}
+	
+	delete current;
+	delete next;
+	first = nullptr;
 }
 
 //------------------------------------
