@@ -20,10 +20,10 @@ list::list(const list& other){
 	
 	first = nullptr;
 	
-	if (other->first == nullptr){
+	if (other.first == nullptr){
 	}
 	else{
-		list_node* current = other->first;
+		list_node* current = other.first;
 
 		while (current != nullptr){
 			insert(current->content);
