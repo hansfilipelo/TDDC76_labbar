@@ -24,7 +24,7 @@ class list
 		~list();
 		void reverse();
 		void print();
-		void printReversed();
+		void printReverse();
 		void insert(string content);
 		void clear();
 	private:
