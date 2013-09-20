@@ -20,14 +20,11 @@ list::list(const list& other){
 	
 	first = nullptr;
 	
-	cerr << "Innan if" << endl;
 	if (other.first == nullptr){
 	}
 	else{
-		cerr << "innan list_node" << endl;
 		list_node* current = other.first;
 		
-		cerr << "innan while" << endl;
 		while (current != nullptr){
 			insert(current->content);
 			current = current->next;
@@ -70,6 +67,7 @@ void list::insert(string content){
 void list::print(){
 	if (first == nullptr){
 		cout << "List is empty" << endl;
+		return;
 	}
 	else {
 		cout << first->content << endl;
