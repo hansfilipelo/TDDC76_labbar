@@ -30,6 +30,7 @@ list::list(const list& other){
 			current = current->next;
 		}
 		
+		cout << "bananer" << endl;
 		reverse();
 	}
 }
