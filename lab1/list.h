@@ -29,5 +29,5 @@ class list
 		void insert(string content);
 		void clear();
 	private:
-		list_node* first;
+		list_node* first = nullptr;
 };
