@@ -20,8 +20,8 @@ int main(){
 	cout << endl << "Reversse igen" << endl;
 	testis.printReverse();
 
-	testis.clear;
+	testis.clear();
 	cout << endl << "Rensat skit" << endl;
-	testis.print;
+	testis.print();
 	return 0;
 }
