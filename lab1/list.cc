@@ -16,7 +16,27 @@ list::list(){
 
 //------------------------------------
 
+list::list(const list& other){
+	
+	if (other.first == nullptr){
+	}
+	else{
+		list_node& current = other->first;
+
+		while (current != nullptr){
+			this.insert(current->content);
+			current = current->next;
+		}
+		
+		this.reverse();
+	}
+}
+
+
+//------------------------------------
+
 list::~list(){
+	this.clear();
 
 }
 

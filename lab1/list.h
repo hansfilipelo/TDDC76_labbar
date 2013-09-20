@@ -20,8 +20,9 @@ struct list_node {
 class list
 {
 	public:
-		list();
-		~list();
+		list();				//Constructor
+		list(const list& other);	//Copy-constructor
+		~list();			//Destructor
 		void reverse();
 		void print();
 		void printReverse();

@@ -20,6 +20,10 @@ int main(){
 	cout << endl << "Reversse igen" << endl;
 	testis.printReverse();
 
+	list testis2(testis);
+	cout << "testis2 print" << endl;
+	testis2.print();
+
 	testis.clear();
 	cout << endl << "Rensat skit" << endl;
 	testis.print();
