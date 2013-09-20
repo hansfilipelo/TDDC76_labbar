@@ -10,3 +10,6 @@ lab1-5.o: lab1-5.cc
 
 list.o: list.cc
 	$(CCC) $(CCFLAGS) -c list.cc
+
+clean:
+	@ \rm -f *.o
