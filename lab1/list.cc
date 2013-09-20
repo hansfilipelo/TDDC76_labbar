@@ -10,6 +10,19 @@ list::list(){
 	first = nullptr;
 }
 
+//------------------------------------
+
+list::~list();{
+
+}
+
+//------------------------------------
+
+void list::clear(){
+
+}
+
+//------------------------------------
 void list::insert(string content){
 	first = new list_node(content,first);
 }
