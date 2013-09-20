@@ -8,7 +8,6 @@
 
 
 
-hej
 using namespace std;
 
 list::list(){
