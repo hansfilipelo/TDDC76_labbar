@@ -46,7 +46,7 @@ list::~list(){
 
 void list::clear(){
 
-	if (first == nullptr)){
+	if (first == nullptr){
 		return;
 	}
 
