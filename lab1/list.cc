@@ -29,35 +29,37 @@ void list::print(){
 	}
 }
 
-list_node* reverseLooper(list_node* current){
+//------------------------------------
+
+list_node* reverseLoop(list_node* current){
 	if (current->next == nullptr){
 		first = current;
 		return current;
 	}
 	else {
-		reverseLooper(current)->next = current;
-	}	
+		reverseLoop(current)->next = current;
+		return nullptr;
+	}
 }
 
 void list::reverse(){
-	
 	list_node* temp = first;
-	reverseLooper(temp)->next = nullptr;
+	reverseLoop(temp)->next = nullptr;
 }
 
 //------------------------------------
 
-void printreversedloop(list_node* current){
+void printReversedLoop(list_node* current){
 	if(current->next == nullptr){
 		cout<<current->content<<endl;
 	}
 	else{
-		printreversedloop(current->next);
+		printReversedLoop(current->next);
 		cout<<current->content<<endl;
 	}
 }
 
-void list::printreversed(){
+void list::printReversed(){
 	
-	prinreversedloop(first);
+	printReversedLoop(first);
 }
