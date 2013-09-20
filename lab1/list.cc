@@ -4,6 +4,11 @@
 #include <string>
 #include "./list.h"
 
+
+
+
+
+hej
 using namespace std;
 
 list::list(){
@@ -21,6 +26,7 @@ list::~list(){
 void list::clear(){
 	list_node* current = first->next;
 	list_node* next;
+	first = nullptr; 
 
 	while ( current->next != nullptr ){
 		next = current->next;
@@ -30,7 +36,6 @@ void list::clear(){
 	
 	delete current;
 	delete next;
-	first = nullptr;
 }
 
 //------------------------------------
