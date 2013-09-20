@@ -39,7 +39,7 @@ void list::reverse(){
 		else {
 			reverseLooper(current)->next = current;
 		}	
-	};
+	}
 	
 	list_node* temp = first;
 	reverseLooper(temp)->next = nullptr;
@@ -52,7 +52,7 @@ void list::printreversed(){
 			cout<<current->content<<endl;
 			}
 		else{
-			printreversedloop(current->next)
+			printreversedloop(current->next);
 			cout<<current->content<<endl;
 			}
 		}

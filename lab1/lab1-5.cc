@@ -2,13 +2,13 @@
 #include <iostream>
 #include "./list.h"
 
-using namespace std
+using namespace std;
 
 int main(){
 	list testis;
-	testis.insert(koolt);
-	testis.insert(badger);
-	testis.insert(erik);
+	testis.insert("koolt");
+	testis.insert("badger");
+	testis.insert("erik");
 	
 	testis.print();
 	
