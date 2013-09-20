@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <iostream>
-#include "list.cc"
+#include "./list.h"
 
 using namespace std
 
