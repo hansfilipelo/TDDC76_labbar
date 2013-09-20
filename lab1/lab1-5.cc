@@ -22,6 +22,6 @@ int main(){
 
 	testis.clear;
 	cout << endl << "Rensat skit" << endl;
-	testis.print
+	testis.print;
 	return 0;
 }
