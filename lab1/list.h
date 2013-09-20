@@ -28,6 +28,5 @@ class list
 		void insert(string content);
 		void clear();
 	private:
-		int length;
 		list_node* first;
 };
