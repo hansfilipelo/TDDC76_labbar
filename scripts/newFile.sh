@@ -1,6 +1,6 @@
 #!/bin/tcsh
 
-FILE=$1
+FILE="$1"
 
 touch $FILE
 
