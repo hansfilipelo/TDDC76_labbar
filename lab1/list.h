@@ -1,3 +1,12 @@
+/*
+FILNAMN: 		list.cc
+LABORATION:		1-5
+PROGRAMMERARE:	hanel742, eriek984
+DATUM:			2013-09-22
+BESKRIVNING:	Laboration 1-5
+*/
+
+
 //file list.h
 #include <stdlib.h>
 #include <iostream>
@@ -5,6 +14,7 @@
 
 using namespace std;
 
+// Creates datatype/struct for list nodes. Each node in the list is one of these. 
 struct list_node {
 	string content;
 	list_node* next;
@@ -14,9 +24,8 @@ struct list_node {
 		next = initial_next;
 		}
 };
-//Does struct<list-node> point to null at init?
 
-
+// Defines class list that's used in this lab.
 class list
 {
 	public:
