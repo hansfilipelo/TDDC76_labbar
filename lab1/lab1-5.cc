@@ -22,7 +22,7 @@ int main(int argc, char* argv[]){
 	}
 	else{
 		//first (0) argument is the executable file eg lab1-5.cc
-		ifstream inputfile (argv[1]);
+		ifstream inputfile (argv[1], ifstream::in);
 		if(inputfile.is_open){
 			
 			while ( getline (inputfile,line) )
