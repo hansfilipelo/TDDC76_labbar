@@ -16,12 +16,13 @@ int main(int argc, char argv){
 
 	list testis;
 
-	if ( argc =! 1 ){
+	if ( (argc =! 1) ){
 		cout << setw(10) << "Please enter a valid filename" << endl;
 	}
 	else{
-	//first (0) argument is the executable file eg lab1-5.cc
-		ifstream inputfile (argv[1]); 
+		//first (0) argument is the executable file eg lab1-5.cc
+		unsigned int x = 1;
+		ifstream inputfile (argv[x]);
 		if(inputfile.is_open){
 			
 			while ( getline (inputfile,line) )
@@ -54,5 +55,6 @@ int main(int argc, char argv){
 	testis.clear();
 	cout << endl << "Testing clear function" << endl;
 	testis.print();
+	
 	return 0;
 }
