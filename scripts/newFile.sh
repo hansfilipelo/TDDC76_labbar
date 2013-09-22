@@ -3,7 +3,7 @@
 touch $1
 
 echo "/*" >> $1
-echo "FILNAMN: 		Lab1-5.cc" >> $1
+echo "FILNAMN: 		$1" >> $1
 echo "LABORATION:		1-5" >> $1
 echo "PROGRAMMERARE:	hanel742, eriek984" >> $1
 echo "DATUM:			$(date '+%Y-%m-%d')" >> $1
