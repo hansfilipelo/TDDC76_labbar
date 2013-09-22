@@ -22,14 +22,18 @@ int main(int argc, char* argv[]){
 	}
 	else{
 		//first (0) argument is the executable file eg lab1-5.cc
-		ifstream inputfile (argv[1], ifstream::in);
+		ifstream inputfile;
+		inputfile.open(argv[1], ifstream::in);
+		
 		if(inputfile.is_open){
 			
-			while ( getline (inputfile,line) )
-				{
+			while ( getline (inputfile,line) ){
       				testis.insert(line);
-      			}
       		}
+      	}
+		
+		inputfile.close();
+		
       	else{
       		cout << "Please enter path to a valid file" << endl;
       	}
