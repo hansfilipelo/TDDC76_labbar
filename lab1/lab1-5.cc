@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
 		
 		if(inputfile.is_open){
 			
-			while ( getline (inputfile,line) ){
+			while ( getline (inputfile,string line) ){
       				testis.insert(line);
       		}
 		inputfile.close();
