@@ -9,6 +9,7 @@ BESKRIVNING:	Laboration 1-5
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include "./list.h"
 
 using namespace std;
@@ -27,7 +28,7 @@ int main(int argc, char* argv[]){
 		
 		if(inputfile.is_open){
 			
-			while ( getline (inputfile,string line) ){
+			while ( getline (inputfile, line) ){
       				testis.insert(line);
       		}
 		inputfile.close();
