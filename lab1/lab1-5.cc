@@ -8,6 +8,7 @@ BESKRIVNING:	Laboration 1-5
 
 #include <stdlib.h>
 #include <iostream>
+#include <iomanip>
 #include "./list.h"
 
 using namespace std;
@@ -21,8 +22,7 @@ int main(int argc, char argv){
 	}
 	else{
 		//first (0) argument is the executable file eg lab1-5.cc
-		unsigned int x = 1;
-		ifstream inputfile (argv[x]);
+		ifstream inputfile (argv[1]);
 		if(inputfile.is_open){
 			
 			while ( getline (inputfile,line) )

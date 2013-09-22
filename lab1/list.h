@@ -1,5 +1,5 @@
 /*
-FILNAMN: 		list.cc
+FILNAMN: 		list.h
 LABORATION:		1-5
 PROGRAMMERARE:	hanel742, eriek984
 DATUM:			2013-09-22
@@ -7,7 +7,8 @@ BESKRIVNING:	Laboration 1-5
 */
 
 
-//file list.h
+#ifndef listfile
+#define listfile
 #include <stdlib.h>
 #include <iostream>
 #include <string>
@@ -40,3 +41,5 @@ class list
 	private:
 		list_node* first;
 };
+
+#endif
