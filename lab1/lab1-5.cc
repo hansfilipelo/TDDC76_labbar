@@ -14,17 +14,19 @@ using namespace std;
 //main function is called with arguments in terminal ./lab1-5 "pathname" 
 int main(int argc, char argv){
 
-	if (argc =! 1){
+	list testis;
+
+	if ( argc =! 1 ){
 		cout << setw(10) << "Please enter a valid filename" << endl;
 	}
 	else{
 	//first (0) argument is the executable file eg lab1-5.cc
 		ifstream inputfile (argv[1]); 
 		if(inputfile.is_open){
-			list testis;
+			
 			while ( getline (inputfile,line) )
 				{
-      				testis.pushback(line);
+      				testis.insert(line);
       			}
       		}
       	else{
@@ -33,9 +35,8 @@ int main(int argc, char argv){
 	}
 	string message;
 	cout<<"input file path please"<<endl;
-		
 
-//test rutine
+	//test rutine
 	testis.print();
 	
 	cout << endl << "Reversing list and printing" << endl;
