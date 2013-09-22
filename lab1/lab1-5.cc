@@ -30,9 +30,8 @@ int main(int argc, char* argv[]){
 			while ( getline (inputfile,line) ){
       				testis.insert(line);
       		}
-      	}
-		
 		inputfile.close();
+      	}
 		
       	else{
       		cout << "Please enter path to a valid file" << endl;
