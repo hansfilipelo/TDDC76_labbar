@@ -13,7 +13,7 @@ BESKRIVNING:	Laboration 1-5
 
 using namespace std;
 //main function is called with arguments in terminal ./lab1-5 "pathname" 
-int main(int argc, char argv){
+int main(int argc, char* argv[]){
 
 	list testis;
 
