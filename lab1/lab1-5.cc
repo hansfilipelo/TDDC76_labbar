@@ -15,14 +15,19 @@ BESKRIVNING:	Laboration 1-5
 using namespace std;
 //main function is called with arguments in terminal ./lab1-5 "pathname" 
 int main(int argc, char* argv[]){
-
+	
+	// Defines a list
 	list testis;
-
+	
+	//If there isn't ONE argument, exit. 
 	if ( (argc =! 1) ){
 		cout << setw(10) << "Please enter a valid filename" << endl;
 	}
+	
+	//Else enter contents of file into list
 	else{
-		//first (0) argument is the executable file eg lab1-5.cc
+		//first (0) argument is the list
+		//Open inputfile. While-loop gets stuff into list. 
 		ifstream inputfile;
 		inputfile.open(argv[1], ifstream::in);
 		
@@ -34,12 +39,11 @@ int main(int argc, char* argv[]){
 		inputfile.close();
       	}
 		
+		//If file doesn't exists. 
       	else{
       		cout << "Please enter path to a valid file" << endl;
       	}
 	}
-	string message;
-	cout<<"input file path please"<<endl;
 
 	//test rutine
 	testis.print();
