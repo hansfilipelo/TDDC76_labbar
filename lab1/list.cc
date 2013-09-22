@@ -9,13 +9,14 @@
 
 
 using namespace std;
-
+/*Constructor: Sets pointer to nullptr*/
 list::list(){
 	first = nullptr;
 }
 
 //------------------------------------
-
+/* Copyconstructor (constructor called with arguments):
+ Makes called list a copy of the list given as argument*/
 list::list(const list& other){
 	
 	first = nullptr;
@@ -36,14 +37,14 @@ list::list(const list& other){
 
 
 //------------------------------------
-
+/* Deconstructor:Calls the clear function for safe deconstruction*/
 list::~list(){
 	this->clear();
 
 }
 
 //------------------------------------
-
+/*Deletes all list_nodes of target list to free up memory*/
 void list::clear(){
 
 	if (first == nullptr){
@@ -65,10 +66,15 @@ void list::clear(){
 }
 
 //------------------------------------
+/* Adds new list_node with given content first in list */
 void list::insert(string content){
 	first = new list_node(content,first);
 }
 
+
+//------------------------------------
+/*Prints content of all list_nodes in target list, if list is empty 
+a message is saying just that is printed instead*/
 void list::print(){
 	if (first == nullptr){
 		cout << "List is empty" << endl;
@@ -86,7 +92,7 @@ void list::print(){
 }
 
 //------------------------------------
-
+/*Flips the order of the list by rearranging pointers*/
 void list::reverse(){
 	list_node* current_temp = first; 
 	list_node* result_temp = nullptr;
@@ -102,7 +108,7 @@ void list::reverse(){
 	return;
 }
 //------------------------------------
-
+/*Prints target list in reverse order, last to first*/
 void printReverseLoop(list_node* current){
 	if(current->next == nullptr){
 		cout<<current->content<<endl;
@@ -113,6 +119,9 @@ void printReverseLoop(list_node* current){
 	}
 }
 
+
+//------------------------------------
+/*Calls the helper function*/
 void list::printReverse(){
 	
 	printReverseLoop(first);
