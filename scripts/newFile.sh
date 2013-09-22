@@ -1,4 +1,4 @@
-#!/bin/tcsh
+#!/usr/bin/bash
 
 FILE="$1"
 
