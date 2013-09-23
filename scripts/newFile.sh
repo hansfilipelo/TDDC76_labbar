@@ -27,4 +27,4 @@ BESKRIVNING:
 using namespace std;
 _EOF_
 
-open banan.cc && echo "Skapat ny fil!"
+open $FILE && echo "Skapat ny fil!"
