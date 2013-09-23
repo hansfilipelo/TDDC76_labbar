@@ -17,7 +17,7 @@ _EOF_
 echo "DATUM:			$(date '+%Y-%m-%d')" >> $FILE
 
 cat << _EOF_ >> ./$FILE
-BESKRIVNING:	Laboration 1-5
+BESKRIVNING:	
 */
 
 #include <stdlib.h>
@@ -26,3 +26,5 @@ BESKRIVNING:	Laboration 1-5
 #include <fstream>
 using namespace std;
 _EOF_
+
+open banan.cc && echo "Skapat ny fil!"
