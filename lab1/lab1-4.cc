@@ -1,4 +1,10 @@
-//lab1-4.cc
+/*
+FILNAMN: 		Lab1-4.cc
+LABORATION:		1-4
+PROGRAMMERARE:	hanel742, eriek984
+DATUM:			2013-09-23
+BESKRIVNING:	Laboration 1-4. Takes user input and puts in vector alphabeticaly. 
+*/
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -8,30 +14,33 @@
 #include <algorithm>
 using namespace std;
 
+//------------------------------
+// Struct for word-entries in vector.
 struct word_entry {
 	int antal;
 	string name;
 };
 
 //------------------------------
-
-static string makelowercase(string message){
+//Converts input to lowercase
+static string makeLowerCase(string message){
 	transform(message.begin(), message.end(),message.begin(),::tolower);
 	return message;
 }
 
 //------------------------------
-
-static bool finnsilista(string message,vector<word_entry>& ordlista){
+//Checks to see a given word already is in list
+static bool inList(string message,vector<word_entry>& wordlist){
 	
-	if ( ordlista.empty() ){
+	if ( wordlist.empty() ){
 		return false;
 		}
 		
 	else {
-		for (unsigned int i=0; i < ordlista.size(); i++ ){
-			if ( ordlista[i].name == message ){
-				ordlista[i].antal += 1;
+		for (unsigned int i=0; i < wordlist.size(); i++ ){
+			//If in list - add upon count of times word's been "mentioned". 
+			if ( wordlist[i].name == message ){
+				wordlist[i].antal += 1;
 				return true;
 			}
 		}
@@ -40,54 +49,55 @@ static bool finnsilista(string message,vector<word_entry>& ordlista){
 }
 
 //------------------------------
+//Adds item to list - sorted. 
 
-static void addlistsort(string& message, vector<word_entry>& ordlista){
+static void addListSort(string& message, vector<word_entry>& wordlist){
 	
 	word_entry temp;
 	temp.name = message;
 	temp.antal = 1;
-	unsigned long length = ordlista.size();
+	unsigned long length = wordlist.size();
 	
 	if ( length > 0 ){
 		for(unsigned int i=0; i < length; i++){
-			if(ordlista[i].name > temp.name){
-				ordlista.insert(ordlista.begin() + i, temp);
+			if(wordlist[i].name > temp.name){
+				wordlist.insert(wordlist.begin() + i, temp);
 				break;
 			}
 			else if (length == (i + 1)) {
-				ordlista.push_back(temp);
+				wordlist.push_back(temp);
 			}
 		}
 	}
 	else {
-		ordlista.push_back(temp);
+		wordlist.push_back(temp);
 	}
 }
 		
 //------------------------------
-
-static void printshit(vector<word_entry>& ordlista){
-	for (unsigned int i=0; i < ordlista.size(); i++){
-		cout << setw(10) << ordlista[i].name << setw(10) << ordlista[i].antal << endl;
+//Prints wordlist
+static void printShit(vector<word_entry>& wordlist){
+	for (unsigned int i=0; i < wordlist.size(); i++){
+		cout << setw(10) << wordlist[i].name << setw(10) << wordlist[i].antal << endl;
 	}
 }
 //------------------------------
 
 int main (){
 	
-	// Initierar ordlista
-	vector<word_entry> ordlista;
+	// Initiates wordlist
+	vector<word_entry> wordlist;
 	string message;
 	
 	while (cin >> message){
 		
-		message = makelowercase(message);
+		message = makeLowerCase(message);
 		
-		if ( not(finnsilista(message, ordlista))){
-			addlistsort(message, ordlista);
+		if ( not(inList(message, wordlist))){
+			addListSort(message, wordlist);
 		}
 	}
 	
-	printshit(ordlista);
+	printShit(wordlist);
 	return 0;	
 }
