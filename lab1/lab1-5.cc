@@ -47,22 +47,26 @@ int main(int argc, char* argv[]){
 
 	//test rutine
 	testis.print();
+	cout << endl;
 	
 	cout << endl << "Reversing list and printing" << endl;
 	testis.reverse();
-	
 	testis.print();
+	cout << endl;
 	
-	cout << endl << "Reversed list printed reversed" << endl;
+	cout << endl << "Reversed list printed reversed, double minus equals plus." << endl;
 	testis.printReverse();
+	cout << endl;
 
 	list testis2(testis);
 	cout << "testis2 print" << endl;
 	testis2.print();
+	cout << endl;
 
 	testis.clear();
 	cout << endl << "Testing clear function" << endl;
 	testis.print();
+	cout << endl;
 	
 	return 0;
 }
