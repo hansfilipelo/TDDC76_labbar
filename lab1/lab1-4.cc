@@ -77,6 +77,8 @@ static void addListSort(string& message, vector<word_entry>& wordlist){
 //------------------------------
 //Prints wordlist
 static void printShit(vector<word_entry>& wordlist){
+	// Formatting
+	cout << setw(10) << "WORD" << setw(10) << "TIMES" << endl;
 	for (unsigned int i=0; i < wordlist.size(); i++){
 		cout << setw(10) << wordlist[i].name << setw(10) << wordlist[i].antal << endl;
 	}
