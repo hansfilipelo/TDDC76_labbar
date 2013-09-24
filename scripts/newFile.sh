@@ -25,6 +25,11 @@ BESKRIVNING:
 #include <iomanip>
 #include <fstream>
 using namespace std;
+
+int main(){
+	
+	return 0;
+}
 _EOF_
 
-open $FILE && echo "Skapat ny fil!"
+open $FILE && echo "Skapat ny $FILE"
