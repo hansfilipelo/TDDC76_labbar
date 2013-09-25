@@ -15,7 +15,7 @@ BESKRIVNING:	Header file for class list. A linked list.
 
 // Creates datatype/struct for list nodes. Each node in the list is one of these. 
 struct list_node {
-	string content;
+	std::string content;
 	list_node* next;
 	
 	list_node(std::string initial_content, list_node* initial_next){
