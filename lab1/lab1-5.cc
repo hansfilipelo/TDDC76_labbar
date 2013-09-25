@@ -22,7 +22,10 @@ int main(int argc, char* argv[]){
 	//If there isn't ONE argument, exit. 
 	if ( (argc > 2) ){
 		cout << setw(10) << "Please enter a valid filename" << endl;
-	}	
+	}
+	else if ( argc == 0 ){
+		cout << setw(10) << "Please enter a valid filename" << endl;
+	}
 	
 	//Else enter contents of file into list
 	else{
