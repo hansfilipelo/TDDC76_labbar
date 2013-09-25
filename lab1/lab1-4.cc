@@ -99,8 +99,8 @@ int main (){
 		message = makeLowerCase(message);
 		
 		addListSort(message, wordlist);
+	}
 	
 	print(wordlist);
 	return 0;
-	}
 }
