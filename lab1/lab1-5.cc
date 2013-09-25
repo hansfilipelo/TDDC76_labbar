@@ -20,7 +20,7 @@ int main(int argc, char* argv[]){
 	list testis;
 	
 	//If there isn't ONE argument, exit. 
-	if ( (argc > 1) ){
+	if ( (argc > 2) ){
 		cout << setw(10) << "Please enter a valid filename" << endl;
 	}	
 	
