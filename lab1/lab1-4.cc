@@ -39,8 +39,10 @@ static bool inList(const string message,vector<word_entry>& wordlist){
 	else {
 		for (unsigned int i=0; i < wordlist.size(); i++ ){
 			//If in list - add upon count of times word's been "mentioned". 
-			if ( wordlist.at(i)->name == message ){
-				wordlist.at(i)->antal += 1;
+			// Got comment wordlist.at() from you (Jonas). We don't really see why the way we're doing it 
+			// here (wordlist[i].name) is incorrect/an issue. 
+			if ( wordlist[i].name == message ){
+				wordlist[i].antal += 1;
 				return true;
 			}
 		}
