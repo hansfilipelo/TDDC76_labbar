@@ -44,12 +44,12 @@ list::list(const list& other){
 // "A1llocating operator" upon copy
 list& list::operator=(const list& input){
 	
-	if ( first == input.head ){
+	if ( first == input->first ){
 		return *this;
 	}
 	
 	this->clear();
-	list_node* current = input->first;
+	list_node* current = input.first;
 	
 	while ( current != nullptr ){
 		insert(current->name);
