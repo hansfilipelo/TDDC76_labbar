@@ -30,7 +30,7 @@ static string makeLowerCase(string message){
 
 //------------------------------
 //Checks to see a given word already is in list
-static bool inList(string message,vector<word_entry>& wordlist){
+static bool inList(const string message,vector<word_entry>& wordlist){
 	
 	if ( wordlist.empty() ){
 		return false;
@@ -51,32 +51,35 @@ static bool inList(string message,vector<word_entry>& wordlist){
 //------------------------------
 //Adds item to list - sorted. 
 
-static void addListSort(string& message, vector<word_entry>& wordlist){
+static void addListSort(const string& message, vector<word_entry>& wordlist){
 	
-	word_entry temp;
-	temp.name = message;
-	temp.antal = 1;
-	unsigned long length = wordlist.size();
+	if ( not(inList(message, wordlist))){
 	
-	if ( length > 0 ){
-		for(unsigned int i=0; i < length; i++){
-			if(wordlist[i].name > temp.name){
-				wordlist.insert(wordlist.begin() + i, temp);
-				break;
-			}
-			else if (length == (i + 1)) {
-				wordlist.push_back(temp);
+		word_entry temp;
+		temp.name = message;
+		temp.antal = 1;
+		unsigned long length = wordlist.size();
+	
+		if ( length > 0 ){
+			for(unsigned int i=0; i < length; i++){
+				if(wordlist[i].name > temp.name){
+					wordlist.insert(wordlist.begin() + i, temp);
+					break;
+				}
+				else if (length == (i + 1)) {
+					wordlist.push_back(temp);
+				}
 			}
 		}
-	}
-	else {
-		wordlist.push_back(temp);
+		else {
+			wordlist.push_back(temp);
+		}
 	}
 }
 		
 //------------------------------
 //Prints wordlist
-static void printShit(vector<word_entry>& wordlist){
+static void print(const vector<word_entry>& wordlist){
 	// Formatting
 	cout << setw(10) << "WORD" << setw(10) << "TIMES" << endl;
 	for (unsigned int i=0; i < wordlist.size(); i++){
@@ -95,11 +98,8 @@ int main (){
 		
 		message = makeLowerCase(message);
 		
-		if ( not(inList(message, wordlist))){
-			addListSort(message, wordlist);
-		}
-	}
+		addListSort(message, wordlist);
 	
-	printShit(wordlist);
+	print(wordlist);
 	return 0;	
 }
