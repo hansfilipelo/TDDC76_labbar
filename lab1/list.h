@@ -31,7 +31,7 @@ class list
 		list();				//Constructor
 		list(const list& other);	//Copy-constructor
 		~list();			//Destructor
-		list& list::operator=(const list& input); // "A1llocating operator" upon copy
+		list& operator=(const list& input); // "A1llocating operator" upon copy
 		void reverse();
 		void print() const;
 		void printReverse() const;

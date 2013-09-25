@@ -44,7 +44,7 @@ list::list(const list& other){
 // "A1llocating operator" upon copy
 list& list::operator=(const list& input){
 	
-	if ( first == input->first ){
+	if ( first == input.first ){
 		return *this;
 	}
 	
