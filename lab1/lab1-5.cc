@@ -48,7 +48,7 @@ int main(int argc, char* argv[]){
       	else{
       		cout << "Please enter path to a valid file" << endl;
       	}
-	}
+}
 
 	//test rutine
 	testis.print();
