@@ -32,11 +32,11 @@ class list
 		list(const list& other);	//Copy-constructor
 		~list();			//Destructor
 		void reverse();
-		void const print();
-		void const printReverse();
+		void print() const;
+		void printReverse() const;
 		void insert(const std::string content);
 		void clear();
-		bool const empty();
+		bool empty() const;
 	private:
 		list_node* first;
 };
