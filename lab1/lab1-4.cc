@@ -86,6 +86,7 @@ static void print(const vector<word_entry>& wordlist){
 		cout << setw(10) << wordlist[i].name << setw(10) << wordlist[i].antal << endl;
 	}
 }
+
 //------------------------------
 
 int main (){
