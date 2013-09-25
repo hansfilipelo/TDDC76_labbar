@@ -52,7 +52,7 @@ list& list::operator=(const list& input){
 	list_node* current = input.first;
 	
 	while ( current != nullptr ){
-		insert(current->name);
+		insert(current->content);
 		current = current->next;
 	}
 	
