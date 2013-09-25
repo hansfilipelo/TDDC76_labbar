@@ -12,8 +12,8 @@ BESKRIVNING:	Implementation file for classs list.
 #include <string>
 #include "./list.h"
 
-
 using namespace std;
+
 /*Constructor: Sets pointer to nullptr*/
 list::list(){
 	first = nullptr;
@@ -40,6 +40,24 @@ list::list(const list& other){
 	}
 }
 
+//------------------------------------
+// "A1llocating operator" upon copy
+list& list::operator=(const list& input){
+	
+	if ( first == input.head ){
+		return *this;
+	}
+	
+	this->clear();
+	list_node* current = input->first;
+	
+	while ( current != nullptr ){
+		insert(current->name);
+		current = current->next;
+	}
+	
+	return *this;
+}
 
 //------------------------------------
 /* Deconstructor:Calls the clear function for safe deconstruction*/
@@ -80,7 +98,7 @@ void list::insert(string content){
 //------------------------------------
 /*Prints content of all list_nodes in target list, if list is empty 
 a message is saying just that is printed instead*/
-void list::print(){
+void const list::print(){
 	if (first == nullptr){
 		cout << "List is empty" << endl;
 		return;
@@ -127,7 +145,20 @@ void printReverseLoop(list_node* current){
 
 //------------------------------------
 /*Calls the helper function*/
-void list::printReverse(){
+void const list::printReverse(){
 	
 	printReverseLoop(first);
+}
+
+//------------------------------------
+/*Checks to see if list is empty*/
+
+bool const list::empty(){
+	bool truth = false;
+	
+	if ( first == nullptr ){
+		truth = true;
+	}
+	
+	return truth;
 }
