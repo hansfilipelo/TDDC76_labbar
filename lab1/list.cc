@@ -98,7 +98,7 @@ void list::insert(string content){
 //------------------------------------
 /*Prints content of all list_nodes in target list, if list is empty 
 a message is saying just that is printed instead*/
-void const list::print(){
+void list::print() const{
 	if (first == nullptr){
 		cout << "List is empty" << endl;
 		return;
@@ -145,7 +145,7 @@ void printReverseLoop(list_node* current){
 
 //------------------------------------
 /*Calls the helper function*/
-void const list::printReverse(){
+void list::printReverse() const{
 	
 	printReverseLoop(first);
 }
@@ -153,7 +153,7 @@ void const list::printReverse(){
 //------------------------------------
 /*Checks to see if list is empty*/
 
-bool const list::empty(){
+bool list::empty() const{
 	bool truth = false;
 	
 	if ( first == nullptr ){
