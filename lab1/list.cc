@@ -3,7 +3,7 @@ FILNAMN: 		list.cc
 LABORATION:		1-5
 PROGRAMMERARE:	hanel742, eriek984
 DATUM:			2013-09-22
-BESKRIVNING:	Laboration 1-5
+BESKRIVNING:	Implementation file for classs list. 
 */
 
 //file list.cc
@@ -11,9 +11,6 @@ BESKRIVNING:	Laboration 1-5
 #include <iostream>
 #include <string>
 #include "./list.h"
-
-
-
 
 
 using namespace std;
