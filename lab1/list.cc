@@ -146,8 +146,9 @@ void printReverseLoop(list_node* current){
 //------------------------------------
 /*Calls the helper function*/
 void list::printReverse() const{
-	
-	printReverseLoop(first);
+	if ( first != nullptr ){
+		printReverseLoop(first);
+	}
 }
 
 //------------------------------------
