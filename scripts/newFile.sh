@@ -33,4 +33,4 @@ int main(){
 }
 _EOF_
 
-open $FILE && echo "Skapat ny $FILE"
+echo "Skapat ny $FILE"

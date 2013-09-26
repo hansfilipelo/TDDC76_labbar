@@ -65,8 +65,6 @@ money::money(const std::string currCode){
 money& money::operator = (const money& otherMoney){
 	
 	currency = otherMoney.currency;
-	units = otherMoney.units;
-	cents = otherMoney.cents;
 	
 	return *this;
 }

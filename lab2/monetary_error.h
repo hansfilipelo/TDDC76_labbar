@@ -11,9 +11,13 @@ BESKRIVNING:
 #include <iomanip>
 #include <fstream>
 #include <string>
-using namespace std;
+#include <stdexcept>
 
-int main(){
+
+class monetary_error: std::logic_error{
+	public:
+		
+		
+	private:
 	
-	return 0;
 }
