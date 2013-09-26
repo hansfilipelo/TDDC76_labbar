@@ -10,9 +10,33 @@ BESKRIVNING:
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-using namespace std;
+#include <string>
 
-int main(){
+namespace monetary{
+	class money{
+
+		public:
+			money();
+			money(const std::string currCode);
+			money(const std::string currCode, const unsigned unitValue, const unsigned centValue);
+			money(const unsigned unitValue, const unsigned centValue);
 	
-	return 0;
+			//Operators
+			money& operator = (const money& otherMoney);
+			bool operator < (const money& otherMoney);
+			bool operator > (const money& otherMoney);
+			bool operator != (const money& otherMoney);
+			bool operator == (const money& otherMoney);
+			money& operator + (const money& otherMoney);
+			money& operator ++ ();						// ++m3
+			money operator ++ (int separatemefrom);	// m3++
+	
+			//Functions
+			std::string getCurrency() const;
+
+		private:
+			std::string currency;
+			unsigned units;
+			unsigned cents;
+	};
 }
