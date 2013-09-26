@@ -40,3 +40,4 @@ namespace monetary{
 			unsigned cents;
 	};
 }
+
