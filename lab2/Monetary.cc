@@ -28,15 +28,9 @@ money::money(){
 //------------------------------------
 
 money::money(const std::string currCode, const unsigned unitValue, const unsigned centValue){
-	try{
         if ( currCode.length() != 3 ){
             throw monetary_error{"En förkortning måste vara tre tecken lång"};
         }
-	}
-    catch (const monetary_error& error){
-        cout << error.what() << endl;
-    }
-    
 	currency = currCode;
 	units = unitValue;
 	cents = centValue;
@@ -56,12 +50,22 @@ money::money(const unsigned unitValue, const unsigned centValue){
 
 money::money(const std::string currCode){
 	if ( currCode.length() != 3 ){
-		//Här fukking error
+	  throw monetary_error{"valutaf�rkortning m�ste vara tre tecken}
 	}
 	
 	currency = currCode;
 	units = 0;
 	cents = 0;
+}
+
+//------------------------------------
+// Copy-constructor
+
+money::money(const money& otherMoney){
+	
+	currency = otherMoney.currency;
+	units = otherMoney.units;
+	cents = otherMoney.cents;
 }
 
 
@@ -209,14 +213,30 @@ money&& money::operator + (const money& otherMoney){
 //------------------------------------
 
 money& money::operator ++ (){
-
-}						// ++m3
+	cents = cents + 1;
+	if ( cents >= 100 ){
+		units = units + 1; 
+		cents = cents - 100;
+	}
+	
+	return this;
+}
 
 //------------------------------------
 
 money money::operator ++ (int separatemefrom){
-
-}	// m3++
+	
+	temp = money(this);
+	
+	cents = cents + 1; 
+	if ( cents >= 100 ){
+		units = units + 1; 
+		cents = cents - 100;
+	}
+	
+	return temp;
+	
+}
 
 //------------------------------------
 
