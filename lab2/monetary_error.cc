@@ -6,14 +6,17 @@ DATUM:			2013-09-26
 BESKRIVNING:	
 */
 
-#include <stdlib.h>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
+
+#include <stdexcept>
 #include <string>
 using namespace std;
 
-int main(){
-	
-	return 0;
-}
+class monetary_error : public logic_error
+{
+public:
+    explicit monetary_error(const string& what_arg) noexcept
+    : logic_error{what_arg} {}
+    
+    explicit monetary_error(const char* what_arg) noexcept
+    : logic_error{what_arg} {}
+};

@@ -11,6 +11,7 @@ BESKRIVNING:
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include "./monetary_error.cc"
 
 namespace monetary{
 	class money{

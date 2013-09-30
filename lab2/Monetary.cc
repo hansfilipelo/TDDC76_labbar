@@ -28,10 +28,15 @@ money::money(){
 //------------------------------------
 
 money::money(const std::string currCode, const unsigned unitValue, const unsigned centValue){
-	if ( currCode.length() != 3 ){
-		//Här fukking error
+	try{
+        if ( currCode.length() != 3 ){
+            throw monetary_error{"En förkortning måste vara tre tecken lång"};
+        }
 	}
-	
+    catch (const monetary_error& error){
+        cout << error.what() << endl;
+    }
+    
 	currency = currCode;
 	units = unitValue;
 	cents = centValue;
@@ -64,39 +69,141 @@ money::money(const std::string currCode){
 
 money& money::operator = (const money& otherMoney){
 	
-	currency = otherMoney.currency;
-	
+    // If both objects have defined currency but they are not the same - do mtf error. 
+    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+        if ( otherMoney.currency != currency ) {
+            throw monetary_error{"Ej samma valutakod"};
+        }
+    }
+    
+    // Essentially only two cases except error
+    if ( currency == "unspecified"){
+        currency = otherMoney.currency;
+        units = otherMoney.units;
+        cents = otherMoney.cents;
+    }
+    else {
+        units = otherMoney.units;
+        cents = otherMoney.cents;
+    }
+
+    
 	return *this;
 }
 
 //------------------------------------
 
 bool money::operator < (const money& otherMoney){
-
+    
+    // If both objects have defined currency but they are not the same - do mtf error.
+    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+        if ( otherMoney.currency != currency ) {
+            throw monetary_error{"Ej samma valutakod"};
+        }
+    }
+    
+    
+    if ( units < otherMoney.units ){
+        return true;
+    }
+    else if ( (units == otherMoney.units) && (cents < otherMoney.cents) ){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 //------------------------------------
 
 bool money::operator > (const money& otherMoney){
-
+    
+    // If both objects have defined currency but they are not the same - do mtf error.
+    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+        if ( otherMoney.currency != currency ) {
+            throw monetary_error{"Ej samma valutakod"};
+        }
+    }
+    
+    
+    if ( units > otherMoney.units ){
+        return true;
+    }
+    else if ( (units == otherMoney.units) && (cents > otherMoney.cents) ){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 //------------------------------------
 
 bool money::operator == (const money& otherMoney){
-
+    
+    // If both objects have defined currency but they are not the same - do mtf error.
+    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+        if ( otherMoney.currency != currency ) {
+            throw monetary_error{"Ej samma valutakod"};
+        }
+    }
+    
+    if ( units == otherMoney.units && cents == otherMoney.cents ){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 //------------------------------------
 
 bool money::operator != (const money& otherMoney){
-
+    
+    // If both objects have defined currency but they are not the same - do mtf error.
+    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+        if ( otherMoney.currency != currency ) {
+            throw monetary_error{"Ej samma valutakod"};
+        }
+    }
+    
+    if ( units != otherMoney.units || cents != otherMoney.cents ){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 //------------------------------------
 
-money& money::operator + (const money& otherMoney){
-
+money&& money::operator + (const money& otherMoney){
+    // If both objects have defined currency but they are not the same - do mtf error.
+    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+            if ( otherMoney.currency != currency ) {
+                throw monetary_error{"Ej samma valutakod"};
+            }
+    }
+    
+    int unitSum;
+    int centSum;
+    unitSum= units + otherMoney.units;
+    centSum = cents + otherMoney.cents;
+    if (centSum >= 100 ){
+        unitSum = unitSum + 1;
+        centSum = centSum - 100;
+    }
+    
+    if ( (currency == "unspecified") && (otherMoney.currency == "unspecified") ){
+        return move(money("unspecified", unitSum, centSum));
+    }
+    else if (currency == "unspecified"){
+        return move(money(otherMoney.currency, unitSum, centSum));
+    }
+    else {
+        return move(money(currency, unitSum, centSum));
+    }
+    
 }
 
 //------------------------------------
