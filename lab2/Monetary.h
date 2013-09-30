@@ -28,7 +28,7 @@ namespace monetary{
 			bool operator > (const money& otherMoney);
 			bool operator != (const money& otherMoney);
 			bool operator == (const money& otherMoney);
-			money& operator + (const money& otherMoney);
+			money&& operator + (const money& otherMoney);
 			money& operator ++ ();						// ++m3
 			money operator ++ (int separatemefrom);	// m3++
 	
