@@ -19,8 +19,7 @@ using namespace std;
 //------------------------------------
 
 money::money(){
-	string unspecified = "unspecified";
-	currency = unspecified;
+	currency = "unspecified";
 	units = 0;
 	cents = 0;
 }
