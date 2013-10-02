@@ -90,9 +90,6 @@ money& money::operator = (const money& otherMoney){
         cents = otherMoney.getCents();
     }
     
-    
-    cout << "slutet av =" << endl;
-    
 	return *this;
 }
 
@@ -210,8 +207,6 @@ money&& money::operator + (const money& otherMoney){
         return move(money(currency, unitSum, centSum));
     }
     
-    cout << "slutet av +" << endl;
-    
 }
 
 //------------------------------------
@@ -268,13 +263,14 @@ unsigned int money::getCents() const{
 //}
 
 //------------------------------------
-
-ostream& operator << (ostream& stream, const money& outsideMoney){
-    
-    if(outsideMoney.getCurrency() == "unspecified"){
-		return stream << outsideMoney.getUnits() << "." << outsideMoney.getCents();
+namespace monetary {
+    ostream& operator<< (ostream& stream, const money& outsideMoney){
+        
+        if(outsideMoney.getCurrency() == "unspecified"){
+            return stream << outsideMoney.getUnits() << "." << outsideMoney.getCents();
+        }
+        return stream << outsideMoney.getCurrency() << " " << outsideMoney.getUnits() << "." << outsideMoney.getCents();
     }
-    return stream << outsideMoney.getCurrency() << " " << outsideMoney.getUnits() << "." << outsideMoney.getCents();
 }
 
 //------------------------------------
