@@ -48,7 +48,7 @@ money::money(const unsigned unitValue, const unsigned centValue){
 
 //------------------------------------
 
-money::money(const std::string currCode){
+money::money(const string currCode){
 	if ( currCode.length() != 3 ){
         throw monetary_error{"valutaförkortning måste vara tre tecken"};
 	}
@@ -63,9 +63,9 @@ money::money(const std::string currCode){
 
 money::money(const money& otherMoney){
 	
-	currency = otherMoney->currency;
-	units = otherMoney->units;
-	cents = otherMoney->cents;
+	currency = otherMoney.currency;
+	units = otherMoney.units;
+	cents = otherMoney.cents;
 }
 
 
@@ -226,7 +226,7 @@ money& money::operator ++ (){
 
 money money::operator ++ (int separatemefrom){
 	
-	temp = money(this);
+    money temp(this);
 	
 	cents = cents + 1; 
 	if ( cents >= 100 ){
