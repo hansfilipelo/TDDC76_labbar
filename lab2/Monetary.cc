@@ -251,12 +251,12 @@ string money::getCurrency() const{
 
 //------------------------------------
 
-unsigned int getUnits() const{
+unsigned int money::getUnits() const{
     return units;
 }
 
 //------------------------------------
 
-unsigned int getCents() const{
+unsigned int money::getCents() const{
     return cents;
 }
