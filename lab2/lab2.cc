@@ -39,7 +39,7 @@ int main(){
     
     try {
         erik > odef;
-        cout << "Erik är större än odef"
+        cout << "Erik är större än odef" << endl;
     } catch (const monetary_error& error) {
         cout << error.what() << endl;
     }
