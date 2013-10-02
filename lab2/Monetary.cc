@@ -40,8 +40,7 @@ money::money(const std::string currCode, const unsigned unitValue, const unsigne
 
 money::money(const unsigned unitValue, const unsigned centValue){
 	
-	string unspecified = "unspecified";
-	currency = unspecified;
+	currency = "unspecified";
 	units = unitValue;
 	cents = centValue;
 }
