@@ -279,7 +279,7 @@ ostream& operator << (ostream& stream, const money& outsideMoney){
 
 //------------------------------------
 
-void money::print(ostream& output){
+void money::print(ostream& output) const{
     output << *this;
 }
 

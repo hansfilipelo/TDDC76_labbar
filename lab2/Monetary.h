@@ -43,7 +43,7 @@ namespace monetary{
         std::string getCurrency() const;
         unsigned int getUnits() const;
         unsigned int getCents() const;
-        void print(ostream& output);
+        void print(ostream& output) const;
         
     private:
         std::string currency;
