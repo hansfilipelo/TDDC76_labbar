@@ -6,6 +6,9 @@
  BESKRIVNING:
  */
 
+
+#ifndef monetaryfile
+#define monetaryfile
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>
@@ -43,3 +46,4 @@ namespace monetary{
 	};
 }
 
+#endif

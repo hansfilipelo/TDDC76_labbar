@@ -219,7 +219,7 @@ money& money::operator ++ (){
 		cents = cents - 100;
 	}
 	
-	return this;
+	return *this;
 }
 
 //------------------------------------
@@ -241,7 +241,8 @@ money money::operator ++ (int separatemefrom){
 //------------------------------------
 
 string money::getCurrency() const{
-
+    
+    return currency;
 }
 
 //------------------------------------
