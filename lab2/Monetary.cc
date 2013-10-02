@@ -81,7 +81,7 @@ money& money::operator = (const money& otherMoney){
             cout<<" currency Šr inte unspec"<<endl;
         }
         
-        if(otherMoney.currency != "unspecified")
+        if(not(strcmp(otherMoney.currency,"unspecified")))
         {
             cout<<" otherMoney.currency Šr inte unspec"<<endl;
         }
