@@ -13,44 +13,42 @@ BESKRIVNING:	Runs test on class "list" implemented in list.h and list.cc.
 #include "./list.h"
 
 using namespace std;
-//main function is called with arguments in terminal ./lab1-5 "pathname" 
+//main function is called with arguments in terminal ./lab1-5 "pathname"
 int main(int argc, char* argv[]){
-	
+    
 	// Defines a list
 	list testis;
 	
-	//If there isn't ONE argument, exit. 
-	if ( (argc > 2) ){
+	//If there isn't ONE argument, exit.
+	if ( (argc != 2) ){
 		cout << setw(10) << "Please enter a valid filename" << endl;
-	}
-	else if ( argc == 0 ){
-		cout << setw(10) << "Please enter a valid filename" << endl;
-	}
+        return 1;
+    }
 	
 	//Else enter contents of file into list
 	else{
 		//first (0) argument is the list
-		//Open inputfile. While-loop gets stuff into list. 
-		//You (Jonas) gave us a comment here - stating that argv[1] is second argument - and yes it is.. 
-		// argv[1] is the "file call" (i e ./lab1-5). We will not change the lines below. 
+		//Open inputfile. While-loop gets stuff into list.
+		//You (Jonas) gave us a comment here - stating that argv[1] is second argument - and yes it is..
+		// argv[1] is the "file call" (i e ./lab1-5). We will not change the lines below.
 		ifstream inputfile;
 		inputfile.open(argv[1], ifstream::in);
 		
 		if( inputfile.is_open() ){
 			string line;
 			while ( getline (inputfile, line) ){
-      				testis.insert(line);
+                testis.insert(line);
       		}
-		inputfile.close();
+            inputfile.close();
       	}
 		
-		//If file doesn't exists. 
+		//If file doesn't exists.
       	else{
       		cout << "Please enter path to a valid file" << endl;
       	}
-}
-
-	//test rutine
+    }
+    
+    //test rutine
 	testis.print();
 	cout << endl;
 	
@@ -62,12 +60,12 @@ int main(int argc, char* argv[]){
 	cout << endl << "Reversed list printed reversed, double minus equals plus." << endl;
 	testis.printReverse();
 	cout << endl;
-
+    
 	list testis2(testis);
 	cout << "testis2 print" << endl;
 	testis2.print();
 	cout << endl;
-
+    
 	testis.clear();
 	cout << endl << "Testing clear function" << endl;
 	testis.print();

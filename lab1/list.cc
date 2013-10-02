@@ -56,6 +56,8 @@ list& list::operator=(const list& input){
 		current = current->next;
 	}
 	
+    reverse();
+    
 	return *this;
 }
 
@@ -85,7 +87,6 @@ void list::clear(){
 	}
 	
 	delete current;
-	delete next;
 }
 
 //------------------------------------
