@@ -25,7 +25,7 @@ int main(){
         erik = erik + odef;
         
         cout << "Eriks pengar" << endl;
-        cout << erik.getCurrency() << endl;
+        cout << erik.getUnits() << endl;
     } catch (const monetary_error& error) {
         cout << error.what() << endl;
     }
@@ -37,15 +37,18 @@ int main(){
         cout << error.what() << endl;
     }
     
-    string teststring = "unspecified";
-    
-    if (teststring == "unspecified"){
-        cout << "Ja det blir en sträng av skiten" << endl;
+    try {
+        erik > odef;
+        cout << "Erik är större än odef"
+    } catch (const monetary_error& error) {
+        cout << error.what() << endl;
     }
     
-    if ( odef.getCurrency() == "unspecified" ){
-        cout << "odef och unspecified är lika" << endl;
+    try {
+        erik < hf
+    } catch (const monetary_error& error) {
+        cout << error.what() << endl;
     }
     
-	return 0;
+    return 0;
 }

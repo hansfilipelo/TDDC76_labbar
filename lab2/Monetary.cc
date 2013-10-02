@@ -63,8 +63,8 @@ money::money(const string currCode){
 money::money(const money& otherMoney){
 	
 	currency = otherMoney.getCurrency();
-	units = otherMoney.units;
-	cents = otherMoney.cents;
+	units = otherMoney.getUnits();
+	cents = otherMoney.getCents();
 }
 
 
@@ -82,12 +82,12 @@ money& money::operator = (const money& otherMoney){
     // Essentially only two cases except error
     if ( currency == "unspecified"){
         currency = otherMoney.getCurrency();
-        units = otherMoney.units;
-        cents = otherMoney.cents;
+        units = otherMoney.getUnits();
+        cents = otherMoney.getCents();
     }
     else {
-        units = otherMoney.units;
-        cents = otherMoney.cents;
+        units = otherMoney.getUnits();
+        cents = otherMoney.getCents();
     }
     
     
@@ -108,10 +108,10 @@ bool money::operator < (const money& otherMoney){
     }
     
     
-    if ( units < otherMoney.units ){
+    if ( units < otherMoney.getUnits() ){
         return true;
     }
-    else if ( (units == otherMoney.units) && (cents < otherMoney.cents) ){
+    else if ( (units == otherMoney.getUnits()) && (cents < otherMoney.getCents()) ){
         return true;
     }
     else {
@@ -131,10 +131,10 @@ bool money::operator > (const money& otherMoney){
     }
     
     
-    if ( units > otherMoney.units ){
+    if ( units > otherMoney.getUnits() ){
         return true;
     }
-    else if ( (units == otherMoney.units) && (cents > otherMoney.cents) ){
+    else if ( (units == otherMoney.getUnits()) && (cents > otherMoney.getCents()) ){
         return true;
     }
     else {
@@ -153,7 +153,7 @@ bool money::operator == (const money& otherMoney){
         }
     }
     
-    if ( units == otherMoney.units && cents == otherMoney.cents ){
+    if ( units == otherMoney.getUnits() && cents == otherMoney.getCents() ){
         return true;
     }
     else {
@@ -172,7 +172,7 @@ bool money::operator != (const money& otherMoney){
         }
     }
     
-    if ( units != otherMoney.units || cents != otherMoney.cents ){
+    if ( units != otherMoney.getUnits() || cents != otherMoney.getCents() ){
         return true;
     }
     else {
@@ -193,8 +193,8 @@ money&& money::operator + (const money& otherMoney){
     
     int unitSum;
     int centSum;
-    unitSum= units + otherMoney.units;
-    centSum = cents + otherMoney.cents;
+    unitSum= units + otherMoney.getUnits();
+    centSum = cents + otherMoney.getCents();
     if (centSum >= 100 ){
         unitSum = unitSum + 1;
         centSum = centSum - 100;
@@ -250,3 +250,13 @@ string money::getCurrency() const{
 }
 
 //------------------------------------
+
+int getUnits() const{
+    return units;
+}
+
+//------------------------------------
+
+int getCents() const{
+    return cents;
+}

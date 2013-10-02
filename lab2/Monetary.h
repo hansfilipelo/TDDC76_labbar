@@ -36,8 +36,10 @@ namespace monetary{
         money& operator ++ ();						// ++m3
         money operator ++ (int);	// m3++
         
-        //Functions
+        // Functions for accessing data
         std::string getCurrency() const;
+        int getUnits() const;
+        int getCents() const;
         
     private:
         std::string currency;
