@@ -224,8 +224,8 @@ money& money::operator ++ (){
 
 //------------------------------------
 
-money money::operator ++ (int separatemefrom){
-
+money money::operator ++ (int){
+    
     money temp( *this );
 	
 	cents = cents + 1; 

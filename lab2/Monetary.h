@@ -34,7 +34,7 @@ namespace monetary{
         bool operator == (const money& otherMoney);
         money&& operator + (const money& otherMoney);
         money& operator ++ ();						// ++m3
-        money operator ++ (int separatemefrom);	// m3++
+        money operator ++ (int);	// m3++
         
         //Functions
         std::string getCurrency() const;
