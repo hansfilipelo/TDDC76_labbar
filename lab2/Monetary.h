@@ -38,8 +38,8 @@ namespace monetary{
         
         // Functions for accessing data
         std::string getCurrency() const;
-        int getUnits() const;
-        int getCents() const;
+        unsigned int getUnits() const;
+        unsigned int getCents() const;
         
     private:
         std::string currency;
