@@ -45,7 +45,7 @@ int main(){
     }
     
     try {
-        erik < hf
+        erik < hf;
     } catch (const monetary_error& error) {
         cout << error.what() << endl;
     }
