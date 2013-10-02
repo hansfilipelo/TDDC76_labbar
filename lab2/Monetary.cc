@@ -50,7 +50,7 @@ money::money(const unsigned unitValue, const unsigned centValue){
 
 money::money(const std::string currCode){
 	if ( currCode.length() != 3 ){
-	  throw monetary_error{"valutaförkortning måste vara tre tecken"}
+        throw monetary_error{"valutaförkortning måste vara tre tecken"};
 	}
 	
 	currency = currCode;
@@ -226,7 +226,7 @@ money& money::operator ++ (){
 
 money money::operator ++ (int separatemefrom){
 	
-	temp = money(this);
+	money temp = money(this);
 	
 	cents = cents + 1; 
 	if ( cents >= 100 ){
