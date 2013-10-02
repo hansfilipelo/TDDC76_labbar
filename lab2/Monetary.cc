@@ -1,10 +1,10 @@
 /*
-FILNAMN: 		Monetary.cc
-LABORATION:		
-PROGRAMMERARE:	hanel742, eriek984
-DATUM:			2013-09-26
-BESKRIVNING:	
-*/
+ FILNAMN: 		Monetary.cc
+ LABORATION:
+ PROGRAMMERARE:	hanel742, eriek984
+ DATUM:			2013-09-26
+ BESKRIVNING:
+ */
 
 #include <stdlib.h>
 #include <iostream>
@@ -27,9 +27,9 @@ money::money(){
 //------------------------------------
 
 money::money(const std::string currCode, const unsigned unitValue, const unsigned centValue){
-        if ( currCode.length() != 3 ){
-            throw monetary_error{"En förkortning måste vara tre tecken lång"};
-        }
+    if ( currCode.length() != 3 ){
+        throw monetary_error{"En förkortning måste vara tre tecken lång"};
+    }
 	currency = currCode;
 	units = unitValue;
 	cents = centValue;
@@ -71,11 +71,17 @@ money::money(const money& otherMoney){
 
 money& money::operator = (const money& otherMoney){
 	
-        cout << "b�rjan av =" << endl;
+    cout << "b�rjan av =" << endl;
     
-    // If both objects have defined currency but they are not the same - do mtf error. 
+    // If both objects have defined currency but they are not the same - do mtf error.
     if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+        
+        cout << "b�gge �r INTE unspecified i =" << endl;
+        
         if ( otherMoney.currency != currency ) {
+            
+            cout << "otherMoney �r inte LIKA =" << endl;
+            
             throw monetary_error{"Ej samma valutakod"};
         }
     }
@@ -92,7 +98,7 @@ money& money::operator = (const money& otherMoney){
     }
     
     
-        cout << "slutet av =" << endl;
+    cout << "slutet av =" << endl;
     
 	return *this;
 }
@@ -189,9 +195,9 @@ money&& money::operator + (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
     if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
-            if ( otherMoney.currency != currency ) {
-                throw monetary_error{"Ej samma valutakod"};
-            }
+        if ( otherMoney.currency != currency ) {
+            throw monetary_error{"Ej samma valutakod"};
+        }
     }
     
     int unitSum;
@@ -222,7 +228,7 @@ money&& money::operator + (const money& otherMoney){
 money& money::operator ++ (){
 	cents = cents + 1;
 	if ( cents >= 100 ){
-		units = units + 1; 
+		units = units + 1;
 		cents = cents - 100;
 	}
 	
@@ -235,9 +241,9 @@ money money::operator ++ (int){
     
     money temp( *this );
 	
-	cents = cents + 1; 
+	cents = cents + 1;
 	if ( cents >= 100 ){
-		units = units + 1; 
+		units = units + 1;
 		cents = cents - 100;
 	}
 	
