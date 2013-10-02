@@ -75,6 +75,16 @@ money& money::operator = (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
     if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
+        //test
+        if(currency != "unspecified")
+        {
+            cout<<" currency Šr inte unspec"<<endl;
+        }
+        
+        if(otherMoney.currency != "unspecified")
+        {
+            cout<<" otherMoney.currency Šr inte unspec"<<endl;
+        }
         
         cout << "bŠgge Šr INTE unspecified i =" << endl;
         
