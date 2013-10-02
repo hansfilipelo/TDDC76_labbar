@@ -63,9 +63,9 @@ money::money(const std::string currCode){
 
 money::money(const money& otherMoney){
 	
-	currency = otherMoney.currency;
-	units = otherMoney.units;
-	cents = otherMoney.cents;
+	currency = otherMoney->currency;
+	units = otherMoney->units;
+	cents = otherMoney->cents;
 }
 
 
@@ -226,7 +226,7 @@ money& money::operator ++ (){
 
 money money::operator ++ (int separatemefrom){
 	
-	money temp = money(this);
+	temp = money(this);
 	
 	cents = cents + 1; 
 	if ( cents >= 100 ){
