@@ -29,54 +29,47 @@ static string makeLowerCase(string message){
 }
 
 //------------------------------
-//Checks to see a given word already is in list
-static bool inList(const string message,vector<word_entry>& wordlist){
-	
-	if ( wordlist.empty() ){
-		return false;
-		}
-		
-	else {
-		for (unsigned int i=0; i < wordlist.size(); i++ ){
-			//If in list - add upon count of times word's been "mentioned". 
-			// Got comment wordlist.at() from you (Jonas). We don't really see why the way we're doing it 
-			// here (wordlist[i].name) is incorrect/an issue. 
-			if ( wordlist[i].name == message ){
-				wordlist[i].antal += 1;
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-//------------------------------
 //Adds item to list - sorted. 
 
 static void addListSort(const string& message, vector<word_entry>& wordlist){
 	
-	if ( not(inList(message, wordlist))){
-	
-		word_entry temp;
+    // Pre-define length in order for it to be constant.
+    const unsigned long length = wordlist.size();
+    
+    //If list is longer than 0
+    if ( length > 0 ){
+		for(unsigned int i=0; i < length; i++){
+            //If word exists - up count on word_entry
+            if ( wordlist.at(i).name == message) {
+                wordlist.at(i).antal += 1;
+                break;
+            }
+            // If word doesn't exist - insert it
+            else if (wordlist[i].name > message){
+                word_entry temp;
+                temp.name = message;
+                temp.antal = 1;
+                
+                wordlist.insert(wordlist.begin() + i, temp);
+                break;
+            }
+            
+            else if (length == (i + 1)) {
+                word_entry temp;
+                temp.name = message;
+                temp.antal = 1;
+                
+                wordlist.push_back(temp);
+            }
+        }
+    }
+    else {
+        word_entry temp;
 		temp.name = message;
 		temp.antal = 1;
-		unsigned long length = wordlist.size();
-	
-		if ( length > 0 ){
-			for(unsigned int i=0; i < length; i++){
-				if(wordlist[i].name > temp.name){
-					wordlist.insert(wordlist.begin() + i, temp);
-					break;
-				}
-				else if (length == (i + 1)) {
-					wordlist.push_back(temp);
-				}
-			}
-		}
-		else {
-			wordlist.push_back(temp);
-		}
-	}
+        
+        wordlist.push_back(temp);
+    }
 }
 		
 //------------------------------
