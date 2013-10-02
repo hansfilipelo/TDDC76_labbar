@@ -260,3 +260,29 @@ unsigned int money::getUnits() const{
 unsigned int money::getCents() const{
     return cents;
 }
+
+//------------------------------------
+
+//void operator >> (const string input){
+//    if ( input.peak() )
+//}
+
+//------------------------------------
+
+ostream& operator << (ostream& stream, const money& outsideMoney){
+    
+    if(outsideMoney.getCurrency() == "unspecified"){
+		return stream << outsideMoney.getUnits() << "." << outsideMoney.getCents();
+    }
+    return stream << outsideMoney.getCurrency() << " " << outsideMoney.getUnits() << "." << outsideMoney.getCents();
+}
+
+//------------------------------------
+
+void money::print(ostream& output){
+    output << *this;
+}
+
+
+
+

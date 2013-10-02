@@ -36,10 +36,14 @@ namespace monetary{
         money& operator ++ ();						// ++m3
         money operator ++ (int);	// m3++
         
+//        friend void operator >> (const string input);
+        friend std::ostream& operator << (ostream& stream, const money& outsideMoney);
+        
         // Functions for accessing data
         std::string getCurrency() const;
         unsigned int getUnits() const;
         unsigned int getCents() const;
+        void print(ostream& output);
         
     private:
         std::string currency;
