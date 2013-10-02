@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <stdio.h>
 #include "./Monetary.h"
 
 using namespace monetary;
