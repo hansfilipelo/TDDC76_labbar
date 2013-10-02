@@ -12,6 +12,7 @@ BESKRIVNING:
 #include <fstream>
 #include "./Monetary.h"
 using namespace std;
+using namespace monetary;
 
 int main(){
     
