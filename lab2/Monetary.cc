@@ -62,7 +62,7 @@ money::money(const string currCode){
 
 money::money(const money& otherMoney){
 	
-	currency = otherMoney.currency;
+	currency = otherMoney.getCurrency();
 	units = otherMoney.units;
 	cents = otherMoney.cents;
 }
@@ -71,35 +71,17 @@ money::money(const money& otherMoney){
 //------------------------------------
 
 money& money::operator = (const money& otherMoney){
-	
-    cout << "bšrjan av =" << endl;
-    
+
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
-        //test
-        if(currency != "unspecified")
-        {
-            cout<<" currency Šr inte unspec"<<endl;
-        }
-        
-        if(not(strcmp(otherMoney.currency,"unspecified")))
-        {
-            cout<<" otherMoney.currency Šr inte unspec"<<endl;
-        }
-        
-        cout << "bŠgge Šr INTE unspecified i =" << endl;
-        
-        if ( otherMoney.currency != currency ) {
-            
-            cout << "otherMoney Šr inte LIKA =" << endl;
-            
+    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
+        if ( otherMoney.getCurrency() != currency ) {
             throw monetary_error{"Ej samma valutakod"};
         }
     }
     
     // Essentially only two cases except error
     if ( currency == "unspecified"){
-        currency = otherMoney.currency;
+        currency = otherMoney.getCurrency();
         units = otherMoney.units;
         cents = otherMoney.cents;
     }
@@ -119,8 +101,8 @@ money& money::operator = (const money& otherMoney){
 bool money::operator < (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
-        if ( otherMoney.currency != currency ) {
+    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
+        if ( otherMoney.getCurrency() != currency ) {
             throw monetary_error{"Ej samma valutakod"};
         }
     }
@@ -142,8 +124,8 @@ bool money::operator < (const money& otherMoney){
 bool money::operator > (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
-        if ( otherMoney.currency != currency ) {
+    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
+        if ( otherMoney.getCurrency() != currency ) {
             throw monetary_error{"Ej samma valutakod"};
         }
     }
@@ -165,8 +147,8 @@ bool money::operator > (const money& otherMoney){
 bool money::operator == (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
-        if ( otherMoney.currency != currency ) {
+    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
+        if ( otherMoney.getCurrency() != currency ) {
             throw monetary_error{"Ej samma valutakod"};
         }
     }
@@ -184,8 +166,8 @@ bool money::operator == (const money& otherMoney){
 bool money::operator != (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
-        if ( otherMoney.currency != currency ) {
+    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
+        if ( otherMoney.getCurrency() != currency ) {
             throw monetary_error{"Ej samma valutakod"};
         }
     }
@@ -202,11 +184,9 @@ bool money::operator != (const money& otherMoney){
 
 money&& money::operator + (const money& otherMoney){
     
-    cout << "Bšrjan av +" << endl;
-    
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
-        if ( otherMoney.currency != currency ) {
+    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
+        if ( otherMoney.getCurrency() != currency ) {
             throw monetary_error{"Ej samma valutakod"};
         }
     }
@@ -220,11 +200,11 @@ money&& money::operator + (const money& otherMoney){
         centSum = centSum - 100;
     }
     
-    if ( (currency == "unspecified") && (otherMoney.currency == "unspecified") ){
+    if ( (currency == "unspecified") && (otherMoney.getCurrency() == "unspecified") ){
         return move(money("unspecified", unitSum, centSum));
     }
     else if (currency == "unspecified"){
-        return move(money(otherMoney.currency, unitSum, centSum));
+        return move(money(otherMoney.getCurrency(), unitSum, centSum));
     }
     else {
         return move(money(currency, unitSum, centSum));
