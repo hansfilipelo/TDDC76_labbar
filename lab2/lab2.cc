@@ -22,7 +22,7 @@ int main(){
     money odef(50,00);
     
     try {
-        erik = erik + odef
+        erik = erik + odef;
         
         cout << "Eriks pengar" << endl;
         cout << erik.getCurrency() << endl;
