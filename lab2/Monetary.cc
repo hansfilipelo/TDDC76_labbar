@@ -71,6 +71,8 @@ money::money(const money& otherMoney){
 
 money& money::operator = (const money& otherMoney){
 	
+        cout << "bšrjan av =" << endl;
+    
     // If both objects have defined currency but they are not the same - do mtf error. 
     if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
         if ( otherMoney.currency != currency ) {
@@ -88,7 +90,9 @@ money& money::operator = (const money& otherMoney){
         units = otherMoney.units;
         cents = otherMoney.cents;
     }
-
+    
+    
+        cout << "slutet av =" << endl;
     
 	return *this;
 }
@@ -180,6 +184,9 @@ bool money::operator != (const money& otherMoney){
 //------------------------------------
 
 money&& money::operator + (const money& otherMoney){
+    
+    cout << "Bšrjan av +" << endl;
+    
     // If both objects have defined currency but they are not the same - do mtf error.
     if ( (currency != "unspecified") && (otherMoney.currency != "unspecified") ){
             if ( otherMoney.currency != currency ) {
@@ -205,6 +212,8 @@ money&& money::operator + (const money& otherMoney){
     else {
         return move(money(currency, unitSum, centSum));
     }
+    
+    cout << "slutet av +" << endl;
     
 }
 

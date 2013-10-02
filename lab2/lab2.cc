@@ -37,5 +37,15 @@ int main(){
         cout << error.what() << endl;
     }
     
+    string teststring = "unspecified";
+    
+    if (teststring == "unspecified"){
+        cout << "Ja det blir en sträng av skiten" << endl;
+    }
+    
+    if ( odef.getCurrency() == "unspecified" ){
+        cout << "odef och unspecified är lika"
+    }
+    
 	return 0;
 }
