@@ -44,7 +44,7 @@ int main(){
     }
     
     if ( odef.getCurrency() == "unspecified" ){
-        cout << "odef och unspecified är lika"
+        cout << "odef och unspecified är lika" << endl;
     }
     
 	return 0;
