@@ -378,9 +378,16 @@ money money::operator -- (int){
 
 
 namespace monetary {
-//	void operator >> (const string input){
-//		if ( input.peak() )
-//	}
+	void operator >> (istream& input){
+		
+		if ( (input.peek() >= '0') && (input.peek() <= '9') ){
+			double x;
+			input >> x;
+			units = 
+		
+		
+				
+	}
 
 //------------------------------------
     ostream& operator << (ostream& stream, const money& outsideMoney){
