@@ -17,6 +17,20 @@
 using namespace monetary;
 using namespace std;
 
+
+//------------------------------------
+// Helper function
+// Checks if otherMoney and this money has same currency or if one of them is unspecified
+
+void money::currencyCheck (const money& otherMoney) {
+	if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
+		if ( otherMoney.getCurrency() != currency ) {
+			throw monetary_error{"Ej samma valutakod"};
+		}
+	}
+}
+
+
 //------------------------------------
 
 money::money(){
@@ -27,10 +41,17 @@ money::money(){
 
 //------------------------------------
 
-money::money(const std::string currCode, const unsigned unitValue, const unsigned centValue){
-    if ( currCode.length() != 3 ){
-        throw monetary_error{"En fÃ¶rkortning mÃ¥ste vara tre tecken lÃ¥ng"};
-    }
+money::money(const std::string currCode, const int unitValue, const int centValue){
+	if ( currCode.length() != 3 ){
+		throw monetary_error{"En förkortning mÃ¥ste vara tre tecken lång"};
+	}
+	if ( unitValue < 0 ){
+		throw monetary_error{"Du måste ge positiva värden på beloppet"};
+	}
+	if ( centValue < 0 || centValue > 99 ){
+		throw monetary_error{"Centvärde måste ligga mellan 0 och 99"};
+	}
+    
 	currency = currCode;
 	units = unitValue;
 	cents = centValue;
@@ -38,7 +59,13 @@ money::money(const std::string currCode, const unsigned unitValue, const unsigne
 
 //------------------------------------
 
-money::money(const unsigned unitValue, const unsigned centValue){
+money::money(const int unitValue, const int centValue){
+	if ( unitValue < 0 ){
+		throw monetary_error{"Du måste ge positiva värden på beloppet"};
+	}
+	if ( centValue < 0 || centValue > 99 ){
+		throw monetary_error{"Centvärde måste ligga mellan 0 och 99"};
+	}
 	
 	currency = "unspecified";
 	units = unitValue;
@@ -73,11 +100,7 @@ money::money(const money& otherMoney){
 money& money::operator = (const money& otherMoney){
 
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
-        if ( otherMoney.getCurrency() != currency ) {
-            throw monetary_error{"Ej samma valutakod"};
-        }
-    }
+    currencyCheck(otherMoney);
     
     // Essentially only two cases except error
     if ( currency == "unspecified"){
@@ -98,11 +121,7 @@ money& money::operator = (const money& otherMoney){
 bool money::operator < (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
-        if ( otherMoney.getCurrency() != currency ) {
-            throw monetary_error{"Ej samma valutakod"};
-        }
-    }
+    currencyCheck(otherMoney);
     
     
     if ( units < otherMoney.getUnits() ){
@@ -121,11 +140,7 @@ bool money::operator < (const money& otherMoney){
 bool money::operator > (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
-        if ( otherMoney.getCurrency() != currency ) {
-            throw monetary_error{"Ej samma valutakod"};
-        }
-    }
+    currencyCheck(otherMoney);
     
     
     if ( units > otherMoney.getUnits() ){
@@ -144,32 +159,9 @@ bool money::operator > (const money& otherMoney){
 bool money::operator == (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
-        if ( otherMoney.getCurrency() != currency ) {
-            throw monetary_error{"Ej samma valutakod"};
-        }
-    }
+    currencyCheck(otherMoney);
     
     if ( units == otherMoney.getUnits() && cents == otherMoney.getCents() ){
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-//------------------------------------
-
-bool money::operator != (const money& otherMoney){
-    
-    // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
-        if ( otherMoney.getCurrency() != currency ) {
-            throw monetary_error{"Ej samma valutakod"};
-        }
-    }
-    
-    if ( units != otherMoney.getUnits() || cents != otherMoney.getCents() ){
         return true;
     }
     else {
@@ -182,16 +174,49 @@ bool money::operator != (const money& otherMoney){
 money&& money::operator + (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-    if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
-        if ( otherMoney.getCurrency() != currency ) {
-            throw monetary_error{"Ej samma valutakod"};
-        }
-    }
+   currencyCheck(otherMoney);
     
     int unitSum;
     int centSum;
     unitSum= units + otherMoney.getUnits();
     centSum = cents + otherMoney.getCents();
+    if (centSum >= 100 ){
+        unitSum = unitSum + 1;
+        centSum = centSum - 100;
+    }
+    
+    if ( (currency == "unspecified") && (otherMoney.getCurrency() == "unspecified") ){
+        return move(money("unspecified", unitSum, centSum));
+    }
+    else if (currency == "unspecified"){
+        return move(money(otherMoney.getCurrency(), unitSum, centSum));
+    }
+    else {
+        return move(money(currency, unitSum, centSum));
+    }
+    
+}
+
+//------------------------------------
+
+money&& money::operator - (const money& otherMoney){
+    
+    // If both objects have defined currency but they are not the same - do mtf error.
+   currencyCheck(otherMoney);
+    
+    int unitSum;
+    int centSum;
+    unitSum= units - otherMoney.getUnits();
+    centSum = cents - otherMoney.getCents();
+    if ( centSum < 0 ){
+	    centSum = 100 + centSum;
+	    unitSum = unitSum - 1;
+    }
+    // Throw if unitSum is less than zero
+    if ( unitSum < 0 ){
+	    throw monetary_error{"Subtraktion resulterar i negativt belopp - ej tillåtet!"};
+    }
+    
     if (centSum >= 100 ){
         unitSum = unitSum + 1;
         centSum = centSum - 100;
@@ -239,6 +264,45 @@ money money::operator ++ (int){
 
 //------------------------------------
 
+bool money::operator != (const money& otherMoney){
+	
+	if ( *this == otherMoney ){
+		return false;
+	}
+	
+	return true;
+}
+
+//------------------------------------
+
+bool money::operator >= (const money& otherMoney){
+	
+	if ( *this == otherMoney ){
+		return true;
+	}
+	else if ( *this > otherMoney ){
+		return true;
+	}
+	
+	return false;
+}
+
+//------------------------------------
+
+bool money::operator <= (const money& otherMoney){
+	
+	if ( *this == otherMoney ){
+		return true;
+	}
+	else if ( *this < otherMoney ){
+		return true;
+	}
+	
+	return false;
+}
+
+//------------------------------------
+
 string money::getCurrency() const{
     
     return currency;
@@ -246,25 +310,80 @@ string money::getCurrency() const{
 
 //------------------------------------
 
-unsigned int money::getUnits() const{
+int money::getUnits() const{
     return units;
 }
 
 //------------------------------------
 
-unsigned int money::getCents() const{
+int money::getCents() const{
     return cents;
 }
 
 //------------------------------------
 
-//void operator >> (const string input){
-//    if ( input.peak() )
-//}
+money& money::operator += (const money& otherMoney) {	
+	*this = *this + otherMoney;
+	
+	return *this;
+}
+
 
 //------------------------------------
+
+money& money::operator -= (const money& otherMoney) {	
+	*this = *this - otherMoney;
+	
+	return *this;
+}
+
+//------------------------------------
+
+money& money::operator -- (){
+	cents = cents - 1;
+	if ( cents < 0 ){
+		units = units - 1;
+		cents = 100 + cents;
+	}
+	
+	// Throw if units is less than zero
+	if ( units < 0 ){
+		throw monetary_error{"Subtraktion resulterar i negativt belopp - ej tillåtet!"};
+	}
+	
+	return *this;
+}
+
+//------------------------------------
+
+money money::operator -- (int){
+    
+    money temp( *this );
+    
+    cents = cents - 1;
+    if ( cents < 0 ){
+	    units = units - 1;
+	    cents = cents + 100;
+    }
+    // Throw if units is less than zero
+    if ( units < 0 ){
+	    throw monetary_error{"Subtraktion resulterar i negativt belopp - ej tillåtet!"};
+    }
+    
+    return temp;
+	
+}
+
+//------------------------------------
+
+
 namespace monetary {
-    ostream& operator<< (ostream& stream, const money& outsideMoney){
+//	void operator >> (const string input){
+//		if ( input.peak() )
+//	}
+
+//------------------------------------
+    ostream& operator << (ostream& stream, const money& outsideMoney){
         
         if(outsideMoney.getCurrency() == "unspecified"){
             return stream << outsideMoney.getUnits() << "." << outsideMoney.getCents();

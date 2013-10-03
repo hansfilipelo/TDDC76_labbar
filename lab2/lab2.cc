@@ -19,7 +19,7 @@ int main(){
     money erik("PWN",100,00);
     money hf("USC",200,50);
     
-    money odef(50,00);
+    money odef(50,99);
     
     try {
         erik = erik + odef;
@@ -48,6 +48,20 @@ int main(){
         erik < hf;
     } catch (const monetary_error& error) {
         cout << error.what() << endl;
+    }
+    
+    try {
+	    cout << erik << endl;
+    } catch (const monetary_error& error) {
+	    cout << error.what() << endl;
+    }
+    
+    try {
+	    cout << ++erik << endl;
+	    cout << --erik << endl;
+	    cout << (erik += odef) << endl;
+    } catch (const monetary_error& error) {
+	    cout << error.what() << endl;
     }
     
     return 0;
