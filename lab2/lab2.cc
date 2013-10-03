@@ -64,5 +64,12 @@ int main(){
 	    cout << error.what() << endl;
     }
     
+        try {
+		cin >> erik;
+		cout << erik << endl;
+    } catch (const monetary_error& error) {
+	    cout << error.what() << endl;
+    }
+    
     return 0;
 }

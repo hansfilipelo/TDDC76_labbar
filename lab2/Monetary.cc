@@ -43,7 +43,7 @@ money::money(){
 
 money::money(const std::string currCode, const int unitValue, const int centValue){
 	if ( currCode.length() != 3 ){
-		throw monetary_error{"En förkortning mÃ¥ste vara tre tecken lång"};
+		throw monetary_error{"En valutaförkortning måste vara tre tecken lång"};
 	}
 	if ( unitValue < 0 ){
 		throw monetary_error{"Du måste ge positiva värden på beloppet"};
@@ -322,6 +322,24 @@ int money::getCents() const{
 
 //------------------------------------
 
+void money::setCurrency(const string currCode){
+    currency = currCode;
+}
+
+//------------------------------------
+
+void money::setUnits(const int unitValue){
+    units = unitValue;
+}
+
+//------------------------------------
+
+void money::setCents(const int centValue){
+    cents = centValue;
+}
+
+//------------------------------------
+
 money& money::operator += (const money& otherMoney) {	
 	*this = *this + otherMoney;
 	
@@ -378,18 +396,48 @@ money money::operator -- (int){
 
 
 namespace monetary {
-	void operator >> (istream& input){
+	istream& operator >> (istream& input, money& otherMoney){
 		
-		if ( (input.peek() >= '0') && (input.peek() <= '9') ){
-			double x;
-			input >> x;
-			units = 
+		while ( input.peek() == ' ' ) {
+			input.get();
+		}
+		input.unget();
 		
+		if ( isalpha( input.peek() ) ) {
+			string currCode;
+			for (int i = 1 ; i <= 3 ; i++ ){
+				currCode += input.get();
+			}
+			if ( isalpha( input.peek() ) ){
+				throw monetary_error{"En valutaförkortning måste vara tre tecken lång"};
+			}
+			
+			otherMoney.setCurrency(currCode);
+		}
 		
-				
+		int unitValue;
+		int centValue;
+		double total;
+		
+		input >> total;
+		
+		if ( total < 0 ){
+			throw monetary_error{"Du kan ej skicka in negativa värden!"};
+		}
+		
+		unitValue = static_cast<int>(total);
+		centValue = static_cast<int>(total*100)%100;
+		
+		otherMoney.setUnits(unitValue);
+		otherMoney.setCents(centValue);
+		
+		input.setstate(ios::eofbit);
+		
+		return input;
 	}
 
 //------------------------------------
+
     ostream& operator << (ostream& stream, const money& outsideMoney){
         
         if(outsideMoney.getCurrency() == "unspecified"){
