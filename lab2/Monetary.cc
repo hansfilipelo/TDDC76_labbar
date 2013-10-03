@@ -407,6 +407,9 @@ namespace monetary {
 		if ( isalpha( input.peek() ) ) {
 			string currCode;
 			for (int i = 1 ; i <= 3 ; i++ ){
+				if ( not (isalpha( input.peek() ))){
+					throw monetary_error{"En valutaförkortning måste vara tre tecken lång"};
+				}
 				currCode += input.get();
 			}
 			if ( isalpha( input.peek() ) ){
