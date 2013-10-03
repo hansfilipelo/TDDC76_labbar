@@ -398,10 +398,11 @@ money money::operator -- (int){
 namespace monetary {
 	istream& operator >> (istream& input, money& otherMoney){
 		
-		while ( input.peek() == ' ' ) {
-			input.get();
+		if ( input.peek() == ' ' ){
+			while ( input.peek() == ' ' ) {
+				input.get();
+			}
 		}
-		input.unget();
 		
 		if ( isalpha( input.peek() ) ) {
 			string currCode;

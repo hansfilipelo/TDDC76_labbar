@@ -1,5 +1,5 @@
 	CCC = g++
-	CCFLAGS = -g -std=c++11 -Wpedantic -Wall -Wextra -Werror
+	CCFLAGS = -g -std=c++11 -Wall -Wextra -Werror
 	LDFLAGS = -L/sw/gcc-${GCC4_V}/lib -static-libstdc++
 
 lab2: lab2.o Monetary.o
