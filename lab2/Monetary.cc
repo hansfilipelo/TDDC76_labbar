@@ -32,6 +32,7 @@ void money::currencyCheck (const money& otherMoney) {
 
 
 //------------------------------------
+// Constructor without in-values
 
 money::money(){
 	currency = "unspecified";
@@ -40,6 +41,7 @@ money::money(){
 }
 
 //------------------------------------
+// Constructor for inserting all given values
 
 money::money(const std::string currCode, const int unitValue, const int centValue){
 	if ( currCode.length() != 3 ){
@@ -58,6 +60,7 @@ money::money(const std::string currCode, const int unitValue, const int centValu
 }
 
 //------------------------------------
+// Constructor for values but unspecified curr code
 
 money::money(const int unitValue, const int centValue){
 	if ( unitValue < 0 ){
@@ -73,6 +76,7 @@ money::money(const int unitValue, const int centValue){
 }
 
 //------------------------------------
+// Constructor for curr code but no values
 
 money::money(const string currCode){
 	if ( currCode.length() != 3 ){
@@ -96,6 +100,7 @@ money::money(const money& otherMoney){
 
 
 //------------------------------------
+// = operator
 
 money& money::operator = (const money& otherMoney){
 
@@ -117,6 +122,7 @@ money& money::operator = (const money& otherMoney){
 }
 
 //------------------------------------
+// Smaller than (<) operator
 
 bool money::operator < (const money& otherMoney){
     
@@ -136,6 +142,7 @@ bool money::operator < (const money& otherMoney){
 }
 
 //------------------------------------
+// Bigger than (>) operator
 
 bool money::operator > (const money& otherMoney){
     
@@ -155,6 +162,7 @@ bool money::operator > (const money& otherMoney){
 }
 
 //------------------------------------
+// == comparator
 
 bool money::operator == (const money& otherMoney){
     
@@ -170,6 +178,7 @@ bool money::operator == (const money& otherMoney){
 }
 
 //------------------------------------
+// + operator
 
 money&& money::operator + (const money& otherMoney){
     
@@ -198,6 +207,7 @@ money&& money::operator + (const money& otherMoney){
 }
 
 //------------------------------------
+// - operator
 
 money&& money::operator - (const money& otherMoney){
     
@@ -235,6 +245,7 @@ money&& money::operator - (const money& otherMoney){
 }
 
 //------------------------------------
+// ++ pre operator
 
 money& money::operator ++ (){
 	cents = cents + 1;
@@ -247,6 +258,7 @@ money& money::operator ++ (){
 }
 
 //------------------------------------
+// ++ post operator
 
 money money::operator ++ (int){
     
@@ -263,6 +275,7 @@ money money::operator ++ (int){
 }
 
 //------------------------------------
+// Comparator !=
 
 bool money::operator != (const money& otherMoney){
 	
@@ -274,6 +287,7 @@ bool money::operator != (const money& otherMoney){
 }
 
 //------------------------------------
+// Comparator >=
 
 bool money::operator >= (const money& otherMoney){
 	
@@ -288,6 +302,7 @@ bool money::operator >= (const money& otherMoney){
 }
 
 //------------------------------------
+// comparator <=
 
 bool money::operator <= (const money& otherMoney){
 	
@@ -302,6 +317,7 @@ bool money::operator <= (const money& otherMoney){
 }
 
 //------------------------------------
+// Gets currency who is private variable.
 
 string money::getCurrency() const{
     
@@ -309,36 +325,42 @@ string money::getCurrency() const{
 }
 
 //------------------------------------
+// Gets units who is private variable.
 
 int money::getUnits() const{
     return units;
 }
 
 //------------------------------------
+// Gets cents who is private variable. 
 
 int money::getCents() const{
     return cents;
 }
 
 //------------------------------------
+// Sets cuurency who is private variable. 
 
 void money::setCurrency(const string currCode){
     currency = currCode;
 }
 
 //------------------------------------
+// Sets units who is private variable. 
 
 void money::setUnits(const int unitValue){
     units = unitValue;
 }
 
 //------------------------------------
+// Sets cents who is private variable. 
 
 void money::setCents(const int centValue){
     cents = centValue;
 }
 
 //------------------------------------
+// += operator
 
 money& money::operator += (const money& otherMoney) {	
 	*this = *this + otherMoney;
@@ -348,6 +370,7 @@ money& money::operator += (const money& otherMoney) {
 
 
 //------------------------------------
+// -= operator
 
 money& money::operator -= (const money& otherMoney) {	
 	*this = *this - otherMoney;
@@ -373,6 +396,7 @@ money& money::operator -- (){
 }
 
 //------------------------------------
+// -- operator- 
 
 money money::operator -- (int){
     
@@ -393,6 +417,7 @@ money money::operator -- (int){
 }
 
 //------------------------------------
+// Reader operator <<
 
 // Friends not included in class - have to specify namespace
 namespace monetary {
@@ -405,6 +430,7 @@ namespace monetary {
 			}
 		}
 		
+		// If Curr code - read it. 
 		if ( isalpha( input.peek() ) ) {
 			string currCode;
 			for (int i = 1 ; i <= 3 ; i++ ){
@@ -427,6 +453,7 @@ namespace monetary {
 			}
 		}
 		
+		// If digits - read them
 		if ( isdigit( input.peek() ) ){
 		
 			int unitValue;
@@ -452,6 +479,7 @@ namespace monetary {
 	}
 
 //------------------------------------
+// Print using operator <<
 
     ostream& operator << (ostream& stream, const money& outsideMoney){
         
@@ -463,6 +491,7 @@ namespace monetary {
 }
 
 //------------------------------------
+// Print function
 
 void money::print(ostream& output) const{
     output << *this;
