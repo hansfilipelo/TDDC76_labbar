@@ -394,10 +394,11 @@ money money::operator -- (int){
 
 //------------------------------------
 
-
+// Friends not included in class - have to specify namespace
 namespace monetary {
 	istream& operator >> (istream& input, money& otherMoney){
 		
+		// If whitespaces before currency code - remove them
 		if ( input.peek() == ' ' ){
 			while ( input.peek() == ' ' ) {
 				input.get();
@@ -419,21 +420,31 @@ namespace monetary {
 			otherMoney.setCurrency(currCode);
 		}
 		
-		int unitValue;
-		int centValue;
-		double total;
-		
-		input >> total;
-		
-		if ( total < 0 ){
-			throw monetary_error{"Du kan ej skicka in negativa värden!"};
+		// If whitespaces before values - remove them
+		if ( input.peek() == ' ' ){
+			while ( input.peek() == ' ' ) {
+				input.get();
+			}
 		}
 		
-		unitValue = static_cast<int>(total);
-		centValue = static_cast<int>(total*100)%100;
+		if ( isdigit( input.peek() ) ){
 		
-		otherMoney.setUnits(unitValue);
-		otherMoney.setCents(centValue);
+			int unitValue;
+			int centValue;
+			double total;
+			
+			input >> total;
+			
+			if ( total < 0 ){
+				throw monetary_error{"Du kan ej skicka in negativa värden!"};
+			}
+			
+			unitValue = static_cast<int>(total);
+			centValue = static_cast<int>(total*100)%100;
+			
+			otherMoney.setUnits(unitValue);
+			otherMoney.setCents(centValue);
+		}
 		
 		input.setstate(ios::eofbit);
 		
