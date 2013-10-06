@@ -1,9 +1,9 @@
 /*
  FILNAMN: 		Monetary.cc
- LABORATION:
+ LABORATION:	2
  PROGRAMMERARE:	hanel742, eriek984
  DATUM:			2013-09-26
- BESKRIVNING:
+ BESKRIVNING:	Implementation file for class money
  */
 
 #include <stdlib.h>

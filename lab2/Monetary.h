@@ -1,9 +1,9 @@
 /*
  FILNAMN: 		Monetary.h
- LABORATION:
+ LABORATION:	2
  PROGRAMMERARE:	hanel742, eriek984
  DATUM:			2013-09-26
- BESKRIVNING:
+ BESKRIVNING:	List file for class money
  */
 
 
@@ -57,7 +57,7 @@ namespace monetary{
         
     private:
         std::string currency;
-	// No we don't want these stuff below unsigned
+		// No we don't want these stuff below unsigned :)
         int units;
         int cents;
 	void currencyCheck (const money& otherMoney);
