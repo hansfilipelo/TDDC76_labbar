@@ -15,6 +15,25 @@
 #include <fstream>
 #include <string>
 #include "./monetary_error.cc"
+#include <stdexcept>
+#ifndef monetary_errorfile
+#define monetary_errorfile
+
+using namespace std;
+
+class monetary_error : public logic_error
+{
+public:
+    explicit monetary_error(const string& what_arg) noexcept
+    : logic_error{what_arg} {}
+    
+    explicit monetary_error(const char* what_arg) noexcept
+    : logic_error{what_arg} {}
+};
+
+#endif
+
+
 
 namespace monetary{
 	class money{
