@@ -1,19 +1,22 @@
-/*
-FILNAMN: 		kalkylator.cc
-LABORATION:		
-PROGRAMMERARE:	hanel742, eriek984
-DATUM:			2013-10-09
-BESKRIVNING:	
-*/
+//
+//  lab3.cc
+//  
+//
+//  Created by Erik Ekelund on 10/9/13.
+//
+//
 
-#include <stdlib.h>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
-#include <string>
+#include <stdio.h>
+#include "Expression/Expression_Tree.h"
 using namespace std;
 
-int main(){
-	
-	return 0;
+int main() {
+    
+    Expression_Tree* femma = new Integer(5);
+    Expression_Tree* trea = new Integer(3);
+    
+    Plus addition(femma, trea);
+    cout << addition.get_postfix() << endl;
+    
+    return 0;
 }
