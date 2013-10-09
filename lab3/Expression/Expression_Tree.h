@@ -25,11 +25,12 @@
 class Expression_Tree
 {
 public:
-   virtual long double      evaluate() const = 0;
-   virtual std::string      get_postfix() const = 0;
-   virtual std::string      str() const = 0;
-   virtual void             print(std::ostream&) const = 0;
-   virtual Expression_Tree* clone() const = 0;
+    virtual long double      evaluate() const = 0;
+    virtual std::string      get_postfix() const = 0;
+    virtual std::string      str() const = 0;
+    virtual void             print(std::ostream&) const = 0;
+    virtual Expression_Tree* clone() const = 0;
+    virtual void printHelper(std::ostream& stream, int startDepth) const = 0;
 };
 
 //------------------------------
@@ -47,20 +48,32 @@ public:
     
     std::string      get_postfix() const;
     void             print(std::ostream& stream) const;
-
+    
 protected:
     Expression_Tree* left;
     Expression_Tree* right;
+    void printHelper(std::ostream& stream, int startDepth) const;
 };
 
 //------------------------------
 
 class Operand : public Expression_Tree
 {
+public:
+    // Virtual functions - declared later
+    virtual std::string      str() const = 0;
+    virtual Expression_Tree* clone() const = 0;
+    virtual long double      evaluate() const = 0;
+    
+    std::string      get_postfix() const;
+    void             print(std::ostream& stream) const;
+
+protected:
+    void printHelper(std::ostream& stream, int startDepth) const;
 };
 
 //class Assign : public Binary_Operator
-//{ 
+//{
 //};
 
 class Plus : public Binary_Operator
@@ -72,7 +85,7 @@ public:
     Expression_Tree* clone() const;
 };
 
-//class Minus : public Binary_Operator 
+//class Minus : public Binary_Operator
 //{
 //};
 //
@@ -97,9 +110,7 @@ public:
     Integer(int inValue);
     
     long double      evaluate() const;
-    std::string      get_postfix() const;
     std::string      str() const;
-    void             print(std::ostream& stream) const;
     Expression_Tree* clone() const;
     
 private:

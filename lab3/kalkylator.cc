@@ -17,8 +17,11 @@ int main() {
     Expression_Tree* fyra = new Integer(4);
     Expression_Tree* addition2 = new Plus(trea,femma);
     
-    Plus addition(addition2, fyra);
+    Plus addition(fyra, addition2);
     cout << addition.get_postfix() << endl;
+    cout << endl;
+    
+    addition.print(cout);
     
     return 0;
 }

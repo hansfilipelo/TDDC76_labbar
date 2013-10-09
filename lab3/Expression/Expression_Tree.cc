@@ -9,6 +9,28 @@ using namespace std;
 
 // SEPARATA DEFINITIONER FÖR FÖR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
 
+//----------------------- Operand ---------------------------------------
+
+//--------------------------------
+
+string Operand::get_postfix() const{
+    return str();
+}
+
+
+//------------------------------
+void Operand::printHelper(std::ostream& stream, int startDepth) const{
+    stream << setw(startDepth) << str() << endl;
+    
+}
+
+void Operand::print(std::ostream& stream) const{
+    printHelper(stream, 0);
+}
+
+//--------------------------------
+
+
 
 
 //-----------------------INTE GINGER------------------------
@@ -19,15 +41,6 @@ Integer::Integer(int inValue){
     value = inValue;
 }
 
-//--------------------------------
-long double Integer::evaluate() const{
-    return double(value);
-}
-
-
-string Integer::get_postfix() const{
-    return str();
-}
 
 //-------------------------------
 
@@ -42,16 +55,18 @@ string Integer::str() const {
 }
 
 //------------------------------
-void Integer::print(std::ostream& stream) const{
-    stream << str();
-    
-}
-//------------------------------
-
 
 Expression_Tree* Integer::clone() const {
     return new Integer(value);
 }
+
+//--------------------------------
+
+long double Integer::evaluate() const{
+    return double(value);
+}
+
+
 
 
 //----------------------- Binary_Operator -------------------------------------
@@ -81,9 +96,22 @@ string Binary_Operator::get_postfix() const{
 
 
 //------------------------------
-void Binary_Operator::print(std::ostream& stream) const{
-    stream << str();
+
+void Binary_Operator::printHelper(std::ostream& stream, int startDepth) const{
+    // Call next in line for printing
+    right->printHelper(stream, (startDepth + 4));
     
+    // Print its own stuff
+    stream << setw(startDepth + 2) << "/" << endl;
+    stream << setw(startDepth) << str() << endl;
+    stream << setw(startDepth + 2) << "\\" << endl;
+    
+    // Print left
+    left->printHelper(stream, (startDepth + 4));
+}
+
+void Binary_Operator::print(std::ostream& stream) const{
+    printHelper(stream, 0);
 }
 
 
