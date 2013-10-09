@@ -32,9 +32,28 @@ public:
    virtual Expression_Tree* clone() const = 0;
 };
 
+//------------------------------
+
 class Binary_Operator : public Expression_Tree
 {
+public:
+    // Constructor
+    Binary_Operator(Expression_Tree* leftIn, Expression_Tree* rightIn);
+    
+    // Virtual functions - declared later
+    virtual long double      evaluate() const = 0;
+    virtual std::string      str() const = 0;
+    virtual Expression_Tree* clone() const = 0;
+    
+    std::string      get_postfix() const;
+    void             print(std::ostream& stream) const;
+
+protected:
+    Expression_Tree* left;
+    Expression_Tree* right;
 };
+
+//------------------------------
 
 class Operand : public Expression_Tree
 {
@@ -47,18 +66,10 @@ class Operand : public Expression_Tree
 class Plus : public Binary_Operator
 {
 public:
-    // Constructor
     Plus(Expression_Tree* leftIn, Expression_Tree* rightIn);
-    
     long double      evaluate() const;
-    std::string      get_postfix() const;
     std::string      str() const;
-    void             print(std::ostream& stream) const;
     Expression_Tree* clone() const;
-    
-private:
-    Expression_Tree* left;
-    Expression_Tree* right;
 };
 
 //class Minus : public Binary_Operator 

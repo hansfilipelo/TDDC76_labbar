@@ -54,23 +54,18 @@ Expression_Tree* Integer::clone() const {
 }
 
 
-//----------------------- Plus ------------------------
+//----------------------- Binary_Operator -------------------------------------
 
 //--------------------------------
-// Constructor for Plus
-Plus::Plus(Expression_Tree* leftIn, Expression_Tree* rightIn){
+// Constructor for Binary_Operator
+Binary_Operator::Binary_Operator(Expression_Tree* leftIn, Expression_Tree* rightIn){
     left = leftIn;
     right = rightIn;
 }
 
 //--------------------------------
-long double Plus::evaluate() const{
-    long double result = left->evaluate() + right->evaluate();
-    return result;
-}
 
-
-string Plus::get_postfix() const{
+string Binary_Operator::get_postfix() const{
     
     string result;
     string space = " ";
@@ -84,6 +79,28 @@ string Plus::get_postfix() const{
     return result;
 }
 
+
+//------------------------------
+void Binary_Operator::print(std::ostream& stream) const{
+    stream << str();
+    
+}
+
+
+//----------------------- Plus ------------------------
+
+// Constructor for Plus
+
+Plus::Plus(Expression_Tree* leftIn, Expression_Tree* rightIn)
+    : Binary_Operator(leftIn, rightIn)
+{}
+
+//------------------------------
+
+Expression_Tree* Plus::clone() const {
+    return new Plus(left, right);
+}
+
 //-------------------------------
 
 string Plus::str() const {
@@ -91,14 +108,9 @@ string Plus::str() const {
     return result;
 }
 
-//------------------------------
-void Plus::print(std::ostream& stream) const{
-    stream << str();
-    
-}
-//------------------------------
+//--------------------------------
 
-
-Expression_Tree* Plus::clone() const {
-    return new Plus(left, right);
+long double Plus::evaluate() const{
+    long double result = left->evaluate() + right->evaluate();
+    return result;
 }
