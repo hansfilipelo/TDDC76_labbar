@@ -60,7 +60,7 @@ namespace monetary{
         std::string getCurrency() const;
         int getUnits() const;
         int getCents() const;
-        void print(ostream& output) const;
+        void print(std::ostream& output) const;
         
     protected:
         // Functions for setting data
