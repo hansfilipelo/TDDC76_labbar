@@ -14,7 +14,6 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
-#include "./monetary_error.cc"
 #include <stdexcept>
 
 class monetary_error : public std::logic_error
