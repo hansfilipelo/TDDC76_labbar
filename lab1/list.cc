@@ -1,10 +1,10 @@
 /*
-FILNAMN: 		list.cc
-LABORATION:		1-5
-PROGRAMMERARE:	hanel742, eriek984
-DATUM:			2013-09-22
-BESKRIVNING:	Implementation file for classs list. 
-*/
+ FILNAMN: 		list.cc
+ LABORATION:		1-5
+ PROGRAMMERARE:	hanel742, eriek984
+ DATUM:			2013-09-22
+ BESKRIVNING:	Implementation file for classs list.
+ */
 
 //file list.cc
 #include <stdlib.h>
@@ -65,21 +65,21 @@ list& list::operator=(const list& input){
 /* Deconstructor:Calls the clear function for safe deconstruction*/
 list::~list(){
 	this->clear();
-
+    
 }
 
 //------------------------------------
 /*Deletes all list_nodes of target list to free up memory*/
 void list::clear(){
-
+    
 	if (first == nullptr){
 		return;
 	}
-
+    
 	list_node* current = first->next;
 	list_node* next;
-	first = nullptr; 
-
+	first = nullptr;
+    
 	while ( current->next != nullptr ){
 		next = current->next;
 		delete current;
@@ -91,14 +91,14 @@ void list::clear(){
 
 //------------------------------------
 /* Adds new list_node with given content first in list */
-void list::insert(string content){
+void list::insert(const string& content){
 	first = new list_node(content,first);
 }
 
 
 //------------------------------------
-/*Prints content of all list_nodes in target list, if list is empty 
-a message is saying just that is printed instead*/
+/*Prints content of all list_nodes in target list, if list is empty
+ a message is saying just that is printed instead*/
 void list::print() const{
 	if (first == nullptr){
 		cout << "List is empty" << endl;
@@ -118,15 +118,15 @@ void list::print() const{
 //------------------------------------
 /*Flips the order of the list by rearranging pointers*/
 void list::reverse(){
-	list_node* current_temp = first; 
+	list_node* current_temp = first;
 	list_node* result_temp = nullptr;
 	
-	while(current_temp != nullptr){ 
+	while(current_temp != nullptr){
 		list_node* next_temp = current_temp->next;
 		current_temp->next = result_temp;
-		result_temp = current_temp; 
-		current_temp = next_temp; 
-	} 
+		result_temp = current_temp;
+		current_temp = next_temp;
+	}
 	
 	first = result_temp;
 	return;
