@@ -17,14 +17,14 @@
 #include "./monetary_error.cc"
 #include <stdexcept>
 
-class monetary_error : public logic_error
+class monetary_error : public std::logic_error
 {
 public:
     explicit monetary_error(const string& what_arg) noexcept
-    : logic_error{what_arg} {}
+    : std::logic_error{what_arg} {}
     
     explicit monetary_error(const char* what_arg) noexcept
-    : logic_error{what_arg} {}
+    : std::logic_error{what_arg} {}
 };
 
 
