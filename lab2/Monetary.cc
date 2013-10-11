@@ -32,15 +32,6 @@ void money::currencyCheck (const money& otherMoney) {
 
 
 //------------------------------------
-// Constructor without in-values
-
-money::money(){
-	currency = "unspecified";
-	units = 0;
-	cents = 0;
-}
-
-//------------------------------------
 // Constructor for inserting all given values
 
 money::money(const std::string currCode, const int unitValue, const int centValue){
@@ -59,34 +50,6 @@ money::money(const std::string currCode, const int unitValue, const int centValu
 	cents = centValue;
 }
 
-//------------------------------------
-// Constructor for values but unspecified curr code
-
-money::money(const int unitValue, const int centValue){
-	if ( unitValue < 0 ){
-		throw monetary_error{"Du måste ge positiva värden på beloppet"};
-	}
-	if ( centValue < 0 || centValue > 99 ){
-		throw monetary_error{"Centvärde måste ligga mellan 0 och 99"};
-	}
-	
-	currency = "unspecified";
-	units = unitValue;
-	cents = centValue;
-}
-
-//------------------------------------
-// Constructor for curr code but no values
-
-money::money(const string currCode){
-	if ( currCode.length() != 3 ){
-        throw monetary_error{"valutaförkortning måste vara tre tecken"};
-	}
-	
-	currency = currCode;
-	units = 0;
-	cents = 0;
-}
 
 //------------------------------------
 // Copy-constructor
@@ -102,8 +65,15 @@ money::money(const money& otherMoney){
 //------------------------------------
 // = operator
 
-money& money::operator = (const money& otherMoney){
+// OBS! OBS! OBS!
+// ----------------
+// getUnits, getCurrency and getCents Šr nšdvŠndiga fšr att kunna kompilera med clang++
+// Provade med direktaccess pŒ andra pengars privata variabler vilket inte fungerade.
+// ----------------
+// OBS! OBS! OBS!
 
+money& money::operator = (const money& otherMoney){
+    
     // If both objects have defined currency but they are not the same - do mtf error.
     currencyCheck(otherMoney);
     
@@ -124,7 +94,7 @@ money& money::operator = (const money& otherMoney){
 //------------------------------------
 // Smaller than (<) operator
 
-bool money::operator < (const money& otherMoney){
+bool money::operator < (const money& otherMoney) const{
     
     // If both objects have defined currency but they are not the same - do mtf error.
     currencyCheck(otherMoney);
@@ -144,27 +114,20 @@ bool money::operator < (const money& otherMoney){
 //------------------------------------
 // Bigger than (>) operator
 
-bool money::operator > (const money& otherMoney){
+bool money::operator > (const money& otherMoney) const{
     
-    // If both objects have defined currency but they are not the same - do mtf error.
-    currencyCheck(otherMoney);
-    
-    
-    if ( units > otherMoney.getUnits() ){
-        return true;
-    }
-    else if ( (units == otherMoney.getUnits()) && (cents > otherMoney.getCents()) ){
-        return true;
-    }
-    else {
+    if (*this < otherMoney || *this == otherMoney) {
         return false;
+    }
+    else{
+        return true;
     }
 }
 
 //------------------------------------
 // == comparator
 
-bool money::operator == (const money& otherMoney){
+bool money::operator == (const money& otherMoney) const{
     
     // If both objects have defined currency but they are not the same - do mtf error.
     currencyCheck(otherMoney);
@@ -180,10 +143,10 @@ bool money::operator == (const money& otherMoney){
 //------------------------------------
 // + operator
 
-money&& money::operator + (const money& otherMoney){
+money money::operator + (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-   currencyCheck(otherMoney);
+    currencyCheck(otherMoney);
     
     int unitSum;
     int centSum;
@@ -209,10 +172,10 @@ money&& money::operator + (const money& otherMoney){
 //------------------------------------
 // - operator
 
-money&& money::operator - (const money& otherMoney){
+money money::operator - (const money& otherMoney){
     
     // If both objects have defined currency but they are not the same - do mtf error.
-   currencyCheck(otherMoney);
+    currencyCheck(otherMoney);
     
     int unitSum;
     int centSum;
@@ -277,43 +240,25 @@ money money::operator ++ (int){
 //------------------------------------
 // Comparator !=
 
-bool money::operator != (const money& otherMoney){
+bool money::operator != (const money& otherMoney) const{
 	
-	if ( *this == otherMoney ){
-		return false;
-	}
-	
-	return true;
+    return not( *this == otherMoney );
 }
 
 //------------------------------------
 // Comparator >=
 
-bool money::operator >= (const money& otherMoney){
+bool money::operator >= (const money& otherMoney) const{
 	
-	if ( *this == otherMoney ){
-		return true;
-	}
-	else if ( *this > otherMoney ){
-		return true;
-	}
-	
-	return false;
+    return ( *this == otherMoney || *this > otherMoney );
 }
 
 //------------------------------------
 // comparator <=
 
-bool money::operator <= (const money& otherMoney){
+bool money::operator <= (const money& otherMoney) const{
 	
-	if ( *this == otherMoney ){
-		return true;
-	}
-	else if ( *this < otherMoney ){
-		return true;
-	}
-	
-	return false;
+    return ( *this == otherMoney || *this < otherMoney );
 }
 
 //------------------------------------
@@ -332,37 +277,37 @@ int money::getUnits() const{
 }
 
 //------------------------------------
-// Gets cents who is private variable. 
+// Gets cents who is private variable.
 
 int money::getCents() const{
     return cents;
 }
 
 //------------------------------------
-// Sets cuurency who is private variable. 
+// Sets cuurency who is private variable.
 
-void money::setCurrency(const string currCode){
+void money::setCurrency(const string& currCode){
     currency = currCode;
 }
 
 //------------------------------------
-// Sets units who is private variable. 
+// Sets units who is private variable.
 
-void money::setUnits(const int unitValue){
+void money::setUnits(const int& unitValue){
     units = unitValue;
 }
 
 //------------------------------------
-// Sets cents who is private variable. 
+// Sets cents who is private variable.
 
-void money::setCents(const int centValue){
+void money::setCents(const int& centValue){
     cents = centValue;
 }
 
 //------------------------------------
 // += operator
 
-money& money::operator += (const money& otherMoney) {	
+money& money::operator += (const money& otherMoney) {
 	*this = *this + otherMoney;
 	
 	return *this;
@@ -372,7 +317,7 @@ money& money::operator += (const money& otherMoney) {
 //------------------------------------
 // -= operator
 
-money& money::operator -= (const money& otherMoney) {	
+money& money::operator -= (const money& otherMoney) {
 	*this = *this - otherMoney;
 	
 	return *this;
@@ -396,7 +341,7 @@ money& money::operator -- (){
 }
 
 //------------------------------------
-// -- operator- 
+// -- operator-
 
 money money::operator -- (int){
     
@@ -430,7 +375,7 @@ namespace monetary {
 			}
 		}
 		
-		// If Curr code - read it. 
+		// If Curr code - read it.
 		if ( isalpha( input.peek() ) ) {
 			string currCode;
 			for (int i = 1 ; i <= 3 ; i++ ){
@@ -455,7 +400,7 @@ namespace monetary {
 		
 		// If digits - read them
 		if ( isdigit( input.peek() ) ){
-		
+            
 			int unitValue;
 			int centValue;
 			double total;
@@ -477,10 +422,10 @@ namespace monetary {
 		
 		return input;
 	}
-
-//------------------------------------
-// Print using operator <<
-
+    
+    //------------------------------------
+    // Print using operator <<
+    
     ostream& operator << (ostream& stream, const money& outsideMoney){
         
         if(outsideMoney.getCurrency() == "unspecified"){

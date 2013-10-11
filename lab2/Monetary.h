@@ -16,10 +16,6 @@
 #include <string>
 #include "./monetary_error.cc"
 #include <stdexcept>
-#ifndef monetary_errorfile
-#define monetary_errorfile
-
-using namespace std;
 
 class monetary_error : public logic_error
 {
@@ -31,7 +27,6 @@ public:
     : logic_error{what_arg} {}
 };
 
-#endif
 
 
 
@@ -39,47 +34,47 @@ namespace monetary{
 	class money{
         
     public:
-        money();
-        money(const std::string currCode);
-        money(const std::string currCode, const int unitValue, const int centValue);
-        money(const int unitValue, const int centValue);
+        money(const std::string currCode = "unspecified", const int unitValue = 0, const int centValue = 0);
         money(const money& otherMoney);
         
         //Operators
         money& operator = (const money& otherMoney);
-        bool operator < (const money& otherMoney);
-        bool operator > (const money& otherMoney);
-        bool operator != (const money& otherMoney);
-        bool operator == (const money& otherMoney);
-        money&& operator + (const money& otherMoney);
-	money&& operator - (const money& otherMoney);
+        bool operator < (const money& otherMoney) const;
+        bool operator > (const money& otherMoney) const;
+        bool operator != (const money& otherMoney) const;
+        bool operator == (const money& otherMoney) const;
+        money operator + (const money& otherMoney);
+        money operator - (const money& otherMoney);
         money& operator ++ ();						// ++m3
         money operator ++ (int);	// m3++
-	bool operator <= (const money& otherMoney);
-	bool operator >= (const money& otherMoney);
-	money& operator += (const money& otherMoney);
-	money& operator -= (const money& otherMoney);
-	money& operator -- ();						// --m3
+        bool operator <= (const money& otherMoney) const;
+        bool operator >= (const money& otherMoney) const;
+        money& operator += (const money& otherMoney);
+        money& operator -= (const money& otherMoney);
+        money& operator -- ();						// --m3
         money operator -- (int);	// m3--
         
-	friend std::istream& operator >> (std::istream& input, money& otherMoney);
+        friend std::istream& operator >> (std::istream& input, money& otherMoney);
         friend std::ostream& operator << (std::ostream& stream, const money& outsideMoney);
         
         // Functions for accessing data
         std::string getCurrency() const;
         int getUnits() const;
         int getCents() const;
-	void setCurrency(string currCode);
-	void setUnits(int unitValue);
-	void setCents(int centValue);
         void print(ostream& output) const;
+        
+    protected:
+        // Functions for setting data
+        void setCurrency(const string& currCode);
+        void setUnits(const int& unitValue);
+        void setCents(const int& centValue);
         
     private:
         std::string currency;
 		// No we don't want these stuff below unsigned :)
         int units;
         int cents;
-	void currencyCheck (const money& otherMoney);
+        void currencyCheck (const money& otherMoney);
 	};
 }
 
