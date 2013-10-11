@@ -34,7 +34,7 @@ namespace monetary{
         
     public:
         money(const std::string currCode = "unspecified", const int unitValue = 0, const int centValue = 0);
-        money(const money& otherMoney);
+        money(const int unitValue = 0, const int centValue = 0);
         
         //Operators
         money& operator = (const money& otherMoney);

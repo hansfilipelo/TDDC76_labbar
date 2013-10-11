@@ -50,17 +50,20 @@ money::money(const std::string currCode, const int unitValue, const int centValu
 	cents = centValue;
 }
 
-
 //------------------------------------
-// Copy-constructor
 
-money::money(const money& otherMoney){
-	
-	currency = otherMoney.getCurrency();
-	units = otherMoney.getUnits();
-	cents = otherMoney.getCents();
+money::money(const int unitValue, const int centValue){
+	if ( unitValue < 0 ){
+		throw monetary_error{"Du måste ge positiva värden på beloppet"};
+	}
+	if ( centValue < 0 || centValue > 99 ){
+		throw monetary_error{"Centvärde måste ligga mellan 0 och 99"};
+	}
+    
+	currency = "unspecified";
+	units = unitValue;
+	cents = centValue;
 }
-
 
 //------------------------------------
 // = operator
