@@ -19,7 +19,7 @@
 class monetary_error : public std::logic_error
 {
 public:
-    explicit monetary_error(const string& what_arg) noexcept
+    explicit monetary_error(const std::string& what_arg) noexcept
     : std::logic_error{what_arg} {}
     
     explicit monetary_error(const char* what_arg) noexcept
@@ -64,7 +64,7 @@ namespace monetary{
         
     protected:
         // Functions for setting data
-        void setCurrency(const string& currCode);
+        void setCurrency(const std::string& currCode);
         void setUnits(const int& unitValue);
         void setCents(const int& centValue);
         
