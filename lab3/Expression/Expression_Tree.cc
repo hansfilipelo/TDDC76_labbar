@@ -9,7 +9,7 @@ using namespace std;
 
 // SEPARATA DEFINITIONER FÖR FÖR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
 
-//----------------------- Operand ---------------------------------------
+//----------------------- Operand -------------------------------------------
 
 //--------------------------------
 
@@ -64,6 +64,42 @@ Expression_Tree* Integer::clone() const {
 
 long double Integer::evaluate() const{
     return double(value);
+}
+
+
+
+
+//-----------------------Real------------------------
+
+//--------------------------------
+// Constructor for Real
+Real::Real(double inValue){
+    value = inValue;
+}
+
+
+//-------------------------------
+
+string Real::str() const {
+    string result;
+    ostringstream convert;
+    
+    convert << value;
+    result = convert.str();
+    
+    return result;
+}
+
+//------------------------------
+
+Expression_Tree* Integer::clone() const {
+    return new Real(value);
+}
+
+//--------------------------------
+
+long double Real::evaluate() const{
+    return value;
 }
 
 
@@ -142,3 +178,162 @@ long double Plus::evaluate() const{
     long double result = left->evaluate() + right->evaluate();
     return result;
 }
+
+
+
+//----------------------- Minus ------------------------
+
+//---------------------
+// Constructor for Minus
+
+Minus::Minus(Expression_Tree* leftIn, Expression_Tree* rightIn)
+: Binary_Operator(leftIn, rightIn)
+{}
+
+//------------------------------
+
+Expression_Tree* Minus::clone() const {
+    return new Minus(left, right);
+}
+
+//-------------------------------
+
+string Minus::str() const {
+    string result = "-";
+    return result;
+}
+
+//--------------------------------
+
+long double Minus::evaluate() const{
+    long double result = left->evaluate() - right->evaluate();
+    return result;
+}
+
+
+
+
+//----------------------- Times ------------------------
+
+//---------------------
+// Constructor for Times
+
+Times::Times(Expression_Tree* leftIn, Expression_Tree* rightIn)
+: Binary_Operator(leftIn, rightIn)
+{}
+
+//------------------------------
+
+Expression_Tree* Times::clone() const {
+    return new Times(left, right);
+}
+
+//-------------------------------
+
+string Times::str() const {
+    string result = "*";
+    return result;
+}
+
+//--------------------------------
+
+long double Times::evaluate() const{
+    long double result = left->evaluate() * right->evaluate();
+    return result;
+}
+
+
+
+//----------------------- Divide ------------------------
+
+//---------------------
+// Constructor for Divide
+
+Divide::Divide(Expression_Tree* leftIn, Expression_Tree* rightIn)
+: Binary_Operator(leftIn, rightIn)
+{}
+
+//------------------------------
+
+Expression_Tree* Divide::clone() const {
+    return new Divide(left, right);
+}
+
+//-------------------------------
+
+string Divide::str() const {
+    string result = "/";
+    return result;
+}
+
+//--------------------------------
+
+long double Divide::evaluate() const{
+    // Can't divide by zero
+    if ( right->evaluate() == 0 ){
+        throw logic_error{"Syntax Error: Can't divide by zero"};
+    }
+    
+    long double result = left->evaluate() / right->evaluate();
+    return result;
+}
+
+
+//----------------------- Power ------------------------
+
+//---------------------
+// Constructor for Power
+
+Power::Power(Expression_Tree* leftIn, Expression_Tree* rightIn)
+: Binary_Operator(leftIn, rightIn)
+{}
+
+//------------------------------
+
+Expression_Tree* Power::clone() const {
+    return new Power(left, right);
+}
+
+//-------------------------------
+
+string Power::str() const {
+    string result = "^";
+    return result;
+}
+
+//--------------------------------
+
+long double Power::evaluate() const{
+    long double result = pow(left->evaluate(), right->evaluate());
+    return result;
+}
+
+
+//
+////----------------------- Assign ------------------------
+//
+////---------------------
+//// Constructor for Assign
+//
+//Assign::Assign(Variable* leftIn, Expression_Tree* rightIn)
+//: Binary_Operator(leftIn, rightIn)
+//{}
+//
+////------------------------------
+//
+//Expression_Tree* Assign::clone() const {
+//    return new Assign(left, right);
+//}
+//
+////-------------------------------
+//
+//string Assign::str() const {
+//    string result = "=";
+//    return result;
+//}
+//
+////--------------------------------
+//
+//Assign::evaluate() const{
+//    left->setValue(right);
+//}

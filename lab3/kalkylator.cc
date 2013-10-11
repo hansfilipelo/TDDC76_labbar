@@ -21,6 +21,7 @@ int main() {
     cout << addition.get_postfix() << endl;
     cout << endl;
     
+    
     addition.print(cout);
     
     return 0;
