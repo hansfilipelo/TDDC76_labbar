@@ -73,7 +73,7 @@ namespace monetary{
 		// No we don't want these stuff below unsigned :)
         int units;
         int cents;
-        void currencyCheck (const money& otherMoney);
+        void currencyCheck (money& otherMoney) const;
 	};
 }
 

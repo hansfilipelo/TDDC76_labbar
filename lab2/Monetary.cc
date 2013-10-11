@@ -22,7 +22,7 @@ using namespace std;
 // Helper function
 // Checks if otherMoney and this money has same currency or if one of them is unspecified
 
-void money::currencyCheck (const money& otherMoney) {
+void money::currencyCheck (money& otherMoney) const{
 	if ( (currency != "unspecified") && (otherMoney.getCurrency() != "unspecified") ){
 		if ( otherMoney.getCurrency() != currency ) {
 			throw monetary_error{"Ej samma valutakod"};
