@@ -3,8 +3,6 @@
  */
 
 #include "Expression_Tree.h"
-
-// INKLUDERA FÖR DET SOM KOMMER ATT ANVÄNDAS I DENNA FIL!
 using namespace std;
 
 // SEPARATA DEFINITIONER FÖR FÖR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
@@ -92,7 +90,7 @@ string Real::str() const {
 
 //------------------------------
 
-Expression_Tree* Integer::clone() const {
+Expression_Tree* Real::clone() const {
     return new Real(value);
 }
 
@@ -103,7 +101,36 @@ long double Real::evaluate() const{
 }
 
 
+//--------------------Variable--------------------------
+Variable::Variable(string inName, Expression_Tree* inValue){
+    name = inName;
+    value = inValue;
+}
 
+//------------------------------
+// set value for variable
+void Variable::setValue(Expression_Tree* inValue){
+    value = inValue;
+}
+
+//-------------------------------
+// evaluate for varialbe
+long double Variable::evaluate() const{
+    return value->evaluate();
+}
+
+
+//-------------------------------
+// str
+string Variable::str() const{
+    return name;
+}
+
+//------------------------------
+
+Expression_Tree* Variable::clone() const{
+    return new Variable(name, value);
+}
 
 //----------------------- Binary_Operator -------------------------------------
 
@@ -309,31 +336,38 @@ long double Power::evaluate() const{
 }
 
 
-//
-////----------------------- Assign ------------------------
-//
-////---------------------
-//// Constructor for Assign
-//
-//Assign::Assign(Variable* leftIn, Expression_Tree* rightIn)
-//: Binary_Operator(leftIn, rightIn)
-//{}
-//
-////------------------------------
-//
-//Expression_Tree* Assign::clone() const {
-//    return new Assign(left, right);
-//}
-//
-////-------------------------------
-//
-//string Assign::str() const {
-//    string result = "=";
-//    return result;
-//}
-//
-////--------------------------------
-//
-//Assign::evaluate() const{
-//    left->setValue(right);
-//}
+
+//----------------------- Assign ------------------------
+
+//---------------------
+// Constructor for Assign
+
+Assign::Assign(Expression_Tree* leftIn, Expression_Tree* rightIn)
+: Binary_Operator(leftIn, rightIn)
+{
+    if ( not( isalpha( left->str().at(0) ) && left->str().size() == 1 )) {
+        throw logic_error("Det maste vara en variabel (ett tecken) till vanster om =");
+    }
+    // Convert left to Variable
+    Variable* leftVariable = dynamic_cast<Variable*>(left);
+    leftVariable->setValue(right);
+}
+
+//------------------------------
+
+Expression_Tree* Assign::clone() const {
+    return new Assign(left, right);
+}
+
+//-------------------------------
+
+string Assign::str() const {
+    string result = "=";
+    return result;
+}
+
+//--------------------------------
+
+long double Assign::evaluate() const{
+    return right->evaluate();
+}
