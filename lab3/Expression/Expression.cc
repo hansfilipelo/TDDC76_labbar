@@ -2,16 +2,6 @@
  * Expression.cc
  */
 #include "Expression.h"
-#include "Expression_Tree.h"
-#include <algorithm>
-#include <iostream>
-#include <iterator>
-#include <map>
-#include <sstream>
-#include <stack>
-#include <stdexcept>
-#include <string>
-#include <vector>
 using namespace std;
 
 /*
@@ -19,7 +9,7 @@ using namespace std;
  */
 long double Expression::evaluate() const
 {
-   return 0;  // ATT GÖRA!
+   return tree->evaluate();
 }
 
 /*

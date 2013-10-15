@@ -6,6 +6,15 @@
 #include <iosfwd>
 #include <stdexcept>
 #include <string>
+#include "Expression_Tree.h"
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <sstream>
+#include <stack>
+#include <vector>
+
 
 /**
  * expression_error: kastas om fel inträffar i en Expression- operation;
@@ -28,6 +37,9 @@ public:
    bool        empty() const;
    void        print_tree(std::ostream&) const;
    void        swap(Expression&);
+
+protected:
+	Expression_Tree* tree;
 };
 
 /**
