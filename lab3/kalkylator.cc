@@ -24,5 +24,9 @@ int main() {
     
     addition.print(cout);
     
+    Variable x("X");
+    Assign likamed = new Assign(x, addition);
+    Assign.print();
+    
     return 0;
 }
