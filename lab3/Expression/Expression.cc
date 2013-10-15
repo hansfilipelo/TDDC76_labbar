@@ -17,23 +17,27 @@ long double Expression::evaluate() const
  */
 std::string Expression::get_postfix() const
 {
-   return string();  // ATT GÖRA!
+    return tree->get_postfix;
 }
 
 /*
  * empty()
  */
-bool Expression::empty() const
-{
-   return false;  // ATT GÖRA!
+bool Expression::empty() const{
+    
+    if ( tree == nullptr ) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 /*
  * print_tree()
  */
-void Expression::print_tree(std::ostream&) const
-{
-   // ATT GÖRA!
+void Expression::print_tree(std::ostream&) const{
+    return tree->print();
 }
 
 /*
