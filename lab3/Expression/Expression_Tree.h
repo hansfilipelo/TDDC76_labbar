@@ -28,16 +28,12 @@
 class Expression_Tree
 {
 public:
-    ~Expression_Tree();
     virtual long double      evaluate() const = 0;
     virtual std::string      get_postfix() const = 0;
     virtual std::string      str() const = 0;
     virtual void             print(std::ostream&) const = 0;
     virtual Expression_Tree* clone() const = 0;
     virtual void printHelper(std::ostream& stream, int startDepth) const = 0;
-
-protected:
-    virtual void clean() const = 0;
 };
 
 //------------------------------
@@ -47,6 +43,8 @@ class Binary_Operator : public Expression_Tree
 public:
     // Constructor
     Binary_Operator(Expression_Tree* leftIn, Expression_Tree* rightIn);
+    // Destructor
+    ~Binary_Operator();
     
     // Virtual functions - declared later
     virtual long double      evaluate() const = 0;
@@ -68,6 +66,7 @@ protected:
 class Operand : public Expression_Tree
 {
 public:
+    ~Operand();
     // Virtual functions - declared later
     virtual std::string      str() const = 0;
     virtual Expression_Tree* clone() const = 0;

@@ -7,12 +7,12 @@ using namespace std;
 
 // SEPARATA DEFINITIONER FÖR FÖR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
 
-Expression_Tree::~Expression_Tree() {
-    clean();
-}
-
 
 //----------------------- Operand -------------------------------------------
+
+Operand::~Operand() {
+    clean();
+}
 
 //--------------------------------
 
@@ -164,6 +164,11 @@ string Binary_Operator::get_postfix() const{
     result.append(str());
     
     return result;
+}
+
+//--------------------------------
+Binary_Operator::~Binary_Operator() {
+    clean();
 }
 
 
