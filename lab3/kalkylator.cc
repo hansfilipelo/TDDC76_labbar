@@ -15,11 +15,11 @@ int main() {
     
     string uttryck = "(1 + 2) * 3 * 4 / 2";
     
-    Expression exp = make_expression(uttryck);
+    Expression* exp = make_expression(uttryck);
     
-    exp.print_tree(cout);
+    exp->print_tree(cout);
     cout << endl;
-    cout << exp.evaluate() << endl;;
+    cout << exp->evaluate() << endl;;
     
     return 0;
 }
