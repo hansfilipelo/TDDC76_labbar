@@ -45,7 +45,10 @@ void Expression::print_tree(std::ostream& ostream) const{
  * swap(other)
  */
 void Expression::swap(Expression& otherExpression) {
-    swap(otherExpression.tree, tree);
+    Expression_Tree* temp = otherExpression->tree;
+    
+    otherExpression->tree = tree;
+    tree = temp;
 }
 
 /*
