@@ -4,7 +4,7 @@
 	OBJECTS = kalkylator.o Expression_Tree.o Expression.o
 
 kalkylator: $(OBJECTS)
-	$(CCC) $(CCFLAGS) kalkylator.o Expression_Tree.o -o kalkylator
+	$(CCC) $(CCFLAGS) $(OBJECTS) -o kalkylator
 
 kalkylator.o: kalkylator.cc
 	$(CCC) $(CCFLAGS) -c kalkylator.cc
