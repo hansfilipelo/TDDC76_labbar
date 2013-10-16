@@ -56,7 +56,7 @@ void Expression::swap(Expression& otherExpression) {
  */
 void swap(Expression& firstExpression, Expression& secondExpression)
 {
-    firstExpression->swap(secondExpression);
+    firstExpression.swap(secondExpression);
 }
 
 /*
