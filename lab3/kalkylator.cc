@@ -12,28 +12,14 @@
 using namespace std;
 
 int main() {
-    long double dubbel = 5.5;
-    long int ltrea = 3;
-    long int lfyra = 4;
     
-    Expression_Tree* femma = new Real(dubbel);
-    Expression_Tree* trea = new Integer(ltrea);
-    Expression_Tree* fyra = new Integer(lfyra);
-    Expression_Tree* addition2 = new Plus(trea,femma);
+    string uttryck = "(1 + 2) * 3 * 4 / 2";
     
-    Expression_Tree* addition = new Plus(fyra, addition2);
-    cout << addition->get_postfix() << endl;
+    exp = make_expression(uttryck);
+    
+    exp.print_tree();
     cout << endl;
-    
-    
-//    addition->print(cout);
-    
-    Expression_Tree* x = new Variable("X");
-    Expression_Tree* likamed = new Assign(x, addition);
-    likamed->print(cout);
-    
-    cout << endl;
-    cout << x->evaluate() << endl;
+    exp.evaluate();
     
     return 0;
 }
