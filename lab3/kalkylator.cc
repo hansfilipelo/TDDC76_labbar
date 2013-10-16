@@ -8,13 +8,17 @@
 
 #include <stdio.h>
 #include "Expression/Expression_Tree.h"
+#include "Expression/Expression.h"
 using namespace std;
 
 int main() {
+    long double dubbel = 5.5;
+    long int ltrea = 3;
+    long int lfyra = 4;
     
-    Expression_Tree* femma = new Real(5.5);
-    Expression_Tree* trea = new Integer(3);
-    Expression_Tree* fyra = new Integer(4);
+    Expression_Tree* femma = new Real(dubbel);
+    Expression_Tree* trea = new Integer(ltrea);
+    Expression_Tree* fyra = new Integer(lfyra);
     Expression_Tree* addition2 = new Plus(trea,femma);
     
     Expression_Tree* addition = new Plus(fyra, addition2);

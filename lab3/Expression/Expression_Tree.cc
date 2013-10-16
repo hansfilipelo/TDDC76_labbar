@@ -10,11 +10,6 @@ using namespace std;
 
 //----------------------- Operand -------------------------------------------
 
-Operand::~Operand() {
-    clean();
-}
-
-//--------------------------------
 
 string Operand::get_postfix() const{
     return str();
@@ -32,10 +27,6 @@ void Operand::print(std::ostream& stream) const{
 }
 
 //--------------------------------
-
-void Operand::clean() {
-    return;
-}
 
 
 

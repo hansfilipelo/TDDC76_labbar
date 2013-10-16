@@ -67,7 +67,6 @@ protected:
 class Operand : public Expression_Tree
 {
 public:
-    ~Operand();
     // Virtual functions - declared later
     virtual std::string      str() const = 0;
     virtual Expression_Tree* clone() const = 0;
@@ -78,7 +77,6 @@ public:
 
 protected:
     void printHelper(std::ostream& stream, int startDepth) const;
-    void clean();
 };
 
 //------------------------------
