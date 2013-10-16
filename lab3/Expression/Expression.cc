@@ -44,17 +44,16 @@ void Expression::print_tree(std::ostream& ostream) const{
 /*
  * swap(other)
  */
-void Expression::swap(Expression&)
-{
-   // ATT GÖRA!
+void Expression::swap(Expression& otherExpression) {
+    swap(otherExpression.tree, tree);
 }
 
 /*
  * swap(x, y)
  */
-void swap(Expression&, Expression&)
+void swap(Expression& firstExpression, Expression& secondExpression)
 {
-   // ATT GÖRA!
+    firstExpression->swap(secondExpression);
 }
 
 /*
