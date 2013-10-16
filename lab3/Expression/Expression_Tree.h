@@ -28,6 +28,7 @@
 class Expression_Tree
 {
 public:
+    virtual ~Expression_Tree() {};
     virtual long double      evaluate() const = 0;
     virtual std::string      get_postfix() const = 0;
     virtual std::string      str() const = 0;
@@ -79,6 +80,8 @@ protected:
     void printHelper(std::ostream& stream, int startDepth) const;
     void clean();
 };
+
+//------------------------------
 
 class Assign : public Binary_Operator
 {
