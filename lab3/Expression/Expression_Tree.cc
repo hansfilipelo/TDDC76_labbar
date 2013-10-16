@@ -71,7 +71,7 @@ long double Integer::evaluate() const{
 
 //--------------------------------
 // Constructor for Real
-Real::Real(double inValue){
+Real::Real(long double inValue){
     value = inValue;
 }
 

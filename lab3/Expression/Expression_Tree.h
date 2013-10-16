@@ -158,14 +158,14 @@ private:
 class Real : public Operand {
 public:
     // Constructor
-    Real(double inValue);
+    Real(long double inValue);
     
     long double      evaluate() const;
     std::string      str() const;
     Expression_Tree* clone() const;
     
 private:
-    double value;
+    long double value;
 };
 
 //--------------------------------
