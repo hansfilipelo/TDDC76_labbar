@@ -17,7 +17,7 @@ int main() {
     
     Expression exp = make_expression(uttryck);
     
-    exp.print_tree();
+    exp.print_tree(cout);
     cout << endl;
     exp.evaluate();
     
