@@ -12,21 +12,24 @@ using namespace std;
 
 int main() {
     
-    Expression_Tree* femma = new Integer(5);
+    Expression_Tree* femma = new Real(5.5);
     Expression_Tree* trea = new Integer(3);
     Expression_Tree* fyra = new Integer(4);
     Expression_Tree* addition2 = new Plus(trea,femma);
     
-    Plus addition(fyra, addition2);
-    cout << addition.get_postfix() << endl;
+    Expression_Tree* addition = new Plus(fyra, addition2);
+    cout << addition->get_postfix() << endl;
     cout << endl;
     
     
-    addition.print(cout);
+//    addition->print(cout);
     
-    Variable x("X");
-    Assign likamed = new Assign(x, addition);
-    Assign.print();
+    Expression_Tree* x = new Variable("X");
+    Expression_Tree* likamed = new Assign(x, addition);
+    likamed->print(cout);
+    
+    cout << endl;
+    cout << x->evaluate() << endl;
     
     return 0;
 }

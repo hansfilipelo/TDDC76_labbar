@@ -101,6 +101,7 @@ public:
 //-------------------
 
 class Minus : public Binary_Operator{
+public:
     Minus(Expression_Tree* leftIn, Expression_Tree* rightIn);
     long double      evaluate() const;
     std::string      str() const;
@@ -110,6 +111,7 @@ class Minus : public Binary_Operator{
 //-------------------
 
 class Times : public Binary_Operator{
+public:
     Times(Expression_Tree* leftIn, Expression_Tree* rightIn);
     long double      evaluate() const;
     std::string      str() const;
@@ -117,6 +119,7 @@ class Times : public Binary_Operator{
 };
 
 class Divide : public Binary_Operator{
+public:
     Divide(Expression_Tree* leftIn, Expression_Tree* rightIn);
     long double      evaluate() const;
     std::string      str() const;
@@ -127,6 +130,7 @@ class Divide : public Binary_Operator{
 
 
 class Power: public Binary_Operator{
+public:
     Power(Expression_Tree* leftIn, Expression_Tree* rightIn);
     long double      evaluate() const;
     std::string      str() const;

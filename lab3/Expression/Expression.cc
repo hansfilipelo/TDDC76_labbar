@@ -2,6 +2,7 @@
  * Expression.cc
  */
 #include "Expression.h"
+
 using namespace std;
 
 /*
@@ -17,7 +18,7 @@ long double Expression::evaluate() const
  */
 std::string Expression::get_postfix() const
 {
-    return tree->get_postfix;
+    return tree->get_postfix();
 }
 
 /*
@@ -36,8 +37,8 @@ bool Expression::empty() const{
 /*
  * print_tree()
  */
-void Expression::print_tree(std::ostream&) const{
-    return tree->print();
+void Expression::print_tree(std::ostream& ostream) const{
+    return tree->print(ostream);
 }
 
 /*
@@ -86,7 +87,7 @@ namespace
    // högerassociativitet, det motsatta vänsterassociativitet. Används av make_postfix(). 
    using priority_table = map<string, int>;
 
-   const vector<string> operators{ "^", "*", "/", "+", "-", "=" };
+    const vector<string> operators{ "^", "*", "/", "+", "-", "=" };
    const priority_table input_priority{ {"^", 8}, {"*", 5}, {"/", 5}, {"+", 3}, {"-", 3}, {"=", 2} };
    const priority_table stack_priority{ {"^", 7}, {"*", 6}, {"/", 6}, {"+", 4}, {"-", 4}, {"=", 1} };
 
