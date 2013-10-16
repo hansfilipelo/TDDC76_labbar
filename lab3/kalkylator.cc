@@ -15,7 +15,7 @@ int main() {
     
     string uttryck = "(1 + 2) * 3 * 4 / 2";
     
-    exp = make_expression(uttryck);
+    Expression exp = make_expression(uttryck);
     
     exp.print_tree();
     cout << endl;
