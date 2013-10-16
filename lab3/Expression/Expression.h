@@ -31,7 +31,7 @@ class Expression
 public:
    // OBSERVERA: DETTA ÄR ENDAST KODSKELETT - MODIFIERA OCH KOMPLETTERA!
 
-   Expression(class Expression_Tree* = nullptr) {}
+    Expression(class Expression_Tree* = nullptr);
 
    long double evaluate() const;
    std::string get_postfix() const;

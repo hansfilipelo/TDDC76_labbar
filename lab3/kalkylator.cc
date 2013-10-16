@@ -14,7 +14,9 @@ using namespace std;
 int main() {
 	
     Expression_Tree* t{new Plus{new Integer{7}, new Real{3.14}}};
- 
+    
+    cout << t << endl;
+    
     Expression testis{t};
     
     testis.print_tree(cout);
