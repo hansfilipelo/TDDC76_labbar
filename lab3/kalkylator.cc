@@ -19,7 +19,7 @@ int main() {
     
     exp.print_tree(cout);
     cout << endl;
-    exp.evaluate();
+    cout << exp.evaluate() << endl;;
     
     return 0;
 }
