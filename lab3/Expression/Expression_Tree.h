@@ -143,14 +143,14 @@ public:
 class Integer : public Operand {
 public:
     // Constructor
-    Integer(int inValue);
+    Integer(long long int inValue);
     
     long double      evaluate() const;
     std::string      str() const;
     Expression_Tree* clone() const;
     
 private:
-    int value;
+    long long int value;
 };
 
 //--------------------------------

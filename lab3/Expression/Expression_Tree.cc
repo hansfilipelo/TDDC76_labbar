@@ -35,7 +35,7 @@ void Operand::print(std::ostream& stream) const{
 
 //--------------------------------
 // Constructor for
-Integer::Integer(int inValue){
+Integer::Integer(long long int inValue){
     value = inValue;
 }
 

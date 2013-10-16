@@ -376,13 +376,13 @@ namespace monetary {
 			while ( input.peek() == ' ' ) {
 				input.get();
 			}
-		}
 		
 		// If Curr code - read it.
 		if ( isalpha( input.peek() ) ) {
 			string currCode;
 			for (int i = 1 ; i <= 3 ; i++ ){
 				if ( not (isalpha( input.peek() ))){
+                    input.setstate(ios::failbit);
 					throw monetary_error{"En valutaförkortning måste vara tre tecken lång"};
 				}
 				currCode += input.get();
@@ -392,13 +392,14 @@ namespace monetary {
 			}
 			
 			otherMoney.setCurrency(currCode);
-		}
-		
-		// If whitespaces before values - remove them
-		if ( input.peek() == ' ' ){
-			while ( input.peek() == ' ' ) {
-				input.get();
-			}
+            
+            // Remove one whitespace
+            if ( input.peek() == ' ' ){
+                input.get();
+            }
+            else {
+                throw monetary_error{"Belopp fŒr ej komma direkt efter valutakoden."};
+            }
 		}
 		
 		// If digits - read them
@@ -420,8 +421,6 @@ namespace monetary {
 			otherMoney.setUnits(unitValue);
 			otherMoney.setCents(centValue);
 		}
-		
-		input.setstate(ios::eofbit);
 		
 		return input;
 	}
