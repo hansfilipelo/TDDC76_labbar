@@ -12,12 +12,12 @@
 using namespace std;
 
 int main() {
-	
-    Expression_Tree* t{new Plus{new Integer{7}, new Real{3.14}}};
+
+//    Expression_Tree* t{new Plus{new Integer{7}, new Real{3.14}}};
     
-    cout << t << endl;
+    string uttryck = "(1 + 2) * 4 / 2";
     
-    Expression testis{t};
+    Expression testis{make_expression(uttryck)};
     
     testis.print_tree(cout);
     cout << endl;
