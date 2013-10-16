@@ -7,6 +7,11 @@ using namespace std;
 
 // SEPARATA DEFINITIONER FÖR FÖR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
 
+Expression_Tree::~Expression_Tree() {
+    clean();
+}
+
+
 //----------------------- Operand -------------------------------------------
 
 //--------------------------------
@@ -27,6 +32,10 @@ void Operand::print(std::ostream& stream) const{
 }
 
 //--------------------------------
+
+void Operand::clean() {
+    return;
+}
 
 
 
@@ -175,6 +184,13 @@ void Binary_Operator::printHelper(std::ostream& stream, int startDepth) const{
 
 void Binary_Operator::print(std::ostream& stream) const{
     printHelper(stream, 0);
+}
+
+//------------------------------
+
+void Binary_Operator::clean() {
+    delete left;
+    delete right;
 }
 
 
