@@ -12,14 +12,14 @@
 using namespace std;
 
 int main() {
+	
+    Expression_Tree* t{new Plus{new Integer{7}, new Real{3.14}}};
+ 
+    Expression testis{t};
     
-    string uttryck = "(1 + 2) * 3 * 4 / 2";
-    
-    Expression* exp = make_expression(uttryck);
-    
-    exp->print_tree(cout);
+    testis.print_tree(cout);
     cout << endl;
-    cout << exp->evaluate() << endl;;
+    cout << testis.evaluate() << endl;;
     
     return 0;
 }

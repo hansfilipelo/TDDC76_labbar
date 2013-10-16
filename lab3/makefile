@@ -1,4 +1,4 @@
-	CCC = clang++
+	CCC = g++
 	CCFLAGS = -g -std=c++11 -Wall -Wextra -Werror
 	LDFLAGS = -L/sw/gcc-${GCC4_V}/lib -static-libstdc++
 	OBJECTS = kalkylator.o Expression_Tree.o Expression.o

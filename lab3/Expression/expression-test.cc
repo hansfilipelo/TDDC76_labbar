@@ -16,8 +16,8 @@ int main()
    else
       cout << "e1.evaluate() = " << e1.evaluate() << '\n';
 
-   cout << "e1.get_postfix() = " << e1.get_postfix() << '\n';
-   cout << boolalpha << "e1.empty() = " << e1.empty() << "\n\n";
+//   cout << "e1.get_postfix() = " << e1.get_postfix() << '\n';
+//   cout << boolalpha << "e1.empty() = " << e1.empty() << "\n\n";
 
    Expression e2{e1};  // kopieringskonstruktor
 
@@ -30,14 +30,14 @@ int main()
       cout << "undantag fångat: " << e.what() << '\n';
    }
 
-   cout << "e2.get_postfix() = " << e2.get_postfix() << '\n';
-   cout << "e2.empty() = " << e2.empty() << "\n\n";
+//   cout << "e2.get_postfix() = " << e2.get_postfix() << '\n';
+//   cout << "e2.empty() = " << e2.empty() << "\n\n";
    
    e2.swap(e1);  // swap
 
    // Resten kräver implementering av Expression_Tree-klasserna.
 
-/*
+
    Expression_Tree* t{new Plus{new Integer{7}, new Real{3.14}}};
 
    Expression e3{t};  // konstruktor som tar ett länkat uttrycksträd
@@ -79,7 +79,7 @@ int main()
    cout << "e2.empty() = " << e2.empty() << '\n';
    cout << "e5.empty() = " << e5.empty() << "\n\n";
 
-*/
+
 
    return 0;
 }
