@@ -19,6 +19,15 @@
  */
 // ATT GÖRA!
 
+class expression_error : public std::logic_error
+{
+public:
+    explicit expression_error(const std::string& what_arg) noexcept
+    : std::logic_error{what_arg} {}
+    
+    explicit expression_error(const char* what_arg) noexcept
+    : std::logic_error{what_arg} {}
+};
 
 // OBSERVERA: NEDANSTÅENDE ÄR ENDAST KODSKELETT - MODIFIERA OCH KOMPLETTERA!
 

@@ -129,7 +129,14 @@ string Variable::str() const{
 //------------------------------
 
 Expression_Tree* Variable::clone() const{
-    return new Variable(name, value);
+    Expression_Tree* newValue = value->clone();
+    try {
+        return new Variable(name, newValue);
+    } catch (bad_alloc) {
+        delete newValue;
+    }
+    
+    return nullptr;
 }
 
 //----------------------- Binary_Operator -------------------------------------
@@ -201,7 +208,24 @@ Plus::Plus(Expression_Tree* leftIn, Expression_Tree* rightIn)
 //------------------------------
 
 Expression_Tree* Plus::clone() const {
-    return new Plus(left, right);
+    Expression_Tree* newLeft = left->clone();
+    
+    try {
+        Expression_Tree* newRight = right->clone();
+        
+        try {
+            return new Plus(newLeft, newRight);
+        } catch (bad_alloc) {
+            delete newLeft;
+            delete newRight;
+        }
+        
+    } catch (bad_alloc) {
+        delete newLeft;
+    }
+    
+    return nullptr;
+    
 }
 
 //-------------------------------
@@ -232,7 +256,22 @@ Minus::Minus(Expression_Tree* leftIn, Expression_Tree* rightIn)
 //------------------------------
 
 Expression_Tree* Minus::clone() const {
-    return new Minus(left, right);
+    Expression_Tree* newLeft = left->clone();
+    
+    try {
+        Expression_Tree* newRight = right->clone();
+        
+        try {
+            return new Minus(newLeft, newRight);
+        } catch (bad_alloc) {
+            delete newLeft;
+            delete newRight;
+        }
+        
+    } catch (bad_alloc) {
+        delete newLeft;
+    }
+    return nullptr;
 }
 
 //-------------------------------
@@ -264,7 +303,23 @@ Times::Times(Expression_Tree* leftIn, Expression_Tree* rightIn)
 //------------------------------
 
 Expression_Tree* Times::clone() const {
-    return new Times(left, right);
+    Expression_Tree* newLeft = left->clone();
+    
+    try {
+        Expression_Tree* newRight = right->clone();
+        
+        try {
+            return new Times(newLeft, newRight);
+        } catch (bad_alloc) {
+            delete newLeft;
+            delete newRight;
+        }
+        
+    } catch (bad_alloc) {
+        delete newLeft;
+    }
+    
+    return nullptr;
 }
 
 //-------------------------------
@@ -295,7 +350,22 @@ Divide::Divide(Expression_Tree* leftIn, Expression_Tree* rightIn)
 //------------------------------
 
 Expression_Tree* Divide::clone() const {
-    return new Divide(left, right);
+    Expression_Tree* newLeft = left->clone();
+    
+    try {
+        Expression_Tree* newRight = right->clone();
+        
+        try {
+            return new Divide(newLeft, newRight);
+        } catch (bad_alloc) {
+            delete newLeft;
+            delete newRight;
+        }
+        
+    } catch (bad_alloc) {
+        delete newLeft;
+    }
+    return nullptr;
 }
 
 //-------------------------------
@@ -310,7 +380,7 @@ string Divide::str() const {
 long double Divide::evaluate() const{
     // Can't divide by zero
     if ( right->evaluate() == 0 ){
-        throw logic_error{"Syntax Error: Can't divide by zero"};
+        throw expression_error{"Syntax Error: Can't divide by zero"};
     }
     
     long double result = left->evaluate() / right->evaluate();
@@ -330,7 +400,22 @@ Power::Power(Expression_Tree* leftIn, Expression_Tree* rightIn)
 //------------------------------
 
 Expression_Tree* Power::clone() const {
-    return new Power(left, right);
+    Expression_Tree* newLeft = left->clone();
+    
+    try {
+        Expression_Tree* newRight = right->clone();
+        
+        try {
+            return new Power(newLeft, newRight);
+        } catch (bad_alloc) {
+            delete newLeft;
+            delete newRight;
+        }
+        
+    } catch (bad_alloc) {
+        delete newLeft;
+    }
+    return nullptr;
 }
 
 //-------------------------------
@@ -357,18 +442,37 @@ long double Power::evaluate() const{
 Assign::Assign(Expression_Tree* leftIn, Expression_Tree* rightIn)
 : Binary_Operator(leftIn, rightIn)
 {
-    if ( not( isalpha( left->str().at(0) ) && left->str().size() == 1 )) {
-        throw logic_error("Det maste vara en variabel (ett tecken) till vanster om =");
-    }
     // Convert left to Variable
     Variable* leftVariable = dynamic_cast<Variable*>(left);
+    
+    // Error if not a Variable but other Expression_Tree sub class
+    if ( leftVariable == nullptr ) {
+        throw expression_error("Det maste vara en variabel till vanster om =");
+    }
+    
     leftVariable->setValue(right);
 }
 
 //------------------------------
 
 Expression_Tree* Assign::clone() const {
-    return new Assign(left, right);
+    Expression_Tree* newLeft = left->clone();
+    
+    try {
+        Expression_Tree* newRight = right->clone();
+        
+        try {
+            return new Assign(newLeft, newRight);
+        } catch (bad_alloc) {
+            delete newLeft;
+            delete newRight;
+        }
+        
+    } catch (bad_alloc) {
+        delete newLeft;
+    }
+    
+    return nullptr;
 }
 
 //-------------------------------

@@ -14,6 +14,9 @@ Expression::Expression(Expression_Tree* inTree){
  */
 long double Expression::evaluate() const
 {
+    if ( tree == nullptr ){
+        throw expression_error{"Kan ej evaluera tomt uttryck!"}; 
+    }
     return tree->evaluate();
 }
 
@@ -22,6 +25,11 @@ long double Expression::evaluate() const
  */
 std::string Expression::get_postfix() const
 {
+    if ( tree == nullptr ){
+        string result = " ";
+        return result;
+    }
+    
     return tree->get_postfix();
 }
 
@@ -31,10 +39,10 @@ std::string Expression::get_postfix() const
 bool Expression::empty() const{
     
     if ( tree == nullptr ) {
-        return false;
+        return true;
     }
     else {
-        return true;
+        return false;
     }
 }
 
