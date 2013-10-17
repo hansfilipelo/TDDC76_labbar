@@ -38,12 +38,12 @@ int main()
     // Resten kräver implementering av Expression_Tree-klasserna.
     
     
-    Expression_Tree* t{new Plus{new Integer{7}, new Real{3.14}}};
+    Expression_Tree* t{ new Plus{new Real{2.17}, new Times{new Integer{8}, new Divide{new Integer{7}, new Real{3.14}}}}};
     
     Expression e3{t};  // konstruktor som tar ett länkat uttrycksträd
     
     cout << "e3.evaluate() = " << e3.evaluate() << '\n';
-    cout << "e3.get_postfix() = " << e3.get_postfix() << '\n';
+    cout << "e3.get_infix() = " << e3.get_infix() << '\n';
     cout << "e3.empty() = " << e3.empty() << "\n\n";
     
     e2.swap(e3);  // swap
