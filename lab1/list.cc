@@ -133,7 +133,7 @@ void list::reverse(){
 }
 //------------------------------------
 /*Prints target list in reverse order, last to first*/
-void printReverseLoop(list_node* current){
+void list::printReverseLoop(list_node* current) const{
 	if(current->next == nullptr){
 		cout<<current->content<<endl;
 	}
