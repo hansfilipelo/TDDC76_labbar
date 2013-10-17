@@ -38,12 +38,14 @@ class Expression_Tree
 {
 public:
     virtual ~Expression_Tree() {};
-    virtual long double      evaluate() const = 0;
-    virtual std::string      get_postfix() const = 0;
-    virtual std::string      str() const = 0;
-    virtual void             print(std::ostream&) const = 0;
-    virtual Expression_Tree* clone() const = 0;
-    virtual void printHelper(std::ostream& stream, int startDepth) const = 0;
+    virtual long double         evaluate() const = 0;
+    virtual std::string         get_postfix() const = 0;
+    virtual std::string         str() const = 0;
+    virtual void                print(std::ostream&) const = 0;
+    virtual Expression_Tree*    clone() const = 0;
+    virtual void                printHelper(std::ostream& stream, int startDepth) const = 0;
+    virtual std::string                 get_infix() const = 0;
+    virtual std::string         get_infix_iterator(bool) const = 0;
 };
 
 //------------------------------
@@ -62,9 +64,13 @@ public:
     virtual Expression_Tree* clone() const = 0;
     
     std::string      get_postfix() const;
+    std::string      get_infix() const;
     void             print(std::ostream& stream) const;
     
+    
 protected:
+    std::string get_infix_iterator(bool) const;
+    bool bracketsOrNot(Expression_Tree*) const;
     Expression_Tree* left;
     Expression_Tree* right;
     void printHelper(std::ostream& stream, int startDepth) const;
@@ -83,9 +89,11 @@ public:
     
     std::string      get_postfix() const;
     void             print(std::ostream& stream) const;
-
+    std::string      get_infix() const;
+    
 protected:
     void printHelper(std::ostream& stream, int startDepth) const;
+    std::string get_infix_iterator(bool) const;
 };
 
 //------------------------------

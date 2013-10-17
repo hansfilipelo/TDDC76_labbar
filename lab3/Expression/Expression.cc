@@ -20,6 +20,13 @@ long double Expression::evaluate() const
     return tree->evaluate();
 }
 
+string Expression::get_infix() const{
+    return tree->get_infix();
+}
+
+
+
+
 /*
  * get_postfix()
  */

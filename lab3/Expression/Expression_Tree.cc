@@ -8,10 +8,22 @@ using namespace std;
 // SEPARATA DEFINITIONER FÖR FÖR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
 
 
+//----------------------- Expression tree -------------------------------------------
+
+
+
 //----------------------- Operand -------------------------------------------
 
 
 string Operand::get_postfix() const{
+    return str();
+}
+//------------------------------
+string Operand::get_infix_iterator(bool brackets) const{
+    //fšr att fŒ kompilatorn att sluta klaga
+    if (brackets) {
+        return str();
+    }
     return str();
 }
 
@@ -27,6 +39,13 @@ void Operand::print(std::ostream& stream) const{
 }
 
 //--------------------------------
+
+string Operand::get_infix() const {
+    return get_infix_iterator(0);
+}
+
+//----------------------------------------
+
 
 
 
@@ -134,6 +153,7 @@ Expression_Tree* Variable::clone() const{
         return new Variable(name, newValue);
     } catch (bad_alloc) {
         delete newValue;
+        throw;
     }
     
     return nullptr;
@@ -163,6 +183,47 @@ string Binary_Operator::get_postfix() const{
     
     return result;
 }
+
+
+//--------------------------------
+string Binary_Operator::get_infix_iterator(bool brackets) const{
+    if(brackets){
+        string node = "(" + left->get_infix_iterator(bracketsOrNot(left)) + " " + str() + " " + right->get_infix_iterator(bracketsOrNot(right)) + ")";
+        return node;
+    }
+    else{
+        string node = left->get_infix_iterator(bracketsOrNot(left)) + " " + str() + " " + right->get_infix_iterator(bracketsOrNot(right));
+        return node;
+    }
+}
+
+//--------------------------------
+// HjŠlpfunktion fšr get_infix_iterator
+bool Binary_Operator::bracketsOrNot(Expression_Tree* otherExpression) const {
+    
+    if ( (str() == string("+") || str() == string("-")) && ((otherExpression->str() == string("*")) || (otherExpression->str() == string("/")) || (otherExpression->str() == string("^"))) ) {
+        return false;
+    }
+    
+    if ( str() == string("=") ){
+        return false;
+    }
+    
+    if ( (str() == string("*") || str() == string("/")) && otherExpression->str() == string("^") ) {
+        return false;
+    }
+    
+    return true;
+}
+
+//----------------------------------
+
+string Binary_Operator::get_infix() const {
+    return get_infix_iterator(0);
+}
+
+
+
 
 //--------------------------------
 Binary_Operator::~Binary_Operator() {
@@ -202,7 +263,7 @@ void Binary_Operator::clean() {
 // Constructor for Plus
 
 Plus::Plus(Expression_Tree* leftIn, Expression_Tree* rightIn)
-    : Binary_Operator(leftIn, rightIn)
+: Binary_Operator(leftIn, rightIn)
 {}
 
 //------------------------------
@@ -216,12 +277,13 @@ Expression_Tree* Plus::clone() const {
         try {
             return new Plus(newLeft, newRight);
         } catch (bad_alloc) {
-            delete newLeft;
             delete newRight;
+            throw;
         }
         
     } catch (bad_alloc) {
         delete newLeft;
+        throw;
     }
     
     return nullptr;
@@ -264,12 +326,13 @@ Expression_Tree* Minus::clone() const {
         try {
             return new Minus(newLeft, newRight);
         } catch (bad_alloc) {
-            delete newLeft;
             delete newRight;
+            throw;
         }
         
     } catch (bad_alloc) {
         delete newLeft;
+        throw;
     }
     return nullptr;
 }
@@ -311,12 +374,13 @@ Expression_Tree* Times::clone() const {
         try {
             return new Times(newLeft, newRight);
         } catch (bad_alloc) {
-            delete newLeft;
             delete newRight;
+            throw;
         }
         
     } catch (bad_alloc) {
         delete newLeft;
+        throw;
     }
     
     return nullptr;
@@ -358,12 +422,13 @@ Expression_Tree* Divide::clone() const {
         try {
             return new Divide(newLeft, newRight);
         } catch (bad_alloc) {
-            delete newLeft;
             delete newRight;
+            throw;
         }
         
     } catch (bad_alloc) {
         delete newLeft;
+        throw;
     }
     return nullptr;
 }
@@ -408,12 +473,13 @@ Expression_Tree* Power::clone() const {
         try {
             return new Power(newLeft, newRight);
         } catch (bad_alloc) {
-            delete newLeft;
             delete newRight;
+            throw;
         }
         
     } catch (bad_alloc) {
         delete newLeft;
+        throw;
     }
     return nullptr;
 }
@@ -464,12 +530,13 @@ Expression_Tree* Assign::clone() const {
         try {
             return new Assign(newLeft, newRight);
         } catch (bad_alloc) {
-            delete newLeft;
             delete newRight;
+            throw;
         }
         
     } catch (bad_alloc) {
         delete newLeft;
+        throw;
     }
     
     return nullptr;

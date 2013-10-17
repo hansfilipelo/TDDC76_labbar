@@ -29,16 +29,17 @@
 class Expression
 {
 public:
-   // OBSERVERA: DETTA ÄR ENDAST KODSKELETT - MODIFIERA OCH KOMPLETTERA!
-
+    // OBSERVERA: DETTA ÄR ENDAST KODSKELETT - MODIFIERA OCH KOMPLETTERA!
+    
     Expression(class Expression_Tree* = nullptr);
-
-   long double evaluate() const;
-   std::string get_postfix() const;
-   bool        empty() const;
-   void        print_tree(std::ostream&) const;
-   void        swap(Expression&);
-
+    
+    long double evaluate() const;
+    std::string get_postfix() const;
+    std::string get_infix() const;
+    bool        empty() const;
+    void        print_tree(std::ostream&) const;
+    void        swap(Expression&);
+    
 protected:
 	Expression_Tree* tree;
 };
