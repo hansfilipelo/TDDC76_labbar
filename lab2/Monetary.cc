@@ -413,6 +413,13 @@ namespace monetary {
             }
         }
         
+        
+        // Check for minus in the beginning
+        if ( input.peek() == '-' ){
+            input.setstate(ios::failbit);
+            throw monetary_error{"Du kan ej skicka in negativa v‰rden!"};
+        }
+        
         // If digits - read them
         if ( isdigit( input.peek() ) ){
             
@@ -420,16 +427,10 @@ namespace monetary {
             string total;
             input >> total;
             
-            // Check for minus in the beginning
-            if ( total.at(0) == '-' ){
-                input.setstate(ios::failbit);
-                throw monetary_error{"Du kan ej skicka in negativa v‰rden!"};
-            }
-            
             // Append unit values
             string temp;
             unsigned int i;
-            for (i = 0 ; isdigit(total.at(i)); i++ ){
+            for (i = 0 ; i < total.length() && isdigit(total.at(i)); i++ ){
                 temp += total.at(i);
             }
             otherMoney.setUnits(stoi(temp));
@@ -437,13 +438,13 @@ namespace monetary {
             temp.clear();
             
             // Check for dot
-            if ( total.at(i) == '.' ){
+            if ( i < total.length() && total.at(i) == '.' ){
                 i++;
                 
                 // Read cents
                 for (unsigned int j = 0 ; (i + j) < total.length() ; j++){
                     if ( isdigit(total.at(i+j)) ){
-                        if ( j > 2) {
+                        if ( j > 1) {
                             input.setstate(ios::failbit);
                             throw monetary_error{"Du kan ej ange fler än två decimaler"};
                         }
@@ -456,7 +457,9 @@ namespace monetary {
                 }
                 
                 otherMoney.setCents(stoi(temp));
-                
+            }
+            else {
+                otherMoney.setCents(0);
             }
         }
         
