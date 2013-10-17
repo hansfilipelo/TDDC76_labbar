@@ -444,6 +444,7 @@ namespace monetary {
                 // Read cents
                 for (unsigned int j = 0 ; (i + j) < total.length() ; j++){
                     if ( isdigit(total.at(i+j)) ){
+                        // If more than two decimals - throw error. 
                         if ( j > 1) {
                             input.setstate(ios::failbit);
                             throw monetary_error{"Du kan ej ange fler än två decimaler"};
@@ -451,7 +452,7 @@ namespace monetary {
                         temp += total.at(i+j);
                     }
                 }
-                
+                // If only one digit in cents - append another. .5 == .50
                 if ( temp.length() == 1 ) {
                     temp += '0';
                 }
