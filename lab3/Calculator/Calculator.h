@@ -3,8 +3,14 @@
  */
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
-#include "Expression.h"
+#include "../Expression/Expression.h"
+#include "../Expression/Expression_Tree.h"
+#include "../Variable_Table/Variable_Table.h"
 #include <iosfwd>
+#include <cctype>
+#include <iostream>
+#include <stdexcept>
+#include <string>
 
 /**
  * Calculator: klass för att läsa in, lagra och bearbeta enkla aritmetiska
@@ -18,10 +24,13 @@
 class Calculator
 {
 public:
-   Calculator() = default;
-   ~Calculator() = default;
+   Calculator();
+   ~Calculator();
 
    void run();
+    
+protected:
+    Variable_Table*  varTable;
 
 private:
    Calculator(const Calculator&) = delete;

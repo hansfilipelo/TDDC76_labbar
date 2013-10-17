@@ -12,8 +12,9 @@
 #include <cmath>
 #include <stdexcept>
 #include <cctype>
+#include "../Variable_Table/Variable_Table.h"
 
-/*
+/*s
  * expression_error: kastas om ett fel inträffar i en Expression-operation;
  * ett diagnostiskt meddelande ska skickas med.
  */
@@ -38,7 +39,7 @@ class Expression_Tree
 {
 public:
     virtual ~Expression_Tree() {};
-    virtual long double         evaluate() const = 0;
+    virtual long double         evaluate(Variable_Table*) const = 0;
     virtual std::string         get_postfix() const = 0;
     virtual std::string         str() const = 0;
     virtual void                print(std::ostream&) const = 0;
@@ -59,7 +60,7 @@ public:
     ~Binary_Operator();
     
     // Virtual functions - declared later
-    virtual long double      evaluate() const = 0;
+    virtual long double      evaluate(Variable_Table*) const = 0;
     virtual std::string      str() const = 0;
     virtual Expression_Tree* clone() const = 0;
     
@@ -85,7 +86,7 @@ public:
     // Virtual functions - declared later
     virtual std::string      str() const = 0;
     virtual Expression_Tree* clone() const = 0;
-    virtual long double      evaluate() const = 0;
+    virtual long double      evaluate(Variable_Table*) const = 0;
     
     std::string      get_postfix() const;
     void             print(std::ostream& stream) const;
@@ -102,7 +103,7 @@ class Assign : public Binary_Operator
 {
 public:
     Assign(Expression_Tree* leftIn, Expression_Tree* rightIn);
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
 };
@@ -116,7 +117,7 @@ class Plus : public Binary_Operator
 {
 public:
     Plus(Expression_Tree* leftIn, Expression_Tree* rightIn);
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
 };
@@ -126,7 +127,7 @@ public:
 class Minus : public Binary_Operator{
 public:
     Minus(Expression_Tree* leftIn, Expression_Tree* rightIn);
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
 };
@@ -136,7 +137,7 @@ public:
 class Times : public Binary_Operator{
 public:
     Times(Expression_Tree* leftIn, Expression_Tree* rightIn);
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
 };
@@ -144,7 +145,7 @@ public:
 class Divide : public Binary_Operator{
 public:
     Divide(Expression_Tree* leftIn, Expression_Tree* rightIn);
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
 };
@@ -155,7 +156,7 @@ public:
 class Power: public Binary_Operator{
 public:
     Power(Expression_Tree* leftIn, Expression_Tree* rightIn);
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
 };
@@ -168,7 +169,7 @@ public:
     // Constructor
     Integer(long long int inValue);
     
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
     
@@ -183,7 +184,7 @@ public:
     // Constructor
     Real(long double inValue);
     
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
     
@@ -200,7 +201,7 @@ public:
     
     void setValue(Expression_Tree* inValue);
     
-    long double      evaluate() const;
+    long double      evaluate(Variable_Table*) const;
     std::string      str() const;
     Expression_Tree* clone() const;
     

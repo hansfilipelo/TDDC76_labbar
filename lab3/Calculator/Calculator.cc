@@ -2,14 +2,26 @@
  * Calculator.cc
  */
 #include "Calculator.h"
-#include "Expression.h"
-#include <cctype>
-#include <iostream>
-#include <stdexcept>
-#include <string>
+
 using namespace std;
 
 const string Calculator::valid_cmds_("?HUBPTS");
+
+// ----------------------------------
+// Constructor for Calculator
+
+Calculator::Calculator(){
+    varTable = new Variable_Table();
+}
+
+// ----------------------------------
+// Destructor for Calculator
+
+Calculator::~Calculator(){
+    delete varTable;
+}
+
+// ----------------------------------
 
 /**
  * run: Huvudfunktionen för kalkylatorn. Skriver ut hjälpinformation
@@ -98,7 +110,7 @@ execute_command()
    else if (command_ == 'U')
       read_expression(cin);
    else if (command_ == 'B')
-      cout << current_expression_.evaluate() << "\n";
+      cout << current_expression_.evaluate(varTable) << "\n";
    else if (command_ == 'P')
       cout << current_expression_.get_postfix() << "\n";
    else if (command_ == 'T')
