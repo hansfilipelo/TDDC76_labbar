@@ -1,4 +1,4 @@
-	CCC = clang++
+	CCC = g++
 	CCFLAGS = -g -std=c++11 -Wpedantic -Wall -Wextra -Werror
 	LDFLAGS = -L/sw/gcc-${GCC4_V}/lib -static-libstdc++
 
