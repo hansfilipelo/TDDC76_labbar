@@ -1,10 +1,10 @@
 /*
-FILNAMN: 		lab2.cc
-LABORATION:		
-PROGRAMMERARE:	hanel742, eriek984
-DATUM:			2013-09-26
-BESKRIVNING:	
-*/
+ FILNAMN: 		lab2.cc
+ LABORATION:
+ PROGRAMMERARE:	hanel742, eriek984
+ DATUM:			2013-09-26
+ BESKRIVNING:
+ */
 
 #include <stdlib.h>
 #include <iostream>
@@ -64,9 +64,11 @@ int main(){
 	    cout << error.what() << endl;
     }
     
-        try {
+    try {
 		cin >> erik;
+        cin >> odef;
 		cout << erik << endl;
+        cout << odef << endl;
     } catch (const monetary_error& error) {
 	    cout << error.what() << endl;
     }

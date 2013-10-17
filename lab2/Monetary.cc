@@ -372,58 +372,96 @@ namespace monetary {
 	istream& operator >> (istream& input, money& otherMoney){
 		
 		// If whitespaces before currency code - remove them
+        // OBS, does not work without "if"
 		if ( input.peek() == ' ' ){
 			while ( input.peek() == ' ' ) {
 				input.get();
 			}
-		
-		// If Curr code - read it.
-		if ( isalpha( input.peek() ) ) {
-			string currCode;
-			for (int i = 1 ; i <= 3 ; i++ ){
-				if ( not (isalpha( input.peek() ))){
+        }
+        
+        // If Curr code - read it.
+        if ( isalpha( input.peek() ) ) {
+            string currCode;
+            for (int i = 1 ; i <= 3 ; i++ ){
+                if ( not (isalpha( input.peek() ))){
                     input.setstate(ios::failbit);
-					throw monetary_error{"En valutafˆrkortning mÂste vara tre tecken lÂng"};
-				}
-				currCode += input.get();
-			}
-			if ( isalpha( input.peek() ) ){
-				throw monetary_error{"En valutafˆrkortning mÂste vara tre tecken lÂng"};
-			}
-			
-			otherMoney.setCurrency(currCode);
+                    throw monetary_error{"En valutafˆrkortning mÂste vara tre tecken lÂng"};
+                }
+                currCode += input.get();
+            }
+            if ( isalpha( input.peek() ) ){
+                input.setstate(ios::failbit);
+                throw monetary_error{"En valutafˆrkortning mÂste vara tre tecken lÂng"};
+            }
+            
+            // Sätt valutakod
+            if ( otherMoney.getCurrency() == "unspecified" ) {
+                otherMoney.setCurrency(currCode);
+            }
+            else if ( otherMoney.getCurrency() != "unspecified" && otherMoney.getCurrency() != currCode ){
+                input.setstate(ios::failbit);
+                throw monetary_error{"Du kan ej byta valutaförkortning"};
+            }
             
             // Remove one whitespace
             if ( input.peek() == ' ' ){
                 input.get();
             }
             else {
+                input.setstate(ios::failbit);
                 throw monetary_error{"Belopp får ej komma direkt efter valutakoden."};
             }
-		}
-		
-		// If digits - read them
-		if ( isdigit( input.peek() ) ){
+        }
+        
+        // If digits - read them
+        if ( isdigit( input.peek() ) ){
             
-			int unitValue;
-			int centValue;
-			double total;
-			
-			input >> total;
-			
-			if ( total < 0 ){
-				throw monetary_error{"Du kan ej skicka in negativa v‰rden!"};
-			}
-			
-			unitValue = static_cast<int>(total);
-			centValue = static_cast<int>(total*100)%100;
-			
-			otherMoney.setUnits(unitValue);
-			otherMoney.setCents(centValue);
-		}
-		
-		return input;
-	}
+            // Read stream to string
+            string total;
+            input >> total;
+            
+            // Check for minus in the beginning
+            if ( total.at(0) == '-' ){
+                input.setstate(ios::failbit);
+                throw monetary_error{"Du kan ej skicka in negativa v‰rden!"};
+            }
+            
+            // Append unit values
+            string temp;
+            unsigned int i;
+            for (i = 0 ; isdigit(total.at(i)); i++ ){
+                temp += total.at(i);
+            }
+            otherMoney.setUnits(stoi(temp));
+            // Clear temp for usage with cents
+            temp.clear();
+            
+            // Check for dot
+            if ( total.at(i) == '.' ){
+                i++;
+                
+                // Read cents
+                for (unsigned int j = 0 ; (i + j) < total.length() ; j++){
+                    if ( isdigit(total.at(i+j)) ){
+                        if ( j > 2) {
+                            input.setstate(ios::failbit);
+                            throw monetary_error{"Du kan ej ange fler än två decimaler"};
+                        }
+                        temp += total.at(i+j);
+                    }
+                }
+                
+                if ( temp.length() == 1 ) {
+                    temp += '0';
+                }
+                
+                otherMoney.setCents(stoi(temp));
+                
+            }
+        }
+        
+        return input;
+    }
     
     //------------------------------------
     // Print using operator <<
@@ -431,9 +469,9 @@ namespace monetary {
     ostream& operator << (ostream& stream, const money& outsideMoney){
         
         if(outsideMoney.getCurrency() == "unspecified"){
-            return stream << outsideMoney.getUnits() << "." << outsideMoney.getCents();
+            return stream << outsideMoney.getUnits() << "." << setfill('0') << setw(2) << outsideMoney.getCents();
         }
-        return stream << outsideMoney.getCurrency() << " " << outsideMoney.getUnits() << "." << outsideMoney.getCents();
+        return stream << outsideMoney.getCurrency() << " " << outsideMoney.getUnits() << "." <<  setw(2) << setfill('0') << outsideMoney.getCents();
     }
 }
 
