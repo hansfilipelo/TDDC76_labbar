@@ -6,6 +6,8 @@ DATUM:			2013-10-17
 BESKRIVNING:	
 */
 
+#ifndef VAR_H
+#define VAR_H
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>
@@ -16,9 +18,13 @@ BESKRIVNING:
 #include "../Expression/Expression_Tree.h"
 
 class Variable_Table {
+    
 public:
-    class Expression_Tree* getVar(std::string) const;
-    void addVar(std::string, Expression_Tree*);
+    long double getVar(std::string) const;
+    void addVar(std::string, long double);
+
 private:
-    std::map<std::string,Expression_Tree*>     varTable;
+    std::map<std::string,long double>     varTable;
 };
+
+#endif

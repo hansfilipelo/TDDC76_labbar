@@ -6,12 +6,12 @@ DATUM:			2013-10-17
 BESKRIVNING:	
 */
 
-#include "Variable_Table.h"
+#include "../Variable_Table/Variable_Table.h"
 using namespace std;
 
 
 // ----------------------------------
-Expression_Tree* Variable_Table::getVar(string name){
+long double Variable_Table::getVar(string name){
     try {
         return varTable.at(varTable.find(name));
     } catch (std::out_of_range) {

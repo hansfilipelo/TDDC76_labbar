@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <string>
 #include "Expression_Tree.h"
+#include "../Variable_Table/Variable_Table.h"
 #include <algorithm>
 #include <iostream>
 #include <iterator>

@@ -136,10 +136,10 @@ void Variable::setValue(Expression_Tree* inValue){
 // evaluate for varialbe
 long double Variable::evaluate(Variable_Table* varTable) const{
     if (value == nullptr){
-        return varTable->getVar(name)->evaluate(varTable);
+        return varTable->getVar(name);
     }
     else {
-        varTable->insert(name,value);
+        varTable->addVar(name,value->evaluate(varTable));
         return value->evaluate(varTable);
     }
 }

@@ -11,7 +11,8 @@ const string Calculator::valid_cmds_("?HUBPTS");
 // Constructor for Calculator
 
 Calculator::Calculator(){
-    varTable = new Variable_Table();
+    varTable = new Variable_Table()
+    ;
 }
 
 // ----------------------------------
