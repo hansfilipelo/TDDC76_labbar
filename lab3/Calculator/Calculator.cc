@@ -2,11 +2,7 @@
  * Calculator.cc
  */
 #include "Calculator.h"
-#include "Expression.h"
-#include <cctype>
-#include <iostream>
-#include <stdexcept>
-#include <string>
+
 using namespace std;
 
 const string Calculator::valid_cmds_("?HUBPTS");
@@ -32,8 +28,7 @@ const string Calculator::valid_cmds_("?HUBPTS");
  * run: Huvudfunktionen för kalkylatorn. Skriver ut hjälpinformation
  * och läser sedan sedan in ett kommando i taget och utför det.
  */
-void
-Calculator::run()
+void Calculator::run()
 {
    cout << "Välkommen till Kalkylatorn!\n\n";
    print_help();

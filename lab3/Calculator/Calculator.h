@@ -6,6 +6,10 @@
 #include "../Expression/Expression.h"
 #include <iosfwd>
 #include "../Variable_Table/Variable_Table.h"
+#include <cctype>
+#include <iostream>
+#include <stdexcept>
+#include <string>
 
 /**
  * Calculator: klass för att läsa in, lagra och bearbeta enkla aritmetiska
