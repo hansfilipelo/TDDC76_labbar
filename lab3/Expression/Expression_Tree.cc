@@ -121,31 +121,34 @@ long double Real::evaluate(Variable_Table*){
 
 
 //--------------------Variable--------------------------
-Variable::Variable(string inName, Expression_Tree* inValue){
+Variable::Variable(string inName){
     name = inName;
-    value = inValue;
+    cout << name << endl;
 }
 
 //------------------------------
 // set value for variable
-void Variable::setValue(Expression_Tree* inValue){
+void Variable::setValue(long double inValue){
     value = inValue;
 }
 
 //-------------------------------
 // evaluate for varialbe
 long double Variable::evaluate(Variable_Table* varTable){
-    if ( value == nullptr ) {
-        try {
-            return varTable->getVar(name);
-        } catch (...) {
-            throw expression_error{"Variabel ej tidigare definerad"};
-        }
-    }
-    else {
-        varTable->addVar(name,value->evaluate(varTable));
-        return value->evaluate(varTable);
-    }
+//    if ( value == nullptr ) {
+//        try {
+//            return varTable->getVar(name);
+//            cout << "1" << endl;
+//        } catch (...) {
+//            throw expression_error{"Variabel ej tidigare definerad"};
+//        }
+//    }
+//    else {
+        cout << "2" << endl;
+        varTable->addVar(name,value);
+        cout << "3" << endl;
+        return value;
+//    }
 }
 
 
@@ -158,11 +161,9 @@ string Variable::str() const{
 //------------------------------
 
 Expression_Tree* Variable::clone() const{
-    Expression_Tree* newValue = value->clone();
     try {
-        return new Variable(name, newValue);
+        return new Variable(name);
     } catch (bad_alloc) {
-        delete newValue;
         throw;
     }
     
@@ -517,17 +518,7 @@ long double Power::evaluate(Variable_Table* varTable) {
 
 Assign::Assign(Expression_Tree* leftIn, Expression_Tree* rightIn)
 : Binary_Operator(leftIn, rightIn)
-{
-    // Convert left to Variable
-    Variable* leftVariable = dynamic_cast<Variable*>(left);
-    
-    // Error if not a Variable but other Expression_Tree sub class
-    if ( leftVariable == nullptr ) {
-        throw expression_error("Det maste vara en variabel till vanster om =");
-    }
-    
-    leftVariable->setValue(right);
-}
+{}
 
 //------------------------------
 
@@ -562,5 +553,15 @@ string Assign::str() const {
 //--------------------------------
 
 long double Assign::evaluate(Variable_Table* varTable) {
-    return right->evaluate(varTable);
+    // Convert left to Variable
+    Variable* leftVariable = dynamic_cast<Variable*>(left);
+    
+    // Error if not a Variable but other Expression_Tree sub class
+    if ( leftVariable == nullptr ) {
+        throw expression_error("Det maste vara en variabel till vanster om =");
+    }
+
+    leftVariable->setValue(right->evaluate(varTable));
+
+    return leftVariable->evaluate(varTable);
 }

@@ -7,13 +7,16 @@ BESKRIVNING:
 */
 
 #include "Variable_Table.h"
-#include <string>
+
 using namespace std;
 
 long double Variable_Table::getVar(string name) const{
-    return varMap.find(name)->second;
+    return varMap.at(name);
 }
 
 void Variable_Table::addVar(string name, long double value) {
-    varMap.insert(std::pair<string,long double>(name,value));
+    cout << name << endl;
+    varMap.insert(pair<string,long double>(name, value));
+//    varMap.at(name) = value;
+    cout << varMap.at(name);
 }

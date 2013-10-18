@@ -197,16 +197,16 @@ private:
 class Variable : public Operand {
 public:
     // Constructor
-    Variable(std::string inName, Expression_Tree* inValue = nullptr);
+    Variable(std::string inName);
     
-    void setValue(Expression_Tree* inValue);
+    void setValue(long double inValue);
     
     long double      evaluate(Variable_Table*);
     std::string      str() const;
     Expression_Tree* clone() const;
     
 private:
-    Expression_Tree* value;
+    long double value;
     std::string name;
 };
 
