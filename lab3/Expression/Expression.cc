@@ -12,7 +12,7 @@ Expression::Expression(Expression_Tree* inTree){
 /*
  * evaluate()
  */
-long double Expression::evaluate(Variable_Table* varTable) const
+long double Expression::evaluate(Variable_Table& varTable) const
 {
     if ( tree == nullptr ){
         throw expression_error{"Kan ej evaluera tomt uttryck!"}; 

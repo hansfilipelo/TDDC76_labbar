@@ -47,7 +47,7 @@ private:
     
     void read_expression(std::istream&);
     
-    Variable_Table* varTable;
+    Variable_Table varTable;
 };
 
 #endif
