@@ -12,12 +12,12 @@ Expression::Expression(Expression_Tree* inTree){
 /*
  * evaluate()
  */
-long double Expression::evaluate() const
+long double Expression::evaluate(Variable_Table* varTable) const
 {
     if ( tree == nullptr ){
         throw expression_error{"Kan ej evaluera tomt uttryck!"}; 
     }
-    return tree->evaluate();
+    return tree->evaluate(varTable);
 }
 
 string Expression::get_infix() const{

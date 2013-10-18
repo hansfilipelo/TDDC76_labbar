@@ -1,13 +1,16 @@
 	CCC = g++
 	CCFLAGS = -g -std=c++11 -Wall -Wextra -Werror
 	LDFLAGS = -L/sw/gcc-${GCC4_V}/lib -static-libstdc++
-	OBJECTS = expression-test.o Expression_Tree.o Expression.o
+	OBJECTS = kalkylator.o Expression_Tree.o Expression.o Variable_Table.o
 
-expression-test: $(OBJECTS)
-	$(CCC) $(CCFLAGS) $(OBJECTS) -o expression-test
+kalkylator: $(OBJECTS)
+	$(CCC) $(CCFLAGS) $(OBJECTS) -o kalkylator
+	
+kalkylator.o: Calculator/kalkylator.cc
+	$(CCC) $(CCFLAGS) -c Calculator/kalkylator.cc
 
-expression-test.o: Expression/expression-test.cc
-	$(CCC) $(CCFLAGS) -c Expression/expression-test.cc
+Variable_Table.o: Variable_Table/Variable_Table.cc
+	$(CCC) $(CCFLAGS) -c Variable_Table/Variable_Table.cc
 
 Expression.o: Expression/Expression.cc
 	$(CCC) $(CCFLAGS) -c Expression/Expression.cc

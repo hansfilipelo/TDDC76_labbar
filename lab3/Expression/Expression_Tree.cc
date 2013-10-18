@@ -79,7 +79,7 @@ Expression_Tree* Integer::clone() const {
 
 //--------------------------------
 
-long double Integer::evaluate() const{
+long double Integer::evaluate(Variable_Table*){
     return double(value);
 }
 
@@ -115,7 +115,7 @@ Expression_Tree* Real::clone() const {
 
 //--------------------------------
 
-long double Real::evaluate() const{
+long double Real::evaluate(Variable_Table*){
     return value;
 }
 
@@ -134,8 +134,18 @@ void Variable::setValue(Expression_Tree* inValue){
 
 //-------------------------------
 // evaluate for varialbe
-long double Variable::evaluate() const{
-    return value->evaluate();
+long double Variable::evaluate(Variable_Table* varTable){
+    if ( value == nullptr ) {
+        try {
+            return varTable->getVar(name);
+        } catch (...) {
+            throw expression_error{"Variabel ej tidigare definerad"};
+        }
+    }
+    else {
+        varTable->addVar(name,value->evaluate(varTable));
+        return value->evaluate(varTable);
+    }
 }
 
 
@@ -299,8 +309,8 @@ string Plus::str() const {
 
 //--------------------------------
 
-long double Plus::evaluate() const{
-    long double result = left->evaluate() + right->evaluate();
+long double Plus::evaluate(Variable_Table* varTable) {
+    long double result = left->evaluate(varTable) + right->evaluate(varTable);
     return result;
 }
 
@@ -346,8 +356,8 @@ string Minus::str() const {
 
 //--------------------------------
 
-long double Minus::evaluate() const{
-    long double result = left->evaluate() - right->evaluate();
+long double Minus::evaluate(Variable_Table* varTable) {
+    long double result = left->evaluate(varTable) - right->evaluate(varTable);
     return result;
 }
 
@@ -395,8 +405,8 @@ string Times::str() const {
 
 //--------------------------------
 
-long double Times::evaluate() const{
-    long double result = left->evaluate() * right->evaluate();
+long double Times::evaluate(Variable_Table* varTable) {
+    long double result = left->evaluate(varTable) * right->evaluate(varTable);
     return result;
 }
 
@@ -442,13 +452,13 @@ string Divide::str() const {
 
 //--------------------------------
 
-long double Divide::evaluate() const{
+long double Divide::evaluate(Variable_Table* varTable) {
     // Can't divide by zero
-    if ( right->evaluate() == 0 ){
+    if ( right->evaluate(varTable) == 0 ){
         throw expression_error{"Syntax Error: Can't divide by zero"};
     }
     
-    long double result = left->evaluate() / right->evaluate();
+    long double result = left->evaluate(varTable) / right->evaluate(varTable);
     return result;
 }
 
@@ -493,8 +503,8 @@ string Power::str() const {
 
 //--------------------------------
 
-long double Power::evaluate() const{
-    long double result = pow(left->evaluate(), right->evaluate());
+long double Power::evaluate(Variable_Table* varTable) {
+    long double result = pow(left->evaluate(varTable), right->evaluate(varTable));
     return result;
 }
 
@@ -551,6 +561,6 @@ string Assign::str() const {
 
 //--------------------------------
 
-long double Assign::evaluate() const{
-    return right->evaluate();
+long double Assign::evaluate(Variable_Table* varTable) {
+    return right->evaluate(varTable);
 }

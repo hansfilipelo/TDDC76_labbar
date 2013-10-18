@@ -3,12 +3,13 @@
  */
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
-#include "Expression.h"
+#include "../Expression/Expression.h"
 #include <iosfwd>
+#include "../Variable_Table/Variable_Table.h"
 
 /**
  * Calculator: klass för att läsa in, lagra och bearbeta enkla aritmetiska
- * uttryck. För att använda kalylatorn - skapa ett Calculator-objekt och 
+ * uttryck. För att använda kalylatorn - skapa ett Calculator-objekt och
  * anropa run().
  *
  * Anm: move-konstruktorn och move-illdelningsoperatorn genereras inte om
@@ -18,29 +19,31 @@
 class Calculator
 {
 public:
-   Calculator() = default;
-   ~Calculator() = default;
-
-   void run();
-
+    Calculator() = default;
+    ~Calculator() = default;
+    
+    void run();
+    
 private:
-   Calculator(const Calculator&) = delete;
-   Calculator& operator=(const Calculator&) = delete;
-   // Move-konstruktor och move-tilldelning genereras inte.
-
-   static const std::string valid_cmds_;
-
-   Expression current_expression_;
-
-   char command_;
-
-   static void print_help();
-
-   void get_command();
-   bool valid_command() const;
-   void execute_command();
-
-   void read_expression(std::istream&);
+    Calculator(const Calculator&) = delete;
+    Calculator& operator=(const Calculator&) = delete;
+    // Move-konstruktor och move-tilldelning genereras inte.
+    
+    static const std::string valid_cmds_;
+    
+    Expression current_expression_;
+    
+    char command_;
+    
+    static void print_help();
+    
+    void get_command();
+    bool valid_command() const;
+    void execute_command();
+    
+    void read_expression(std::istream&);
+    
+    Variable_Table* varTable;
 };
 
 #endif

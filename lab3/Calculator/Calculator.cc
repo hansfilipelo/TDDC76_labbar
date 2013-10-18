@@ -11,13 +11,29 @@ using namespace std;
 
 const string Calculator::valid_cmds_("?HUBPTS");
 
+//// -----------------------------------
+//// Constructor
+//Calculator::Calculator() {
+//    varTable = new Variable_Table();
+//}
+//
+//// -----------------------------------
+//// Destructor
+//Calculator::~Calculator() {
+//    delete varTable;
+//}
+
+
+
+// -----------------------------------
+
+
 /**
  * run: Huvudfunktionen för kalkylatorn. Skriver ut hjälpinformation
  * och läser sedan sedan in ett kommando i taget och utför det.
  */
 void
-Calculator::
-run()
+Calculator::run()
 {
    cout << "Välkommen till Kalkylatorn!\n\n";
    print_help();
@@ -98,7 +114,7 @@ execute_command()
    else if (command_ == 'U')
       read_expression(cin);
    else if (command_ == 'B')
-      cout << current_expression_.evaluate() << "\n";
+      cout << current_expression_.evaluate(varTable) << "\n";
    else if (command_ == 'P')
       cout << current_expression_.get_postfix() << "\n";
    else if (command_ == 'T')
