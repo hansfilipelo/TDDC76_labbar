@@ -146,7 +146,7 @@ execute_command()
     else if (command_ == 'U'){
         read_expression(cin);
         expVec.push_back(current_expression_);
-        currExpNr = 0;
+        currExpNr = expVec.size();
     }
     else if (command_ == 'B' && expPos > 0)
         cout << expVec.at(expPos - 1).evaluate(varTable) << "\n";
@@ -170,10 +170,7 @@ execute_command()
     
     else if (command_ == 'R'){
         current_expression_ = NULL;
-        if ( currExpNr != 0 ) {
-            int i = expPos; //vector.erase() can't take unsigned
-            expVec.erase(expVec.begin() + i - 1); //mŒste fixa denna fkn, raderar ej aktuellt uttryck
-        }
+        expVec.erase(expVec.begin() + currExpNr - 1); //mŒste fixa denna fkn, raderar ej aktuellt uttryck
     }
     
     else if (command_ == 'A' && expPos > 0){
