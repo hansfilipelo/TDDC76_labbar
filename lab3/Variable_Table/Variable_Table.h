@@ -22,6 +22,7 @@ public:
     void addVar(std::string, long double);
     void print() const;
     bool exist(std::string) const;
+    void clear();
     
 protected:
     std::map<std::string,long double> varMap;

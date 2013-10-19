@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const string Calculator::valid_cmds_("?HUBPTSLRAVXN");
+const string Calculator::valid_cmds_("?HUBPTSILRAVXN");
 
 //// -----------------------------------
 //// Constructor
@@ -70,6 +70,7 @@ print_help()
     cout << "  R n   Radera uttryck n\n";
     cout << "  V     Lista alla variabler\n";
     cout << "  X     Radera alla variabler\n";
+    
     cout << "  S     Avsluta kalkylatorn\n";
 }
 
@@ -166,11 +167,12 @@ execute_command()
         int i = expPos; //vector.erase() can't take unsigned
         expVec.erase(expVec.begin() + i - 1);
     }
+    
     else if (command_ == 'R'){
         current_expression_ = NULL;
         if ( currExpNr != 0 ) {
             int i = expPos; //vector.erase() can't take unsigned
-            expVec.erase(expVec.begin() + i - 1);
+            expVec.erase(expVec.begin() + i - 1); //mŒste fixa denna fkn, raderar ej aktuellt uttryck
         }
     }
     
@@ -193,6 +195,12 @@ execute_command()
             cout << (i + 1) << ": " << expVec.at(i).get_infix() << endl;
         }
     }
+    else if (command_ == 'X'){
+        varTable.clear();
+    }
+    
+    else if (command_ == 'N')
+        cout << expVec.size() << "\n";
     
     else if (command_ == 'S')
         cout << "Kalkylatorn avlutas, välkommen åter!\n";

@@ -38,3 +38,7 @@ bool Variable_Table::exist(string name) const {
 }
 
 // -------------------------------------
+
+void Variable_Table::clear() {
+    varMap.clear();
+}
