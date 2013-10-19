@@ -10,6 +10,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 /**
  * Calculator: klass för att läsa in, lagra och bearbeta enkla aritmetiska
@@ -29,6 +30,17 @@ public:
     void run();
     
 private:
+    // Error class
+    class calculator_error : public std::logic_error
+    {
+    public:
+        explicit calculator_error(const std::string& what_arg) noexcept
+        : std::logic_error{what_arg} {}
+        
+        explicit calculator_error(const char* what_arg) noexcept
+        : std::logic_error{what_arg} {}
+    };
+    
     Calculator(const Calculator&) = delete;
     Calculator& operator=(const Calculator&) = delete;
     // Move-konstruktor och move-tilldelning genereras inte.
@@ -44,10 +56,13 @@ private:
     void get_command();
     bool valid_command() const;
     void execute_command();
+    unsigned expPos;
+    unsigned currExpNr;
     
     void read_expression(std::istream&);
     
     Variable_Table varTable;
+    std::vector<Expression> expVec;
 };
 
 #endif

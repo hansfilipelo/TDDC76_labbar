@@ -123,32 +123,23 @@ long double Real::evaluate(Variable_Table&){
 //--------------------Variable--------------------------
 Variable::Variable(string inName){
     name = inName;
-    cout << name << endl;
 }
 
 //------------------------------
 // set value for variable
-void Variable::setValue(long double inValue){
-    value = inValue;
+void Variable::setValue(long double inValue, Variable_Table& varTable){
+    varTable.addVar(name,inValue);
 }
 
 //-------------------------------
-// evaluate for varialbe
+// evaluate for variable
 long double Variable::evaluate(Variable_Table& varTable){
-//    if ( value == nullptr ) {
-//        try {
-//            return varTable->getVar(name);
-//            cout << "1" << endl;
-//        } catch (...) {
-//            throw expression_error{"Variabel ej tidigare definerad"};
-//        }
-//    }
-//    else {
-        cout << "2" << endl;
-        varTable.addVar(name,value);
-        cout << "3" << endl;
-        return value;
-//    }
+    if ( varTable.exist(name) ) {
+        return varTable.getVar(name);
+    }
+    else {
+        throw expression_error{"Variabeln ej definerad"};
+    }
 }
 
 
@@ -561,7 +552,7 @@ long double Assign::evaluate(Variable_Table& varTable) {
         throw expression_error("Det maste vara en variabel till vanster om =");
     }
 
-    leftVariable->setValue(right->evaluate(varTable));
+    leftVariable->setValue(right->evaluate(varTable),varTable);
 
     return leftVariable->evaluate(varTable);
 }

@@ -10,13 +10,31 @@ BESKRIVNING:
 
 using namespace std;
 
+
+// -------------------------------------
+
 long double Variable_Table::getVar(string name) const{
     return varMap.at(name);
 }
 
+// -------------------------------------
+
 void Variable_Table::addVar(string name, long double value) {
-    cout << name << endl;
     varMap.insert(pair<string,long double>(name, value));
-//    varMap.at(name) = value;
-    cout << varMap.at(name);
 }
+
+// -------------------------------------
+
+void Variable_Table::print() const{
+    for (auto it = varMap.cbegin(); it != varMap.cend(); ++it) {
+        cout << it->first << " = " << it->second << endl;
+    }
+}
+
+// -------------------------------------
+
+bool Variable_Table::exist(string name) const {
+    return varMap.count(name);
+}
+
+// -------------------------------------

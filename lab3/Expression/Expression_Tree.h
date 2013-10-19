@@ -199,14 +199,13 @@ public:
     // Constructor
     Variable(std::string inName);
     
-    void setValue(long double inValue);
+    void setValue(long double inValue, Variable_Table&);
     
     long double      evaluate(Variable_Table&);
     std::string      str() const;
     Expression_Tree* clone() const;
     
 private:
-    long double value;
     std::string name;
 };
 

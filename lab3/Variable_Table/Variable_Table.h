@@ -20,6 +20,8 @@ class Variable_Table {
 public:
     long double getVar(std::string name) const;
     void addVar(std::string, long double);
+    void print() const;
+    bool exist(std::string) const;
     
 protected:
     std::map<std::string,long double> varMap;
