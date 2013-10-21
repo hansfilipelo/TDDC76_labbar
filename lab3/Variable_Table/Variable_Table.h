@@ -15,8 +15,10 @@
 #include <string>
 #include <map>
 
+
+//definierar en ny klass variable table, egentligen bara ett abstraktionslager för map
 class Variable_Table {
-    
+
 public:
     long double getVar(std::string name) const;
     void addVar(std::string, long double);

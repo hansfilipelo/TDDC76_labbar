@@ -11,6 +11,8 @@ Expression::Expression(Expression_Tree* inTree){
 
 /*
  * evaluate()
+ anropar  evaluate() på översta noden
+ skickar med variabeltabellen som används
  */
 long double Expression::evaluate(Variable_Table& varTable) const
 {
@@ -29,6 +31,7 @@ string Expression::get_infix() const{
 
 /*
  * get_postfix()
+ anropar postfix på översta noden i uttrycket
  */
 std::string Expression::get_postfix() const
 {
@@ -42,6 +45,7 @@ std::string Expression::get_postfix() const
 
 /*
  * empty()
+ är uttrycket tomt / = nullptr?
  */
 bool Expression::empty() const{
     
@@ -62,6 +66,7 @@ void Expression::print_tree(std::ostream& ostream) const{
 
 /*
  * swap(other)
+ byter pekare mellan två uttryck
  */
 void Expression::swap(Expression& otherExpression) {
     Expression_Tree* temp = otherExpression.tree;
@@ -72,6 +77,7 @@ void Expression::swap(Expression& otherExpression) {
 
 /*
  * swap(x, y)
+ se swap(other)
  */
 void swap(Expression& firstExpression, Expression& secondExpression)
 {
