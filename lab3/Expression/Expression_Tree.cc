@@ -13,33 +13,31 @@ using namespace std;
 
 
 //----------------------- Operand -------------------------------------------
-
+//Prints the operande in postfix i.e prints itself
 
 string Operand::get_postfix() const{
     return str();
 }
 //------------------------------
-string Operand::get_infix_iterator(bool brackets) const{
-    //för att få kompilatorn att sluta klaga
-    if (brackets) {
-        return str();
-    }
+//Prints the operand in infix i.e allways prints itself without parantheses
+string Operand::get_infix_iterator(bool) const{
     return str();
 }
 
 
 //------------------------------
+//Printhelper sends the operands char to the selected stream indented with the given depth
 void Operand::printHelper(std::ostream& stream, int startDepth) const{
     stream << setw(startDepth) << str() << endl;
     
 }
-
+// print calls the helperfunction with startdepth = 0
 void Operand::print(std::ostream& stream) const{
     printHelper(stream, 0);
 }
 
 //--------------------------------
-
+// calls the infix function with false as invalue,
 string Operand::get_infix() const {
     return get_infix_iterator(0);
 }
@@ -50,7 +48,7 @@ string Operand::get_infix() const {
 
 
 
-//-----------------------INTE GINGER------------------------
+//-----------------------INTEGER------------------------
 
 //--------------------------------
 // Constructor for
@@ -60,7 +58,7 @@ Integer::Integer(long long int inValue){
 
 
 //-------------------------------
-
+//prints the value as a string
 string Integer::str() const {
     string result;
     ostringstream convert;
@@ -72,7 +70,7 @@ string Integer::str() const {
 }
 
 //------------------------------
-
+// creates a new integer of same value
 Expression_Tree* Integer::clone() const {
     return new Integer(value);
 }
@@ -177,9 +175,9 @@ string Binary_Operator::get_postfix() const{
     string result;
     string space = " ";
     
-    result.append(left->get_postfix());
-    result.append(space);
     result.append(right->get_postfix());
+    result.append(space);
+    result.append(left->get_postfix());
     result.append(space);
     result.append(str());
     
