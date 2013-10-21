@@ -132,6 +132,7 @@ void Variable::setValue(long double inValue, Variable_Table& varTable){
 //-------------------------------
 // evaluate for variable
 long double Variable::evaluate(Variable_Table& varTable){
+	// Check if variable exists, otherwise throw error
     if ( varTable.exist(name) ) {
         return varTable.getVar(name);
     }
@@ -198,9 +199,11 @@ string Binary_Operator::get_infix_iterator(bool brackets) const{
 }
 
 //--------------------------------
-// HjŠlpfunktion fšr get_infix_iterator
+// Helper function for get_infix_iterator
 bool Binary_Operator::bracketsOrNot(Expression_Tree* otherExpression) const {
     
+    // Checks too see if next in tree structure should print parenthesis or not.
+    // Wanted to use dynamic_cast instead of this but Jonas told us not too. 
     if ( (str() == string("+") || str() == string("-")) && ((otherExpression->str() == string("*")) || (otherExpression->str() == string("/")) || (otherExpression->str() == string("^"))) ) {
         return false;
     }
