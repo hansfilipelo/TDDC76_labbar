@@ -30,7 +30,7 @@ const string Calculator::valid_cmds_("?HUBPTSILRAVXN");
  */
 void Calculator::run()
 {
-    cout << "Välkommen till Kalkylatorn!\n\n";
+    cout << "Valkommen till Kalkylatorn!\n\n";
     print_help();
     
     do
@@ -44,7 +44,7 @@ void Calculator::run()
         {
             cout << e.what() << '\n';
         }
-        // Oförutsedda undantag avbryter programkörningen, via main().
+        // Oforutsedda undantag avbryter programkorningen, via main().
     }
     while (command_ != 'S');
 }
@@ -58,14 +58,14 @@ print_help()
 {
     cout << "  H, ?  Skriv ut denna information\n";
     cout << "  U     Mata in ett nytt uttryck\n";
-    cout << "  B     Beräkna aktuellt uttryck\n";
+    cout << "  B     Berakna aktuellt uttryck\n";
     cout << "  P     Visa aktuellt uttryck som postfix\n";
     cout << "  I     Visa aktuellt uttryck som infix\n";
     cout << "  I n   Visa uttryck n som infix\n";
     cout << "  L     Lista alla uttryck som infix\n";
-    cout << "  T     Visa aktuellt uttryck som träd\n";
+    cout << "  T     Visa aktuellt uttryck som trad\n";
     cout << "  N     Visa antal lagrade uttryck\n";
-    cout << "  A n   Gšr uttryck n till aktuellt uttryck\n";
+    cout << "  A n   Gor uttryck n till aktuellt uttryck\n";
     cout << "  R     Radera aktuellt uttryck\n";
     cout << "  R n   Radera uttryck n\n";
     cout << "  V     Lista alla variabler\n";
@@ -125,7 +125,7 @@ valid_command() const
 {
     if (valid_cmds_.find(command_) == string::npos)
     {
-        cout << "Otillåtet kommando: " << command_ << "\n";
+        cout << "Otillatet kommando: " << command_ << "\n";
         return false;
     }
     return true;
@@ -200,9 +200,9 @@ execute_command()
         cout << expVec.size() << "\n";
     
     else if (command_ == 'S')
-        cout << "Kalkylatorn avlutas, välkommen åter!\n";
+        cout << "Kalkylatorn avlutas, valkommen ater!\n";
     else
-        cout << "Detta ska inte hända!\n";
+        cout << "Detta ska inte handa!\n";
 }
 
 /**

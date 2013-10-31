@@ -11,8 +11,8 @@ Expression::Expression(Expression_Tree* inTree){
 
 /*
  * evaluate()
- anropar  evaluate() på översta noden
- skickar med variabeltabellen som används
+ anropar  evaluate() pa oversta noden
+ skickar med variabeltabellen som anvands
  */
 long double Expression::evaluate(Variable_Table& varTable) const
 {
@@ -31,7 +31,7 @@ string Expression::get_infix() const{
 
 /*
  * get_postfix()
- anropar postfix på översta noden i uttrycket
+ anropar postfix pa oversta noden i uttrycket
  */
 std::string Expression::get_postfix() const
 {
@@ -45,7 +45,7 @@ std::string Expression::get_postfix() const
 
 /*
  * empty()
- är uttrycket tomt / = nullptr?
+ ar uttrycket tomt / = nullptr?
  */
 bool Expression::empty() const{
     
@@ -66,7 +66,7 @@ void Expression::print_tree(std::ostream& ostream) const{
 
 /*
  * swap(other)
- byter pekare mellan två uttryck
+ byter pekare mellan tva uttryck
  */
 void Expression::swap(Expression& otherExpression) {
     Expression_Tree* temp = otherExpression.tree;
@@ -204,7 +204,7 @@ namespace
             {
                 if (!last_was_operand || postfix.empty() || previous_token == "(")
                 {
-                    std::cerr << "operator d‰r operand fˆrv‰ntades\n";
+                    std::cerr << "operator dar operand forvantades\n";
                     exit(EXIT_FAILURE);
                 }
                 
@@ -240,7 +240,7 @@ namespace
             {
                 if (paren_count == 0)
                 {
-                    std::cerr << "v‰nsterparentes saknas\n";
+                    std::cerr << "vansterparentes saknas\n";
                     exit(EXIT_FAILURE);
                 }
                 
@@ -258,10 +258,10 @@ namespace
                 
                 if (operator_stack.empty())
                 {
-                    std::cerr << "hˆgerparentes saknar matchande v‰nsterparentes\n";
+                    std::cerr << "hogerparentes saknar matchande vansterparentes\n";
                     exit(EXIT_FAILURE);
                 }
-                // Det finns en v‰nsterparentes pÂ stacken
+                // Det finns en vansterparentes pÂ stacken
                 operator_stack.pop();
                 --paren_count;
             }
@@ -269,7 +269,7 @@ namespace
             {
                 if (last_was_operand || previous_token == ")")
                 {
-                    std::cerr << "operand d‰r operator fˆrv‰ntades\n";
+                    std::cerr << "operand dar operator forvantades\n";
                     exit(EXIT_FAILURE);
                 }
                 
@@ -278,7 +278,7 @@ namespace
             }
             else
             {
-                std::cerr << "otillÂten symbol\n";
+                std::cerr << "otillaten symbol\n";
                 exit(EXIT_FAILURE);
             }
             
@@ -299,7 +299,7 @@ namespace
         
         if (paren_count > 0)
         {
-            std::cerr << "hˆgerparentes saknas\n";
+            std::cerr << "hogerparentes saknas\n";
             exit(EXIT_FAILURE);
         }
         
@@ -317,8 +317,8 @@ namespace
         return postfix;
     }
     
-    // make_expression_tree tar en postfixstr‰ng och returnerar ett motsvarande
-    // l‰nkat tr‰d av Expression_Tree-noder.
+    // make_expression_tree tar en postfixstrang och returnerar ett motsvarande
+    // lankat trad av Expression_Tree-noder.
     Expression_Tree* make_expression_tree(const std::string& postfix)
     {
         using std::stack;
@@ -392,7 +392,7 @@ namespace
                 exit(EXIT_FAILURE);
             }
         }
-        // Det ska bara finnas ett tr‰d pÂ stacken om korrekt postfix.
+        // Det ska bara finnas ett trad pÂ stacken om korrekt postfix.
         
         if (tree_stack.empty())
         {

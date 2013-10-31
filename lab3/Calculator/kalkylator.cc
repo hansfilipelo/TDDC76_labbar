@@ -20,7 +20,7 @@ int main()
    }
    catch (...)
    {
-      cout << "Ett okänt fel har inträffat.\n";
+      cout << "Ett okant fel har intraffat.\n";
    }
 
    return 0;
