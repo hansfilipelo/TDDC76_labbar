@@ -12,6 +12,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <cctype>
+#include <typeinfo>
 #include "../Variable_Table/Variable_Table.h"
 
 /*
@@ -173,6 +174,9 @@ public:
     std::string      str() const;
     Expression_Tree* clone() const;
     
+protected:
+    void printHelper(std::ostream& stream, int startDepth) const;
+    
 private:
     long long int value;
 };
@@ -187,6 +191,9 @@ public:
     long double      evaluate(Variable_Table&);
     std::string      str() const;
     Expression_Tree* clone() const;
+    
+protected:
+    void printHelper(std::ostream& stream, int startDepth) const;
     
 private:
     long double value;
@@ -204,6 +211,10 @@ public:
     long double      evaluate(Variable_Table&);
     std::string      str() const;
     Expression_Tree* clone() const;
+    long double get_value(Variable_Table&);
+    
+//protected:
+//    void printHelper(std::ostream& stream, int startDepth) const;
     
 private:
     std::string name;

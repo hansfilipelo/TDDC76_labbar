@@ -28,6 +28,7 @@ string Operand::get_infix_iterator(bool) const{
 //------------------------------
 //Printhelper sends the operands char to the selected stream indented with the given depth
 void Operand::printHelper(std::ostream& stream, int startDepth) const{
+    
     stream << setw(startDepth) << str() << endl;
     
 }
@@ -81,6 +82,22 @@ long double Integer::evaluate(Variable_Table&){
     return double(value);
 }
 
+// -----------------------------
+
+void Integer::printHelper(std::ostream& stream, int startDepth) const{
+    int indent = 0;
+    
+    long long int temp = value;
+    
+    while ( temp > 9 ) {
+        temp = temp / 10;
+        indent++;
+    }
+    
+    stream << setw(startDepth + indent) << str() << endl;
+    
+}
+
 
 
 
@@ -117,6 +134,21 @@ long double Real::evaluate(Variable_Table&){
     return value;
 }
 
+//--------------------------------
+
+void Real::printHelper(std::ostream& stream, int startDepth) const{
+    int indent = 0;
+    
+    long double temp = value;
+    
+    while ( temp > 9 ) {
+        temp = temp / 10;
+        indent++;
+    }
+    
+    stream << setw(startDepth + indent) << str() << endl;
+    
+}
 
 //--------------------Variable--------------------------
 Variable::Variable(string inName){
@@ -159,6 +191,14 @@ Expression_Tree* Variable::clone() const{
     
     return nullptr;
 }
+
+// ----------------------
+
+long double Variable::get_value(Variable_Table& varTable) {
+    return evaluate(varTable);
+}
+
+
 
 //----------------------- Binary_Operator -------------------------------------
 
@@ -203,7 +243,7 @@ string Binary_Operator::get_infix_iterator(bool brackets) const{
 bool Binary_Operator::bracketsOrNot(Expression_Tree* otherExpression) const {
     
     // Checks too see if next in tree structure should print parenthesis or not.
-    // Wanted to use dynamic_cast instead of this but Jonas told us not too. 
+    // Wanted to use dynamic_cast instead of this but Jonas told us not too.
     if ( (str() == string("+") || str() == string("-")) && ((otherExpression->str() == string("*")) || (otherExpression->str() == string("/")) || (otherExpression->str() == string("^"))) ) {
         return false;
     }
@@ -552,8 +592,8 @@ long double Assign::evaluate(Variable_Table& varTable) {
     if ( leftVariable == nullptr ) {
         throw expression_error("Det maste vara en variabel till vanster om =");
     }
-
+    
     leftVariable->setValue(right->evaluate(varTable),varTable);
-
+    
     return leftVariable->evaluate(varTable);
 }
