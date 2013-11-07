@@ -12,6 +12,7 @@ using namespace std;
 
 
 
+
 //----------------------- Operand -------------------------------------------
 //Prints the operande in postfix i.e prints itself
 
@@ -225,6 +226,13 @@ Binary_Operator::Binary_Operator(Expression_Tree* leftIn, Expression_Tree* right
 }
 
 //--------------------------------
+// Destructor
+Binary_Operator::~Binary_Operator() {
+    clean();
+}
+
+
+//--------------------------------
 
 string Binary_Operator::get_postfix() const{
     
@@ -275,15 +283,6 @@ int Binary_Operator::getPriority() const {
 string Binary_Operator::get_infix() const {
     return get_infix_iterator(0);
 }
-
-
-
-
-//--------------------------------
-Binary_Operator::~Binary_Operator() {
-    clean();
-}
-
 
 //------------------------------
 

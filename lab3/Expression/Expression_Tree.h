@@ -86,6 +86,8 @@ protected:
 class Operand : public Expression_Tree
 {
 public:
+    // Destructor
+    ~Operand() = default;
     // Virtual functions - declared later
     //    virtual std::string      str() const = 0;
     //    virtual Expression_Tree* clone() const = 0;

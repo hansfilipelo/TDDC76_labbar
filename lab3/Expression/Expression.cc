@@ -7,9 +7,57 @@ using namespace std;
 
 // -----------------------
 // Constructor
+
 Expression::Expression(Expression_Tree* inTree){
     tree = inTree;
 }
+
+// -----------------------
+// Destructor
+
+Expression::~Expression() {
+    delete tree;
+}
+
+//// -----------------------
+//// = operator
+//
+//Expression& Expression::operator=(const Expression& otherExpression) {
+//    Expression_Tree temp;
+//    temp = *otherExpression.tree
+//    tree = temp*;
+//
+//    return *this;
+//}
+//
+//// -----------------------
+//// reverse = operator
+//
+//Expression::operator=(const Expression&& otherExpression) {
+//    Expression_Tree temp;
+//    temp = *tree
+//    otherExpression.tree = temp*;
+//
+//    return otherExpression;
+//}
+
+Expression::Expression(Expression&& otherExpression){
+    swap(otherExpression);
+}
+
+Expression& Expression::operator=(Expression&& otherExpression)
+{
+    swap(otherExpression);
+    return *this;
+}
+
+Expression& Expression::operator=(const Expression& otherExpression){
+    this->tree = otherExpression.tree->clone();
+    return *this;
+}
+
+
+// --------------------------------------------
 
 /*
  * evaluate()
@@ -19,7 +67,7 @@ Expression::Expression(Expression_Tree* inTree){
 long double Expression::evaluate(Variable_Table& varTable) const
 {
     if ( tree == nullptr ){
-        throw expression_error{"Kan ej evaluera tomt uttryck!"}; 
+        throw expression_error{"Kan ej evaluera tomt uttryck!"};
     }
     return tree->evaluate(varTable);
 }
@@ -67,7 +115,7 @@ void Expression::print_tree(std::ostream& ostream) const{
 }
 
 /*
- * swap(other)
+ * swap(otherExpression)
  byter pekare mellan tva uttryck
  */
 void Expression::swap(Expression& otherExpression) {
@@ -79,7 +127,7 @@ void Expression::swap(Expression& otherExpression) {
 
 /*
  * swap(x, y)
- se swap(other)
+ se swap(otherExpression)
  */
 void swap(Expression& firstExpression, Expression& secondExpression)
 {
@@ -332,7 +380,7 @@ namespace
                 Expression_Tree* rhs{tree_stack.top()};
                 tree_stack.pop();
                 
-                if (tree_stack.empty()) 
+                if (tree_stack.empty())
                 {
                     throw expression_error{"Felaktig postfix"};
                 }

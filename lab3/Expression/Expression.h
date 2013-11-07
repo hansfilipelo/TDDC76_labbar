@@ -22,7 +22,7 @@ class Expression
 {
 public:
     // Constructor
-    Expression(class Expression_Tree* = nullptr);
+    Expression(Expression_Tree*);
     Expression() = default;
     // Destructor
     ~Expression();
