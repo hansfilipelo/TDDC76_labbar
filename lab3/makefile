@@ -12,14 +12,14 @@ kalkylator.o: Calculator/kalkylator.cc
 Calculator.o: Calculator/Calculator.cc
 	$(CCC) $(CCFLAGS) -c Calculator/Calculator.cc
 
-Variable_Table.o: Variable_Table/Variable_Table.cc
-	$(CCC) $(CCFLAGS) -c Variable_Table/Variable_Table.cc
-
 Expression.o: Expression/Expression.cc
 	$(CCC) $(CCFLAGS) -c Expression/Expression.cc
 
 Expression_Tree.o: Expression/Expression_Tree.cc
 	$(CCC) $(CCFLAGS) -c Expression/Expression_Tree.cc
+
+Variable_Table.o: Variable_Table/Variable_Table.cc
+	$(CCC) $(CCFLAGS) -c Variable_Table/Variable_Table.cc
 
 clean:
 	@ \rm -f *.o

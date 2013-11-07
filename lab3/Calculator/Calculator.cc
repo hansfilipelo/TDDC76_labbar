@@ -185,7 +185,7 @@ execute_command()
         expVec.at(expPos - 1).print_tree(cout);
     
     else if (command_ == 'V')
-        varTable.print();
+        varTable.list();
     
     else if (command_ == 'L' ){
         for (unsigned i = 0 ; i < expVec.size() ; i++) {

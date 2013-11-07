@@ -62,9 +62,9 @@ public:
     ~Binary_Operator();
     
     // Virtual functions - declared later
-//    virtual long double      evaluate(Variable_Table&) const = 0;
-//    virtual std::string      str() const = 0;
-//    virtual Expression_Tree* clone() const = 0;
+    //    virtual long double      evaluate(Variable_Table&) const = 0;
+    //    virtual std::string      str() const = 0;
+    //    virtual Expression_Tree* clone() const = 0;
     
     std::string      get_postfix() const;
     std::string      get_infix() const;
@@ -87,9 +87,9 @@ class Operand : public Expression_Tree
 {
 public:
     // Virtual functions - declared later
-//    virtual std::string      str() const = 0;
-//    virtual Expression_Tree* clone() const = 0;
-//    virtual long double      evaluate(Variable_Table&) const = 0;
+    //    virtual std::string      str() const = 0;
+    //    virtual Expression_Tree* clone() const = 0;
+    //    virtual long double      evaluate(Variable_Table&) const = 0;
     
     std::string      get_postfix() const;
     void             print(std::ostream& stream) const;
@@ -214,10 +214,10 @@ public:
     long double      evaluate(Variable_Table&);
     std::string      str() const;
     Expression_Tree* clone() const;
-    long double get_value(Variable_Table&);
+    long double      get_value(Variable_Table&);
     
-//protected:
-//    void printHelper(std::ostream& stream, int startDepth) const;
+    //protected:
+    //    void printHelper(std::ostream& stream, int startDepth) const;
     
 private:
     std::string name;

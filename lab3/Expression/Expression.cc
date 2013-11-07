@@ -5,6 +5,8 @@
 #include "Expression.h"
 using namespace std;
 
+// -----------------------
+// Constructor
 Expression::Expression(Expression_Tree* inTree){
     tree = inTree;
 }

@@ -18,21 +18,20 @@
 #include "../Variable_Table/Variable_Table.h"
 
 
-/**
- * expression_error: kastas om fel inträffar i en Expression- operation;
- * ett diagnostiskt meddelande ska skickas med.
- */
-// ATT GÖRA!
-
-/**
- * Expression: Klass för att representera ett enkelt aritmetiskt uttryck.
- */
 class Expression
 {
 public:
-    // OBSERVERA: DETTA ÄR ENDAST KODSKELETT - MODIFIERA OCH KOMPLETTERA!
-    
+    // Constructor
     Expression(class Expression_Tree* = nullptr);
+    Expression() = default;
+    // Destructor
+    ~Expression();
+    
+    Expression(const Expression&);        //Kopieringskonstruktor
+    Expression(Expression&&);           //Move
+    
+    Expression& operator=(const Expression&);        //= operator
+    Expression& operator=(Expression&&);
     
     long double evaluate(Variable_Table&) const;
     std::string get_postfix() const;

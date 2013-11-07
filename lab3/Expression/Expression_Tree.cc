@@ -171,18 +171,23 @@ void Variable::setValue(long double inValue, Variable_Table& varTable){
      
      "DŒ en variabel fšrekommer till vŠnster om = Şnns tvŒ alternativ: 1) har den inte har fšrekommit tidigare deŞnieras den; 2) har den deŞnierats tidigare ska dess vŠrde Šndras."
      
-     Notera att detta sker inuti varTable. 
+     Notera att detta skedde inuti varTable och var mycket snyggare och som en riktig kalkylator faktiskt fungerar... Men ja nu fšljer vi spec :)
      
      */
-    varTable.addVar(name,inValue);
+    if ( varTable.find(name) ) {
+        varTable.set_value(name, inValue);
+    }
+    else {
+        varTable.insert(name,inValue);
+    }
 }
 
 //-------------------------------
 // evaluate for variable
 long double Variable::evaluate(Variable_Table& varTable){
 	// Check if variable exists, otherwise throw error
-    if ( varTable.exist(name) ) {
-        return varTable.getVar(name);
+    if ( varTable.find(name) ) {
+        return varTable.get_value(name);
     }
     else {
         throw expression_error{"Variabeln ej definerad"};
@@ -553,6 +558,11 @@ string Power::str() const {
 //--------------------------------
 
 long double Power::evaluate(Variable_Table& varTable) {
+    
+    if(left->evaluate(varTable) < 0 && floor(right->evaluate(varTable)) != right->evaluate(varTable)){
+        throw expression_error("Negative number raised by non-integer.");
+    }
+    
     long double result = pow(left->evaluate(varTable), right->evaluate(varTable));
     return result;
 }
