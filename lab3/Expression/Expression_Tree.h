@@ -48,6 +48,7 @@ public:
     virtual void                printHelper(std::ostream& stream, int startDepth) const = 0;
     virtual std::string                 get_infix() const = 0;
     virtual std::string         get_infix_iterator(bool) const = 0;
+    virtual int getPriority() const = 0;
 };
 
 //------------------------------
@@ -68,9 +69,10 @@ public:
     std::string      get_postfix() const;
     std::string      get_infix() const;
     void             print(std::ostream& stream) const;
-    
+    int getPriority() const;
     
 protected:
+    int priority;
     std::string get_infix_iterator(bool) const;
     bool bracketsOrNot(Expression_Tree*) const;
     Expression_Tree* left;
@@ -92,6 +94,7 @@ public:
     std::string      get_postfix() const;
     void             print(std::ostream& stream) const;
     std::string      get_infix() const;
+    int getPriority() const;
     
 protected:
     void printHelper(std::ostream& stream, int startDepth) const;

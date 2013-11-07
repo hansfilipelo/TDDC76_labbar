@@ -43,6 +43,13 @@ string Operand::get_infix() const {
     return get_infix_iterator(0);
 }
 
+
+//------------------
+
+int Operand::getPriority() const {
+    return 0;
+}
+
 //----------------------------------------
 
 
@@ -158,6 +165,15 @@ Variable::Variable(string inName){
 //------------------------------
 // set value for variable
 void Variable::setValue(long double inValue, Variable_Table& varTable){
+    /* 
+     
+     Fick kommentar hŠr. FrŒn spec:
+     
+     "DŒ en variabel fšrekommer till vŠnster om = Þnns tvŒ alternativ: 1) har den inte har fšrekommit tidigare deÞnieras den; 2) har den deÞnierats tidigare ska dess vŠrde Šndras."
+     
+     Notera att detta sker inuti varTable. 
+     
+     */
     varTable.addVar(name,inValue);
 }
 
@@ -183,13 +199,7 @@ string Variable::str() const{
 //------------------------------
 
 Expression_Tree* Variable::clone() const{
-    try {
-        return new Variable(name);
-    } catch (bad_alloc) {
-        throw;
-    }
-    
-    return nullptr;
+    return new Variable(name);
 }
 
 // ----------------------
@@ -242,21 +252,17 @@ string Binary_Operator::get_infix_iterator(bool brackets) const{
 // Helper function for get_infix_iterator
 bool Binary_Operator::bracketsOrNot(Expression_Tree* otherExpression) const {
     
-    // Checks too see if next in tree structure should print parenthesis or not.
-    // Wanted to use dynamic_cast instead of this but Jonas told us not too.
-    if ( (str() == string("+") || str() == string("-")) && ((otherExpression->str() == string("*")) || (otherExpression->str() == string("/")) || (otherExpression->str() == string("^"))) ) {
-        return false;
+    if ( priority > otherExpression->getPriority() ) {
+        return true;
     }
     
-    if ( str() == string("=") ){
-        return false;
-    }
-    
-    if ( (str() == string("*") || str() == string("/")) && otherExpression->str() == string("^") ) {
-        return false;
-    }
-    
-    return true;
+    return false;
+}
+
+// --------------------------------
+
+int Binary_Operator::getPriority() const {
+    return priority;
 }
 
 //----------------------------------
@@ -307,7 +313,9 @@ void Binary_Operator::clean() {
 
 Plus::Plus(Expression_Tree* leftIn, Expression_Tree* rightIn)
 : Binary_Operator(leftIn, rightIn)
-{}
+{
+    priority = 0;
+}
 
 //------------------------------
 
@@ -319,12 +327,12 @@ Expression_Tree* Plus::clone() const {
         
         try {
             return new Plus(newLeft, newRight);
-        } catch (bad_alloc) {
+        } catch (...) {
             delete newRight;
             throw;
         }
         
-    } catch (bad_alloc) {
+    } catch (...) {
         delete newLeft;
         throw;
     }
@@ -356,7 +364,9 @@ long double Plus::evaluate(Variable_Table& varTable) {
 
 Minus::Minus(Expression_Tree* leftIn, Expression_Tree* rightIn)
 : Binary_Operator(leftIn, rightIn)
-{}
+{
+    priority = 0;
+}
 
 //------------------------------
 
@@ -368,12 +378,12 @@ Expression_Tree* Minus::clone() const {
         
         try {
             return new Minus(newLeft, newRight);
-        } catch (bad_alloc) {
+        } catch (...) {
             delete newRight;
             throw;
         }
         
-    } catch (bad_alloc) {
+    } catch (...) {
         delete newLeft;
         throw;
     }
@@ -404,7 +414,9 @@ long double Minus::evaluate(Variable_Table& varTable) {
 
 Times::Times(Expression_Tree* leftIn, Expression_Tree* rightIn)
 : Binary_Operator(leftIn, rightIn)
-{}
+{
+    priority = 1;
+}
 
 //------------------------------
 
@@ -416,12 +428,12 @@ Expression_Tree* Times::clone() const {
         
         try {
             return new Times(newLeft, newRight);
-        } catch (bad_alloc) {
+        } catch (...) {
             delete newRight;
             throw;
         }
         
-    } catch (bad_alloc) {
+    } catch (...) {
         delete newLeft;
         throw;
     }
@@ -452,7 +464,9 @@ long double Times::evaluate(Variable_Table& varTable) {
 
 Divide::Divide(Expression_Tree* leftIn, Expression_Tree* rightIn)
 : Binary_Operator(leftIn, rightIn)
-{}
+{
+    priority = 1;
+}
 
 //------------------------------
 
@@ -464,12 +478,12 @@ Expression_Tree* Divide::clone() const {
         
         try {
             return new Divide(newLeft, newRight);
-        } catch (bad_alloc) {
+        } catch (...) {
             delete newRight;
             throw;
         }
         
-    } catch (bad_alloc) {
+    } catch (...) {
         delete newLeft;
         throw;
     }
@@ -503,7 +517,9 @@ long double Divide::evaluate(Variable_Table& varTable) {
 
 Power::Power(Expression_Tree* leftIn, Expression_Tree* rightIn)
 : Binary_Operator(leftIn, rightIn)
-{}
+{
+    priority = 2;
+}
 
 //------------------------------
 
@@ -515,12 +531,12 @@ Expression_Tree* Power::clone() const {
         
         try {
             return new Power(newLeft, newRight);
-        } catch (bad_alloc) {
+        } catch (...) {
             delete newRight;
             throw;
         }
         
-    } catch (bad_alloc) {
+    } catch (...) {
         delete newLeft;
         throw;
     }
@@ -562,12 +578,12 @@ Expression_Tree* Assign::clone() const {
         
         try {
             return new Assign(newLeft, newRight);
-        } catch (bad_alloc) {
+        } catch (...) {
             delete newRight;
             throw;
         }
         
-    } catch (bad_alloc) {
+    } catch (...) {
         delete newLeft;
         throw;
     }
