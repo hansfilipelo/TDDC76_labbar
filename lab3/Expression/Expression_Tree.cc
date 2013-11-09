@@ -11,8 +11,6 @@ using namespace std;
 //----------------------- Expression tree -------------------------------------------
 
 
-
-
 //----------------------- Operand -------------------------------------------
 //Prints the operande in postfix i.e prints itself
 
@@ -166,15 +164,7 @@ Variable::Variable(string inName){
 //------------------------------
 // set value for variable
 void Variable::setValue(long double inValue, Variable_Table& varTable){
-    /* 
-     
-     Fick kommentar här. Från spec:
-     
-     "Då en variabel förekommer till vänster om = ﬁnns två alternativ: 1) har den inte har förekommit tidigare deﬁnieras den; 2) har den deﬁnierats tidigare ska dess värde ändras."
-     
-     Notera att detta skedde inuti varTable och var mycket snyggare och som en riktig kalkylator faktiskt fungerar... Men ja nu följer vi spec :)
-     
-     */
+    
     if ( varTable.find(name) ) {
         varTable.set_value(name, inValue);
     }
