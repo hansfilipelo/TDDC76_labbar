@@ -27,10 +27,13 @@ public:
     // Destructor
     ~Expression();
     
-    Expression(const Expression&);        //Kopieringskonstruktor
-    Expression(Expression&&);           //Move
+    // Copy constructor
+    Expression(const Expression&);
+    // Move
+    Expression(Expression&&);
     
-    Expression& operator=(const Expression&);        //= operator
+    // = operator
+    Expression& operator=(const Expression&);
     Expression& operator=(Expression&&);
     
     long double evaluate(Variable_Table&) const;

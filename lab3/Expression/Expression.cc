@@ -19,31 +19,22 @@ Expression::~Expression() {
     delete tree;
 }
 
-//// -----------------------
-//// = operator
-//
-//Expression& Expression::operator=(const Expression& otherExpression) {
-//    Expression_Tree temp;
-//    temp = *otherExpression.tree
-//    tree = temp*;
-//
-//    return *this;
-//}
-//
-//// -----------------------
-//// reverse = operator
-//
-//Expression::operator=(const Expression&& otherExpression) {
-//    Expression_Tree temp;
-//    temp = *tree
-//    otherExpression.tree = temp*;
-//
-//    return otherExpression;
-//}
+// --------------------------
+// Copy constructor
+
+Expression::Expression(const Expression& otherExpression) {
+    this->tree = otherExpression.tree->clone();
+}
+
+// --------------------------
+// Move
 
 Expression::Expression(Expression&& otherExpression){
     swap(otherExpression);
 }
+
+// --------------------------
+// Operator =
 
 Expression& Expression::operator=(Expression&& otherExpression)
 {
@@ -55,6 +46,8 @@ Expression& Expression::operator=(const Expression& otherExpression){
     this->tree = otherExpression.tree->clone();
     return *this;
 }
+
+// --------------------------
 
 
 // --------------------------------------------
