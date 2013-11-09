@@ -297,7 +297,9 @@ void Binary_Operator::print(std::ostream& stream) const{
 
 void Binary_Operator::clean() {
     delete left;
+    left = nullptr;
     delete right;
+    right = nullptr;
 }
 
 

@@ -16,8 +16,8 @@ Expression::Expression(Expression_Tree* inTree){
 // Destructor
 
 Expression::~Expression() {
-    delete tree;
-    tree = nullptr;
+    delete this->tree;
+    this->tree = nullptr;
 }
 
 // --------------------------

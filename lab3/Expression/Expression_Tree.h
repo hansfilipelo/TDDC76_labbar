@@ -39,7 +39,7 @@ public:
 class Expression_Tree
 {
 public:
-    virtual ~Expression_Tree() {};
+    virtual ~Expression_Tree() = default;
     virtual long double         evaluate(Variable_Table&) = 0;
     virtual std::string         get_postfix() const = 0;
     virtual std::string         str() const = 0;
