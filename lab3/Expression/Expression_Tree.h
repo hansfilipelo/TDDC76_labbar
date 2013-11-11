@@ -46,7 +46,7 @@ public:
     virtual void                print(std::ostream&) const = 0;
     virtual Expression_Tree*    clone() const = 0;
     virtual void                printHelper(std::ostream& stream, int startDepth) const = 0;
-    virtual std::string                 get_infix() const = 0;
+    virtual std::string         get_infix() const = 0;
     virtual std::string         get_infix_iterator(bool) const = 0;
     virtual int getPriority() const = 0;
 };
