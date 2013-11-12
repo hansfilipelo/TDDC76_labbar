@@ -9,7 +9,6 @@ using namespace std;
 // Constructor
 
 Expression::Expression(class Expression_Tree* inTree){
-    cerr <<"const exression" << endl;
     tree = inTree;
 }
 
@@ -17,7 +16,6 @@ Expression::Expression(class Expression_Tree* inTree){
 // Destructor
 
 Expression::~Expression() {
-    cerr << "Expression destruct" << endl;
     delete tree;
     tree = nullptr;
 }
@@ -26,7 +24,6 @@ Expression::~Expression() {
 // Copy constructor
 
 Expression::Expression(const Expression& otherExpression) {
-    cerr << "copy const expression"<< endl;
     this->tree = otherExpression.tree->clone();
 }
 
@@ -34,7 +31,6 @@ Expression::Expression(const Expression& otherExpression) {
 // Move
 
 Expression::Expression(Expression&& otherExpression){
-    cerr << "move expression" << endl;
     swap(otherExpression);
 }
 
@@ -43,13 +39,11 @@ Expression::Expression(Expression&& otherExpression){
 
 Expression& Expression::operator=(Expression&& otherExpression)
 {
-    cerr <<"operator = expression" << endl;
     swap(otherExpression);
     return *this;
 }
 
 Expression& Expression::operator=(const Expression& otherExpression){
-    cerr << "expression operator = const" << endl;
     this->tree = otherExpression.tree->clone();
     return *this;
 }
@@ -122,9 +116,9 @@ void Expression::swap(Expression& otherExpression) {
     if(this == &otherExpression){
         return;
     }
-    Expression_Tree *temp1 = this->tree;
-    this->tree = otherExpression.tree;
-    otherExpression.tree = temp1;
+    
+    std::swap(tree, otherExpression.tree);
+    
     return;
 }
 

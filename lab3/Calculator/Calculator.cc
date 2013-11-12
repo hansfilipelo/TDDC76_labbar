@@ -170,7 +170,7 @@ execute_command()
     
     else if (command_ == 'R'){
         current_expression_ = NULL;
-        expVec.erase(expVec.begin() + currExpNr - 1); //mŒste fixa denna fkn, raderar ej aktuellt uttryck
+        expVec.clear(); //mŒste fixa denna fkn, raderar ej aktuellt uttryck
     }
     
     else if (command_ == 'A' && expPos > 0){

@@ -5,7 +5,7 @@
 #include "Expression_Tree.h"
 using namespace std;
 
-// SEPARATA DEFINITIONER FÖR FÖR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
+// SEPARATA DEFINITIONER FOR FOR EXPRESSION_TREE-KLASSERNA DEFINIERAS HÄR.
 
 
 //----------------------- Expression tree -------------------------------------------
@@ -218,7 +218,6 @@ Binary_Operator::Binary_Operator(Expression_Tree* leftIn, Expression_Tree* right
 //--------------------------------
 // Destructor
 Binary_Operator::~Binary_Operator() {
-    cout << "Binary_Operator" << endl;
     clean();
 }
 
@@ -297,10 +296,8 @@ void Binary_Operator::print(std::ostream& stream) const{
 //------------------------------
 
 void Binary_Operator::clean() {
-    cout << "Clean" << endl;
     delete left;
     left = nullptr;
-    cout << "Clean" << endl;
     delete right;
     right = nullptr;
 }
