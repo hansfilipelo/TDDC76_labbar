@@ -24,7 +24,12 @@ Expression::~Expression() {
 // Copy constructor
 
 Expression::Expression(const Expression& otherExpression) {
-    this->tree = otherExpression.tree->clone();
+    if (otherExpression.tree != nullptr) {
+        this->tree = otherExpression.tree->clone();
+    }
+    else {
+        this->tree = nullptr;
+    }
 }
 
 // --------------------------
@@ -44,6 +49,7 @@ Expression& Expression::operator=(Expression&& otherExpression)
 }
 
 Expression& Expression::operator=(const Expression& otherExpression){
+    delete tree;
     this->tree = otherExpression.tree->clone();
     return *this;
 }
@@ -114,12 +120,19 @@ void Expression::print_tree(std::ostream& ostream) const{
  */
 void Expression::swap(Expression& otherExpression) {
     if(this == &otherExpression){
-        return;
+        
     }
-    
+    else if (this->tree==nullptr){
+        this->tree = otherExpression.tree;
+        otherExpression.tree = nullptr;
+    }
+    else if (otherExpression.tree == nullptr){
+        otherExpression.tree = this->tree;
+        this->tree = nullptr;
+    }
+    else{
     std::swap(tree, otherExpression.tree);
-    
-    return;
+    }
 }
 
 /*
@@ -450,5 +463,10 @@ namespace
 
 Expression make_expression(const string& infix)
 {
-    return Expression{make_expression_tree(make_postfix(infix))};
+    try {
+        return Expression{make_expression_tree(make_postfix(infix))};
+    } catch (...) {
+        throw;
+    }
+    
 }
